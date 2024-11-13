@@ -48,7 +48,7 @@
 		<p class="text-sm text-muted-foreground">{$_('docs.answer_not_found')}</p>
 		<Button
 			variant="link"
-			href="https://www.reddit.com/r/gpxstudio/"
+			href="https://www.reddit.com/r/wanderstories/"
 			target="_blank"
 			class="p-0 h-6 text-link"
 		>

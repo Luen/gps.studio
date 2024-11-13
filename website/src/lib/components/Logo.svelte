@@ -3,15 +3,15 @@
 	import { mode, systemPrefersMode } from 'mode-watcher';
 
 	export let iconOnly = false;
-	export let company = 'gpx.studio';
+	export let company = 'gps.studio';
 
 	$: effectiveMode = $mode ?? $systemPrefersMode ?? 'light';
 </script>
 
-{#if company === 'gpx.studio'}
+{#if company === 'gps.studio'}
 	<img
 		src="{base}/{iconOnly ? 'icon' : 'logo'}{effectiveMode === 'dark' ? '-dark' : ''}.svg"
-		alt="Logo of gpx.studio."
+		alt="Logo of gps.studio."
 		{...$$restProps}
 	/>
 {:else if company === 'mapbox'}

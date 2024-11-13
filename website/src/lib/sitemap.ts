@@ -3,7 +3,7 @@ import { glob } from 'glob';
 import { languages } from '$lib/languages';
 
 function getURLForLanguage(lang: string, path: string): string {
-    return `https://gpx.studio${lang === 'en' ? '' : `/${lang}`}${path}`;
+    return `https://studio.wanderstories.space${lang === 'en' ? '' : `/${lang}`}${path}`;
 }
 
 function generateSitemap() {

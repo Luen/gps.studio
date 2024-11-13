@@ -14,10 +14,6 @@
 			<Logo class="h-8 sm:hidden" iconOnly={true} width="26" />
 			<Logo class="h-8 hidden sm:block" width="153" />
 		</a>
-		<Button variant="link" class="text-base px-0" href={getURLForLanguage($locale, '/')}>
-			<Home size="18" class="mr-1.5" />
-			{$_('homepage.home')}
-		</Button>
 		<Button variant="link" class="text-base px-0" href={getURLForLanguage($locale, '/app')}>
 			<Map size="18" class="mr-1.5" />
 			{$_('homepage.app')}

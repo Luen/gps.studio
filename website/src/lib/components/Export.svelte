@@ -95,10 +95,6 @@
 				</span>
 			</div>
 			<div class="w-full flex flex-row flex-wrap gap-2">
-				<Button class="bg-support grow" href="https://ko-fi.com/gpxstudio" target="_blank">
-					{$_('menu.support_button')}
-					<span class="ml-2">🙏</span>
-				</Button>
 				<Button
 					variant="outline"
 					class="grow"

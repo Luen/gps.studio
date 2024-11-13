@@ -44,7 +44,7 @@
 	}
 
 	$: if (browser && !$isLoading && $locale) {
-		let title = `gpx.studio — ${$_(`metadata.${$page.route.id?.replace('/[[language]]', '').split('/')[1] ?? 'home'}_title`)}`;
+		let title = `gps.studio — ${$_(`metadata.${$page.route.id?.replace('/[[language]]', '').split('/')[1] ?? 'home'}_title`)}`;
 		if ($page.params.guide) {
 			document.title = `${title} | ${data.guideTitles[$page.params.guide]}`;
 		} else {

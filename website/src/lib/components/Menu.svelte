@@ -466,19 +466,6 @@
 					{$_('menu.help')}
 				</span>
 			</Button>
-			<Button
-				variant="ghost"
-				href="https://ko-fi.com/gpxstudio"
-				target="_blank"
-				class="cursor-default h-fit rounded-sm font-bold text-support hover:text-support px-3 py-0.5"
-				aria-label={$_('menu.donate')}
-			>
-				<HeartHandshake size="18" class="md:hidden" />
-				<span class="hidden md:flex flex-row items-center">
-					{$_('menu.donate')}
-					<Heart size="16" class="ml-1" fill="rgb(var(--support))" />
-				</span>
-			</Button>
 		</div>
 	</div>
 </div>

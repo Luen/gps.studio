@@ -31,7 +31,7 @@
 						href={getURLForLanguage($locale, '/')}
 					>
 						<Home size="16" class="mr-1" />
-						{$_('homepage.home')}
+						{$_('homepage.app')}
 					</Button>
 					<Button
 						variant="link"
@@ -55,7 +55,7 @@
 					<Button
 						variant="link"
 						class="h-6 px-0 text-muted-foreground"
-						href="https://www.reddit.com/r/gpxstudio/"
+						href="https://www.reddit.com/r/wanderstories/"
 						target="_blank"
 					>
 						<Logo company="reddit" class="h-4 mr-1 fill-muted-foreground" />
@@ -64,7 +64,7 @@
 					<Button
 						variant="link"
 						class="h-6 px-0 text-muted-foreground"
-						href="https://facebook.com/gpx.studio"
+						href="https://facebook.com/wanderstorie"
 						target="_blank"
 					>
 						<Logo company="facebook" class="h-4 mr-1 fill-muted-foreground" />
@@ -73,7 +73,7 @@
 					<Button
 						variant="link"
 						class="h-6 px-0 text-muted-foreground"
-						href="https://x.com/gpxstudio"
+						href="https://x.com/wanderstories"
 						target="_blank"
 					>
 						<Logo company="x" class="h-4 mr-1 fill-muted-foreground" />
@@ -82,7 +82,7 @@
 					<Button
 						variant="link"
 						class="h-6 px-0 text-muted-foreground"
-						href="mailto:hello@gpx.studio"
+						href="mailto:hello@wanderstories.space"
 						target="_blank"
 					>
 						<AtSign size="16" class="mr-1" />
@@ -94,25 +94,7 @@
 					<Button
 						variant="link"
 						class="h-6 px-0 text-muted-foreground"
-						href="https://ko-fi.com/gpxstudio"
-						target="_blank"
-					>
-						<Heart size="16" class="mr-1" />
-						{$_('menu.donate')}
-					</Button>
-					<Button
-						variant="link"
-						class="h-6 px-0 text-muted-foreground"
-						href="https://crowdin.com/project/gpxstudio"
-						target="_blank"
-					>
-						<Logo company="crowdin" class="h-4 mr-1 fill-muted-foreground" />
-						{$_('homepage.crowdin')}
-					</Button>
-					<Button
-						variant="link"
-						class="h-6 px-0 text-muted-foreground"
-						href="https://github.com/gpxstudio/gpx.studio"
+						href="https://github.com/Luen/gps.studio"
 						target="_blank"
 					>
 						<Logo company="github" class="h-4 mr-1 fill-muted-foreground" />

@@ -13,13 +13,6 @@
 	<div class="w-full flex flex-row flex-wrap gap-3 justify-center">
 		<Button href={getURLForLanguage($locale, '/')} class="text-base w-1/4 min-w-fit rounded-full">
 			<Home size="18" class="mr-1.5" />
-			{$_('homepage.home')}
-		</Button>
-		<Button
-			href={getURLForLanguage($locale, '/app')}
-			class="text-base w-1/4 min-w-fit rounded-full"
-		>
-			<Map size="18" class="mr-1.5" />
 			{$_('homepage.app')}
 		</Button>
 		<Button
