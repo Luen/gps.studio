@@ -1,0 +1,12 @@
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4173:4173"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PUBLIC_MAPBOX_TOKEN=${PUBLIC_MAPBOX_TOKEN}
