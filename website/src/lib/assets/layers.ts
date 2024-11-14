@@ -565,7 +565,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://natmap.wanderstories.space/natmap/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 16,
+                maxzoom: 14,
                 attribution: '&copy; <a href="https://natmap.wanderstories.space" target="_blank">NatMaps</a>'
             }
         },
@@ -1588,12 +1588,12 @@ export const overlayTree: LayerTreeType = {
             },
             cyclOSMlite: true,
             bikerouterGravel: true,
-            stravaHeatmapAll: false,
-            stravaHeatmapRide: false,
-            trailforksHeatmap: false,
-            ridewithgpsHeatmap: false,
-            garminHeatmap: false,
-            osmTraces: false,
+            stravaHeatmapAll: true,
+            stravaHeatmapRide: true,
+            trailforksHeatmap: true,
+            ridewithgpsHeatmap: true,
+            garminHeatmap: true,
+            osmTraces: true,
         },
         countries: {
             australia: {
