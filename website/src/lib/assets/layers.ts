@@ -944,9 +944,11 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             indigenousGroups: {
                 type: 'raster',
+                
                 tiles: ['https://aiatsis.gov.au/sites/default/files/maps/aiatsis_map/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 6,
+                minzoom: 2,
                 attribution: '&copy; <a href="https://aiatsis.gov.au" target="_blank">AIATSIS</a>'
             }
         },
