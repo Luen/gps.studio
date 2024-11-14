@@ -361,7 +361,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/qtopo/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 16,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -378,7 +378,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/qimagery/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 19,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -395,7 +395,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/qaerial/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 19,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -480,7 +480,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://imagemap.geohub.sa.gov.au/mapproxy/wmts/PublicMosaic/webmercator_22/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 22,
+                maxzoom: 19,
                 attribution: '&copy; <a href="https://imagemap.geohub.sa.gov.au" target="_blank">South Australia State Government</a>'
             }
         },
@@ -548,7 +548,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://getlost.wanderstories.space/{z}/{x}/{y}.jpg'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 13,
                 attribution: '&copy; <a href="https://getlost.wanderstories.space" target="_blank">Get Lost</a>'
             }
         },
@@ -601,7 +601,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://applemaps.wanderstories.space/satellite/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 20,
+                maxzoom: 18,
                 attribution: '&copy; <a href="https://www.apple.com/maps" target="_blank">Apple</a>'
             }
         },
@@ -618,7 +618,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://applemaps.wanderstories.space/standard/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 20,
+                maxzoom: 18,
                 attribution: '&copy; <a href="https://www.apple.com/maps" target="_blank">Apple</a>'
             }
         },
@@ -635,7 +635,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://core-sat.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}'], //, 'https://sat0.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}', 'https://sat1.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}', 'https://sat2.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}', 'https://sat3.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}'
                 tileSize: 256,
-                maxzoom: 19,
+                maxzoom: 18,
                 attribution: '&copy; <a href="https://yandex.com/maps" target="_blank">Yandex</a>'
             }
         },
@@ -652,7 +652,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'],
                 tileSize: 256,
-                maxzoom: 19,
+                maxzoom: 18,
                 attribution: '&copy; <a href="https://www.arcgis.com" target="_blank">Esri</a>'
             }
         },
@@ -669,7 +669,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
                 tileSize: 256,
-                maxzoom: 19,
+                maxzoom: 18,
                 attribution: '&copy; <a href="https://www.arcgis.com" target="_blank">Esri</a>'
             }
         },
@@ -686,7 +686,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?blankTile=false'],
                 tileSize: 256,
-                maxzoom: 19,
+                maxzoom: 18,
                 attribution: '&copy; <a href="https://www.arcgis.com" target="_blank">Esri</a>'
             }
         },
@@ -703,7 +703,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://wayback.maptiles.arcgis.com/arcgis/rest/services/world_imagery/mapserver/tile/645/{z}/{y}/{x}'],
                 tileSize: 256,
-                maxzoom: 19,
+                maxzoom: 18,
                 attribution: '&copy; <a href="https://www.arcgis.com" target="_blank">Esri</a>'
             }
         },
@@ -737,7 +737,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'],
                 tileSize: 256,
-                maxzoom: 21,
+                maxzoom: 18,
                 attribution: '&copy; <a href="https://www.google.com/maps" target="_blank">Google</a>'
             }
         },
@@ -754,7 +754,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}'],
                 tileSize: 256,
-                maxzoom: 21,
+                maxzoom: 18,
                 attribution: '&copy; <a href="https://www.google.com/maps" target="_blank">Google</a>'
             }
         },
@@ -771,7 +771,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}'],
                 tileSize: 256,
-                maxzoom: 21,
+                maxzoom: 14,
                 attribution: '&copy; <a href="https://www.google.com/maps" target="_blank">Google</a>'
             }
         },
@@ -791,14 +791,14 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/contours/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 16,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qWater: {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/water/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 16, // Can do 17
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -821,6 +821,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 tiles: ['https://qldglobe.wanderstories.space/FireScarMapping?service=WMS&request=GetMap&layers=&styles=&format=png32&transparent=true&version=1.1.1&id=FireScarMapping&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A0%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A0%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
                 maxzoom: 16,
+                minzoom: 11,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -837,14 +838,14 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/MiningResources?service=WMS&request=GetMap&layers=MiningResources&styles=&format=png32&transparent=true&version=1.1.1&id=MiningResources&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A12%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A12%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A14%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A14%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A15%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A15%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A16%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A16%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A17%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A17%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
-                maxzoom: 16,
+                maxzoom: 17,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qMinesPermitsHistoric: {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/MinesPermitsHistoric?service=WMS&request=GetMap&layers=MinesPermitsHistoric&styles=&format=png32&transparent=true&version=1.1.1&id=MinesPermitsHistoric&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A155%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A155%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A160%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A160%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A170%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A170%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A175%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A175%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A180%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A180%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A190%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A190%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A195%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A195%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A205%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A205%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A210%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A210%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A215%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A215%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A220%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A220%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
-                maxzoom: 16,
+                maxzoom: 17,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -866,14 +867,16 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/RoadsAndTracks?service=WMS&request=GetMap&layers=RoadsAndTracks&styles=&format=png32&transparent=true&version=1.1.1&id=RoadsAndTracks&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A21%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A21%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A22%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A22%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A23%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A23%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A10%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A10%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
-                maxzoom: 16,
+                maxzoom: 17, // can do 18
+                minzoom: 11, // Can do 8
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qParks: {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/ParksTerrestrialProtectedAreas?service=WMS&request=GetMap&layers=ParksTerrestrialProtectedAreas&styles=&format=png32&transparent=true&version=1.1.1&id=ParksTerrestrialProtectedAreas&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A2%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A2%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
-                maxzoom: 16,
+                maxzoom: 17,
+                minzoom: 11,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -896,6 +899,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 tiles: ['https://qldglobe.wanderstories.space/CadastralFramework?service=WMS&request=GetMap&layers=&styles=&format=png32&transparent=true&version=1.1.1&id=CadastralFramework&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A3%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A3%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A23%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A23%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A15%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A15%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A5%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A5%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A9%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A9%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A14%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A14%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
                 maxzoom: 16,
+                minzoom: 11,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -913,6 +917,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 tiles: ['https://qldglobe.wanderstories.space/landuse/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
+                minzoom: 11,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -929,7 +934,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://caltopo.com/tile/sc_s15-30c00ff00ps31-35cffff00ps36-45cff0000ps45-90c0000ff/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
                 attribution: '&copy; <a href="https://caltopo.com" target="_blank">CalTopo</a>'
             }
         },
@@ -965,7 +970,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://gis.environment.gov.au/gispub/rest/services/heritage/shipwrecks_query/MapServer/export?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
                 tileSize: 256,
-                maxzoom: 16,
+                maxzoom: 15,
                 attribution: '&copy; <a href="https://www.environment.gov.au/" target="_blank">Australian Government</a>'
             }
         },
