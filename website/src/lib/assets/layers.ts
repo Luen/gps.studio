@@ -991,7 +991,6 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             id: 'nafiFireScars',
             type: 'raster',
             source: 'nafiFireScars',
-            minzoom: 14
         }],
     },
     heatmap: {
