@@ -3,4 +3,4 @@ Disallow: /*?*
 Disallow: /embed
 Disallow: /*/embed
 Disallow: /404
-Sitemap: https://gpx.studio/sitemap.xml
+Sitemap: https://studio.wanderstories.space/sitemap.xml

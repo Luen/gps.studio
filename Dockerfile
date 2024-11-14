@@ -1,5 +1,5 @@
 # Use an official Node.js image as a base
-FROM node:18 AS builder
+FROM node:22 AS builder
 
 # Set the working directory for the GPX project
 WORKDIR /app/gpx

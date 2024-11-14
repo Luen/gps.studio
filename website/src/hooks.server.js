@@ -23,7 +23,7 @@ export async function handle({ event, resolve }) {
 	const htmlTag = `<html lang="${language}" translate="no">`;
 
 	let headTag = `<head>
-    <title>gps.studio — ${title}</title>
+    <title>Studio — ${title} — Wanderstories</title>
     <meta name="description" content="${description}" />
     <meta property="og:title" content="gps.studio — ${title}" />
     <meta property="og:description" content="${description}" />
@@ -36,7 +36,7 @@ export async function handle({ event, resolve }) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://studio.wanderstories.space${base}/og_logo.png" />
     <meta name="twitter:url" content="https://studio.wanderstories.space/" />
-    <meta name="twitter:site" content="@gpxstudio" />
+    <meta name="twitter:site" content="@wanderstories" />
     <meta name="twitter:creator" content="@gpxstudio" />
     <link rel="alternate" hreflang="x-default" href="https://studio.wanderstories.space${getURLForLanguage('en', path)}" />`;
 

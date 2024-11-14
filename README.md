@@ -1,31 +1,15 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="website/static/logo-dark.svg">
-  <img alt="Logo of gpx.studio." src="website/static/logo.svg">
-</picture>
+# gps.studio
 
-[**gpx.studio**](https://gpx.studio) is an online tool for creating and editing GPX files.
+[**gps.studio**](https://studio.wanderstories.space) is an online tool for creating and editing GPX files.
 
-![gpx.studio screenshot](website/src/lib/assets/img/docs/getting-started/interface.png)
+![gps.studio screenshot](website/src/lib/assets/img/docs/getting-started/interface.png)
 
 This repository contains the source code of the website.
-
-## Contributing
-
-Please create an issue if you find a bug or have a feature request.
-
-Code contributions are also welcome, but except for obvious bug fixes, please open an issue first to discuss the changes you would like to make.
-
-## Translation
-
-The website is translated by volunteers on a collaborative translation platform.
-You can help complete and improve the translations by joining the [Crowdin project](https://crowdin.com/project/gpxstudio).
-If you would like to start the translation in a new language, please contact me or create an issue.
-
-Any help is greatly appreciated!
 
 ## Development
 
 The code is split into two parts:
+
 - `gpx`: a Typescript library for parsing and manipulating GPX files,
 - `website`: the website itself, which is a [SvelteKit](https://kit.svelte.dev/) application.
 
@@ -52,6 +36,7 @@ npm run dev
 
 ## Credits
 
+Built on top of [**gpx.studio**](https://gpx.studio).
 This project has been made possible thanks to the following open source projects:
 
 - Development:

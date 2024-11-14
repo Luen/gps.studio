@@ -4,10 +4,45 @@ import ignFrTopo from './custom/ign-fr-topo.json';
 import ignFrPlan from './custom/ign-fr-plan.json';
 import ignFrSatellite from './custom/ign-fr-satellite.json';
 import bikerouterGravel from './custom/bikerouter-gravel.json';
+import { LucideArrowDownZA, TabletSmartphone } from 'lucide-svelte';
 
 export const basemaps: { [key: string]: string | StyleSpecification; } = {
+    wsOutdoors: {
+        version: 8,
+        sources: {
+            wsOutdoors: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/topo/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>'
+            }
+        },
+        layers: [{
+            id: 'wsOutdoors',
+            type: 'raster',
+            source: 'wsOutdoors',
+        }],
+    },
     mapboxOutdoors: 'mapbox://styles/mapbox/outdoors-v12',
-    mapboxSatellite: 'mapbox://styles/mapbox/satellite-streets-v12',
+    //mapboxSatellite: 'mapbox://styles/mapbox/satellite-streets-v12',
+    mapboxSatellite: {
+        version: 8,
+        sources: {
+            mapboxSatellite: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/satellite/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>'
+            }
+        },
+        layers: [{
+            id: 'mapboxSatellite',
+            type: 'raster',
+            source: 'mapboxSatellite',
+        }],
+    },
     openStreetMap: {
         version: 8,
         sources: {
@@ -30,7 +65,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             openTopoMap: {
                 type: 'raster',
-                tiles: ['https://tile.opentopomap.org/{z}/{x}/{y}.png'],
+                //tiles: ['https://tile.opentopomap.org/{z}/{x}/{y}.png'],
+                tiles: ['https://opentopomap.wanderstories.space/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 17,
                 attribution: '&copy; <a href="https://www.opentopomap.org" target="_blank">OpenTopoMap</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
@@ -111,6 +147,23 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             id: 'linzTopo',
             type: 'raster',
             source: 'linzTopo',
+        }],
+    },
+    linzImagery: {
+        version: 8,
+        sources: {
+            linzImagery: {
+                type: 'raster',
+                tiles: ['https://tiles-cdn.koordinates.com/services;key=39a8b989633a4bef98bc0e065380454a/tiles/v4/layer=50766/EPSG:3857/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.linz.govt.nz/" target="_blank">LINZ</a>'
+            }
+        },
+        layers: [{
+            id: 'linzImagery',
+            type: 'raster',
+            source: 'linzImagery',
         }],
     },
     ignBe: {
@@ -301,9 +354,825 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             source: 'usgs',
         }],
     },
+    qTopo: {
+        version: 8,
+        sources: {
+            qTopo: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/qtopo/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qTopo',
+            type: 'raster',
+            source: 'qTopo',
+        }],
+    },
+    qImagery: {
+        version: 8,
+        sources: {
+            qImagery: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/qimagery/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qImagery',
+            type: 'raster',
+            source: 'qImagery',
+        }],
+    },
+    qAerial: {
+        version: 8,
+        sources: {
+            qAerial: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/qaerial/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qAerial',
+            type: 'raster',
+            source: 'qAerial',
+        }],
+    },
+    nswTopo: {
+        version: 8,
+        sources: {
+            nswTopo: {
+                type: 'raster',
+                tiles: ['https://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Topo_Map/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://maps.six.nsw.gov.au" target="_blank">NSW SIX Maps</a>'
+            }
+        },
+        layers: [{
+            id: 'nswTopo',
+            type: 'raster',
+            source: 'nswTopo',
+        }],
+    },
+    nswBase: {
+        version: 8,
+        sources: {
+            nswBase: {
+                type: 'raster',
+                tiles: ['https://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Base_Map/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 20,
+                attribution: '&copy; <a href="https://maps.six.nsw.gov.au" target="_blank">NSW SIX Maps</a>'
+            }
+        },
+        layers: [{
+            id: 'nswBase',
+            type: 'raster',
+            source: 'nswBase',
+        }],
+    },
+    nswImagery: {
+        version: 8,
+        sources: {
+            nswImagery: {
+                type: 'raster',
+                tiles: ['https://maps.six.nsw.gov.au/arcgis/rest/services/public/NSW_Imagery/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 21,
+                attribution: '&copy; <a href="https://maps.six.nsw.gov.au" target="_blank">NSW SIX Maps</a>'
+            }
+        },
+        layers: [{
+            id: 'nswImagery',
+            type: 'raster',
+            source: 'nswImagery',
+        }],
+    },
+    vicImagery: {
+        version: 8,
+        sources: {
+            vicImagery: {
+                type: 'raster',
+                tiles: ['https://base.maps.vic.gov.au/service?'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://maps.vic.gov.au" target="_blank">Victoria State Government</a>'
+            }
+        },
+        layers: [{
+            id: 'vicImagery',
+            type: 'raster',
+            source: 'vicImagery',
+        }],
+    },
+    saImagery: {
+        version: 8,
+        sources: {
+            saImagery: {
+                type: 'raster',
+                tiles: ['https://imagemap.geohub.sa.gov.au/mapproxy/wmts/PublicMosaic/webmercator_22/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 22,
+                attribution: '&copy; <a href="https://imagemap.geohub.sa.gov.au" target="_blank">South Australia State Government</a>'
+            }
+        },
+        layers: [{
+            id: 'saImagery',
+            type: 'raster',
+            source: 'saImagery',
+        }],
+    },
+    tasTopo: {
+        version: 8,
+        sources: {
+            tasTopo: {
+                type: 'raster',
+                tiles: ['https://services.thelist.tas.gov.au/arcgis/rest/services/Basemaps/Topographic/ImageServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://maps.thelist.tas.gov.au" target="_blank">Tasmania LIST</a>'
+            }
+        },
+        layers: [{
+            id: 'tasTopo',
+            type: 'raster',
+            source: 'tasTopo',
+        }],
+    },
+    tasBase: {
+        version: 8,
+        sources: {
+            tasBase: {
+                type: 'raster',
+                tiles: ['https://services.thelist.tas.gov.au/arcgis/rest/services/Basemaps/TasmapRaster/ImageServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://maps.thelist.tas.gov.au" target="_blank">Tasmania LIST</a>'
+            }
+        },
+        layers: [{
+            id: 'tasBase',
+            type: 'raster',
+            source: 'tasBase',
+        }],
+    },
+    tasImagery: {
+        version: 8,
+        sources: {
+            tasImagery: {
+                type: 'raster',
+                tiles: ['https://services.thelist.tas.gov.au/arcgis/rest/services/Basemaps/Orthophoto/ImageServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 19,
+                attribution: '&copy; <a href="https://maps.thelist.tas.gov.au" target="_blank">Tasmania LIST</a>'
+            }
+        },
+        layers: [{
+            id: 'tasImagery',
+            type: 'raster',
+            source: 'tasImagery',
+        }],
+    },
+    getLostTopo: {
+        version: 8,
+        sources: {
+            getLostTopo: {
+                type: 'raster',
+                tiles: ['https://getlost.wanderstories.space/{z}/{x}/{y}.jpg'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://getlost.wanderstories.space" target="_blank">Get Lost</a>'
+            }
+        },
+        layers: [{
+            id: 'getLostTopo',
+            type: 'raster',
+            source: 'getLostTopo',
+        }],
+    },
+    natmapsTopo: {
+        version: 8,
+        sources: {
+            natmapsTopo: {
+                type: 'raster',
+                tiles: ['https://natmap.wanderstories.space/natmap/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://natmap.wanderstories.space" target="_blank">NatMaps</a>'
+            }
+        },
+        layers: [{
+            id: 'natmapsTopo',
+            type: 'raster',
+            source: 'natmapsTopo',
+        }],
+    },
+    nafiTopo: {
+        version: 8,
+        sources: {
+            nafiTopo: {
+                type: 'raster',
+                tiles: ['https://nafi.wanderstories.space/nafi-tiles-wsgi/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tileSize: 256,
+                minzoom: 10,
+                maxzoom: 12,
+                attribution: '&copy; NAFI'
+            }
+        },
+        layers: [{
+            id: 'nafiTopo',
+            type: 'raster',
+            source: 'nafiTopo',
+            maxzoom: 12
+        }],
+    },
+    appleSatellite: {
+        version: 8,
+        sources: {
+            appleSatellite: {
+                type: 'raster',
+                tiles: ['https://applemaps.wanderstories.space/satellite/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 20,
+                attribution: '&copy; <a href="https://www.apple.com/maps" target="_blank">Apple</a>'
+            }
+        },
+        layers: [{
+            id: 'appleSatellite',
+            type: 'raster',
+            source: 'appleSatellite',
+        }],
+    },
+    appleMaps: {
+        version: 8,
+        sources: {
+            appleMaps: {
+                type: 'raster',
+                tiles: ['https://applemaps.wanderstories.space/standard/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 20,
+                attribution: '&copy; <a href="https://www.apple.com/maps" target="_blank">Apple</a>'
+            }
+        },
+        layers: [{
+            id: 'appleMaps',
+            type: 'raster',
+            source: 'appleMaps',
+        }],
+    },
+    yandexSatellite: {
+        version: 8,
+        sources: { // The projection is EPSG:3395 (Web Mercator)
+            yandexSatellite: {
+                type: 'raster',
+                tiles: ['https://core-sat.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}'], //, 'https://sat0.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}', 'https://sat1.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}', 'https://sat2.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}', 'https://sat3.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}'
+                tileSize: 256,
+                maxzoom: 19,
+                attribution: '&copy; <a href="https://yandex.com/maps" target="_blank">Yandex</a>'
+            }
+        },
+        layers: [{
+            id: 'yandexSatellite',
+            type: 'raster',
+            source: 'yandexSatellite',
+        }],
+    },
+    arcTopo: {
+        version: 8,
+        sources: {
+            arcTopo: {
+                type: 'raster',
+                tiles: ['https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 19,
+                attribution: '&copy; <a href="https://www.arcgis.com" target="_blank">Esri</a>'
+            }
+        },
+        layers: [{
+            id: 'arcTopo',
+            type: 'raster',
+            source: 'arcTopo',
+        }],
+    },
+    arcImagery: {
+        version: 8,
+        sources: {
+            arcImagery: {
+                type: 'raster',
+                tiles: ['https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 19,
+                attribution: '&copy; <a href="https://www.arcgis.com" target="_blank">Esri</a>'
+            }
+        },
+        layers: [{
+            id: 'arcImagery',
+            type: 'raster',
+            source: 'arcImagery',
+        }],
+    },
+    esriClarity: {
+        version: 8,
+        sources: {
+            esriClarity: {
+                type: 'raster',
+                tiles: ['https://clarity.maptiles.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?blankTile=false'],
+                tileSize: 256,
+                maxzoom: 19,
+                attribution: '&copy; <a href="https://www.arcgis.com" target="_blank">Esri</a>'
+            }
+        },
+        layers: [{
+            id: 'esriClarity',
+            type: 'raster',
+            source: 'esriClarity',
+        }],
+    },
+    esriImagery: {
+        version: 8,
+        sources: {
+            esriImagery: {
+                type: 'raster',
+                tiles: ['https://wayback.maptiles.arcgis.com/arcgis/rest/services/world_imagery/mapserver/tile/645/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 19,
+                attribution: '&copy; <a href="https://www.arcgis.com" target="_blank">Esri</a>'
+            }
+        },
+        layers: [{
+            id: 'esriImagery',
+            type: 'raster',
+            source: 'esriImagery',
+        }],
+    },
+    bingSatellite: {
+        version: 8,
+        sources: {
+            bingSatellite: {
+                type: 'raster',
+                tiles: ['https://ecn.t0.tiles.virtualearth.net/tiles/a{quadkey}.jpeg?g=8547'],
+                tileSize: 256,
+                maxzoom: 19,
+                attribution: '&copy; <a href="https://www.microsoft.com/maps" target="_blank">Microsoft</a>'
+            }
+        },
+        layers: [{
+            id: 'bingSatellite',
+            type: 'raster',
+            source: 'bingSatellite',
+        }],
+    },
+    googleSatellite: {
+        version: 8,
+        sources: {
+            googleSatellite: {
+                type: 'raster',
+                tiles: ['https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'],
+                tileSize: 256,
+                maxzoom: 21,
+                attribution: '&copy; <a href="https://www.google.com/maps" target="_blank">Google</a>'
+            }
+        },
+        layers: [{
+            id: 'googleSatellite',
+            type: 'raster',
+            source: 'googleSatellite',
+        }],
+    },
+    googleMaps: {
+        version: 8,
+        sources: {
+            googleMaps: {
+                type: 'raster',
+                tiles: ['https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}'],
+                tileSize: 256,
+                maxzoom: 21,
+                attribution: '&copy; <a href="https://www.google.com/maps" target="_blank">Google</a>'
+            }
+        },
+        layers: [{
+            id: 'googleMaps',
+            type: 'raster',
+            source: 'googleMaps',
+        }],
+    },
+    googleTerrain: {
+        version: 8,
+        sources: {
+            googleTerrain: {
+                type: 'raster',
+                tiles: ['https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}'],
+                tileSize: 256,
+                maxzoom: 21,
+                attribution: '&copy; <a href="https://www.google.com/maps" target="_blank">Google</a>'
+            }
+        },
+        layers: [{
+            id: 'googleTerrain',
+            type: 'raster',
+            source: 'googleTerrain',
+        }],
+    },
 };
 
 export const overlays: { [key: string]: string | StyleSpecification; } = {
+    qContours: {
+        version: 8,
+        sources: {
+            qContours: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/contours/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            },
+            qWater: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/water/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qContours',
+            type: 'raster',
+            source: 'qContours',
+            }, 
+            {
+            id: 'qWater',
+            type: 'raster',
+            source: 'qWater',
+        }],
+    },
+    qFireScars: {
+        version: 8,
+        sources: {
+            qFireScars: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/FireScarMapping?service=WMS&request=GetMap&layers=&styles=&format=png32&transparent=true&version=1.1.1&id=FireScarMapping&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A0%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A0%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qFireScars',
+            type: 'raster',
+            source: 'qFireScars',
+        }],
+    },
+    qMines: {
+        version: 8,
+        sources: {
+            qMiningResources: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/MiningResources?service=WMS&request=GetMap&layers=MiningResources&styles=&format=png32&transparent=true&version=1.1.1&id=MiningResources&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A12%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A12%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A14%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A14%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A15%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A15%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A16%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A16%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A17%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A17%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            },
+            qMinesPermitsHistoric: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/MinesPermitsHistoric?service=WMS&request=GetMap&layers=MinesPermitsHistoric&styles=&format=png32&transparent=true&version=1.1.1&id=MinesPermitsHistoric&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A155%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A155%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A160%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A160%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A170%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A170%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A175%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A175%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A180%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A180%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A190%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A190%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A195%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A195%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A205%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A205%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A210%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A210%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A215%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A215%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A220%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A220%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qMiningResources',
+            type: 'raster',
+            source: 'qMiningResources',
+        },
+        {
+            id: 'qMinesPermitsHistoric',
+            type: 'raster',
+            source: 'qMinesPermitsHistoric',
+        }],
+    },
+    qRoads: {
+        version: 8,
+        sources: {
+            qRoads: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/RoadsAndTracks?service=WMS&request=GetMap&layers=RoadsAndTracks&styles=&format=png32&transparent=true&version=1.1.1&id=RoadsAndTracks&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A21%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A21%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A22%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A22%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A23%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A23%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A10%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A10%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            },
+            qParks: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/ParksTerrestrialProtectedAreas?service=WMS&request=GetMap&layers=ParksTerrestrialProtectedAreas&styles=&format=png32&transparent=true&version=1.1.1&id=ParksTerrestrialProtectedAreas&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A2%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A2%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qRoads',
+            type: 'raster',
+            source: 'qRoads',
+        },
+        {
+            id: 'qParks',
+            type: 'raster',
+            source: 'qParks',
+        }],
+    },
+    qLandParcel: {
+        version: 8,
+        sources: {
+            qLandParcel: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/CadastralFramework?service=WMS&request=GetMap&layers=&styles=&format=png32&transparent=true&version=1.1.1&id=CadastralFramework&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A3%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A3%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A23%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A23%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A15%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A15%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A5%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A5%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A9%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A9%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A14%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A14%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qLandParcel',
+            type: 'raster',
+            source: 'qLandParcel',
+        }],
+    },
+    qLandUse: {
+        version: 8,
+        sources: {
+            qLandUse: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/landuse/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qLandUse',
+            type: 'raster',
+            source: 'qLandUse',
+        }],
+    },
+    calSlopes:{
+        version: 8,
+        sources: {
+            calSlopes: {
+                type: 'raster',
+                tiles: ['https://caltopo.com/tile/sc_s15-30c00ff00ps31-35cffff00ps36-45cff0000ps45-90c0000ff/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://caltopo.com" target="_blank">CalTopo</a>'
+            }
+        },
+        layers: [{
+            id: 'calSlopes',
+            type: 'raster',
+            source: 'calSlopes',
+        }],
+    },
+    indigenousGroups: {
+        version: 8,
+        sources: {
+            indigenousGroups: {
+                type: 'raster',
+                tiles: ['https://aiatsis.gov.au/sites/default/files/maps/aiatsis_map/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://aiatsis.gov.au" target="_blank">AIATSIS</a>'
+            }
+        },
+        layers: [{
+            id: 'indigenousGroups',
+            type: 'raster',
+            source: 'indigenousGroups',
+        }],
+    },
+    shipwrecks: {
+        version: 8,
+        sources: {
+            shipwrecks: {
+                type: 'raster',
+                tiles: ['https://gis.environment.gov.au/gispub/rest/services/heritage/shipwrecks_query/MapServer/export?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://www.environment.gov.au/" target="_blank">Australian Government</a>'
+            }
+        },
+        layers: [{
+            id: 'shipwrecks',
+            type: 'raster',
+            source: 'shipwrecks',
+        }],
+    },
+    nafiFireScars: {
+        version: 8,
+        sources: {
+            nafiFireScars: {
+                type: 'raster',
+                tiles: ['https://nafi.wanderstories.space/nafi-tiles-wsgi/?service=WMS&request=GetMap&layers=fire_scar_by_month_current%2Cnodata_raster&styles=null%2Cnull%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiFireScars&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tileSize: 512,
+                minzoom: 12,
+                maxzoom: 15,
+                attribution: '&copy; NAFI'
+            }
+        },
+        layers: [{
+            id: 'nafiFireScars',
+            type: 'raster',
+            source: 'nafiFireScars',
+            minzoom: 14
+        }],
+    },
+    heatmap: {
+        version: 8,
+        sources: {
+            heatmap: {
+                type: 'raster',
+                tiles: ['https://heatmap.wanderstories.space/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://heatmap.wanderstories.space" target="_blank">Wanderstories</a>'
+            }
+        },
+        layers: [{
+            id: 'heatmap',
+            type: 'raster',
+            source: 'heatmap',
+        }],
+    },
+    stravaHeatmapAll: {
+        version: 8,
+        sources: {
+            stravaAll: {
+                type: 'raster',
+                tiles: ['https://strava.wanderstories.space/{z}/{x}/{y}/512/all/hot'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
+            }
+        },
+        layers: [{
+            id: 'stravaAll',
+            type: 'raster',
+            source: 'stravaAll',
+        }],
+    },
+    stravaHeatmapRide: {
+        version: 8,
+        sources: {
+            stravaRide: {
+                type: 'raster',
+                tiles: ['https://strava.wanderstories.space/{z}/{x}/{y}/512/ride/hot'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
+            }
+        },
+        layers: [{
+            id: 'stravaRide',
+            type: 'raster',
+            source: 'stravaRide',
+        }],
+    },
+    trailforksHeatmap: {
+        version: 8,
+        sources: {
+            trailforksHeatmap: {
+                type: 'raster',
+                tiles: ['https://trailforks.wanderstories.space/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://trailforks.com" target="_blank">Trailforks</a>'
+            }
+        },
+        layers: [{
+            id: 'trailforksHeatmap',
+            type: 'raster',
+            source: 'trailforksHeatmap',
+        }],
+    },
+    ridewithgpsHeatmap: {
+        version: 8,
+        sources: {
+            ridewithgpsHeatmap: {
+                type: 'raster',
+                tiles: ['https://heatmap.ridewithgps.com/v1/map/default/normalized/{z}/{x}/{y}.png?end_color=%23E60026&end_opacity=255&mid_color=%23E64560&mid_opacity=200&midpoint=0.2&start_color=%23A1E6E6&start_opacity=150'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://ridewithgps.com" target="_blank">Ride with GPS</a>'
+            }
+        },
+        layers: [{
+            id: 'ridewithgpsHeatmap',
+            type: 'raster',
+            source: 'ridewithgpsHeatmap',
+        }],
+    },
+    garminHeatmap: {
+        version: 8,
+        sources: {
+            garminRoad: {
+                type: 'raster',
+                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            },
+            garminMtb: {
+                type: 'raster',
+                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            },
+            garminGravel: {
+                type: 'raster',
+                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            },
+            garminRunning: {
+                type: 'raster',
+                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            },
+            garminTrail: {
+                type: 'raster',
+                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            },
+            garminHiking: {
+                type: 'raster',
+                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            },
+        },
+        layers: [
+            {
+                id: 'garminRoad',
+                type: 'raster',
+                source: 'garminRoad',
+            },
+            {
+                id: 'garminMtb',
+                type: 'raster',
+                source: 'garminMtb',
+            },
+            {
+                id: 'garminGravel',
+                type: 'raster',
+                source: 'garminGravel',
+            },
+            {
+                id: 'garminRunning',
+                type: 'raster',
+                source: 'garminRunning',
+            },
+            {
+                id: 'garminTrail',
+                type: 'raster',
+                source: 'garminTrail',
+            },
+            {
+                id: 'garminHiking',
+                type: 'raster',
+                source: 'garminHiking',
+            },
+        ],
+    },
+    osmTraces: {
+        version: 8,
+        sources: {
+            osmTraces: {
+                type: 'raster',
+                tiles: ['https://gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://openstreetmap.org" target="_blank">OpenStreetMap</a>'
+            }
+        },
+        layers: [{
+            id: 'osmTraces',
+            type: 'raster',
+            source: 'osmTraces',
+        }],
+    },
     cyclOSMlite: {
         version: 8,
         sources: {
@@ -621,14 +1490,42 @@ export type LayerTreeType = { [key: string]: LayerTreeType | boolean; };
 export const basemapTree: LayerTreeType = {
     basemaps: {
         world: {
+            wsOutdoors: true,
             mapboxOutdoors: true,
             mapboxSatellite: true,
             openStreetMap: true,
             openTopoMap: true,
             openHikingMap: true,
-            cyclOSM: true
+            cyclOSM: true,
+            arcTopo: true,
+            arcImagery: true,
+            esriClarity: true,
+            esriImagery: true,
+            bingSatellite: true,
+            googleSatellite: true,
+            googleMaps: true,
+            googleTerrain: true,
+            appleSatellite: true,
+            appleMaps: true,
+            yandexSatellite: true,
         },
         countries: {
+            australia: {
+                qTopo: true,
+                qImagery: true,
+                qAerial: true,
+                nswTopo: true,
+                nswBase: true,
+                nswImagery: true,
+                vicImagery: true,
+                saImagery: true,
+                tasTopo: true,
+                tasBase: true,
+                tasImagery: true,
+                nafiTopo: true,
+                natmapsTopo: true,
+                getLostTopo: true,
+            },
             belgium: {
                 ignBe: true,
             },
@@ -647,6 +1544,7 @@ export const basemapTree: LayerTreeType = {
             new_zealand: {
                 linz: true,
                 linzTopo: true,
+                linzImagery: true,
             },
             norway: {
                 norwayTopo: true,
@@ -688,8 +1586,27 @@ export const overlayTree: LayerTreeType = {
             },
             cyclOSMlite: true,
             bikerouterGravel: true,
+            stravaHeatmapAll: true,
+            stravaHeatmapRide: true,
+            trailforksHeatmap: true,
+            ridewithgpsHeatmap: true,
+            garminHeatmap: true,
+            osmTraces: true,
         },
         countries: {
+            australia: {
+                qMines: true,
+                qRoads: true,
+                qLandUse: true,
+                qLandParcel: true,
+                qContours: true,
+                qFireScars: true,
+                nafiFireScars: true,
+                shipwrecks: true,
+                calSlopes: true,
+                indigenousGroups: true,
+                heatmap: true,
+            },
             france: {
                 ignFrCadastre: true,
                 ignSlope: true,
@@ -755,7 +1672,7 @@ export const overpassTree: LayerTreeType = {
 };
 
 // Default basemap used
-export const defaultBasemap = 'mapboxOutdoors';
+export const defaultBasemap = 'wsOutdoors';
 
 // Default overlays used (none)
 export const defaultOverlays: LayerTreeType = {
@@ -771,8 +1688,27 @@ export const defaultOverlays: LayerTreeType = {
             },
             cyclOSMlite: false,
             bikerouterGravel: false,
+            stravaHeatmapAll: true,
+            stravaHeatmapRide: true,
+            trailforksHeatmap: true,
+            ridewithgpsHeatmap: true,
+            garminHeatmap: true,
+            osmTraces: true,
         },
         countries: {
+            australia: {
+                qMines: true,
+                qRoads: true,
+                qLandUse: true,
+                qLandParcel: true,
+                qContours: true,
+                qFireScars: true,
+                nafiFireScars: true,
+                shipwrecks: true,
+                calSlopes: true,
+                indigenousGroups: true,
+                heatmap: true,
+            },
             france: {
                 ignFrCadastre: false,
                 ignSlope: false,
@@ -841,14 +1777,42 @@ export const defaultOverpassQueries: LayerTreeType = {
 export const defaultBasemapTree: LayerTreeType = {
     basemaps: {
         world: {
+            wsOutdoors: true,
             mapboxOutdoors: true,
             mapboxSatellite: true,
             openStreetMap: true,
             openTopoMap: true,
             openHikingMap: true,
-            cyclOSM: true
+            cyclOSM: true,
+            arcTopo: true,
+            arcImagery: true,
+            esriClarity: true,
+            esriImagery: true,
+            bingSatellite: true,
+            googleSatellite: true,
+            googleMaps: true,
+            googleTerrain: true,
+            appleSatellite: true,
+            appleMaps: true,
+            yandexSatellite: true,
         },
         countries: {
+            australia: {
+                qTopo: true,
+                qImagery: true,
+                qAerial: true,
+                nswTopo: true,
+                nswBase: true,
+                nswImagery: true,
+                vicImagery: true,
+                saImagery: true,
+                tasTopo: true,
+                tasBase: true,
+                tasImagery: true,
+                nafiTopo: true,
+                natmapsTopo: true,
+                getLostTopo: true,
+            },
             belgium: {
                 ignBe: false,
             },
@@ -867,6 +1831,7 @@ export const defaultBasemapTree: LayerTreeType = {
             new_zealand: {
                 linz: false,
                 linzTopo: false,
+                linzImagery: false,
             },
             norway: {
                 norwayTopo: false,
@@ -908,8 +1873,27 @@ export const defaultOverlayTree: LayerTreeType = {
             },
             cyclOSMlite: false,
             bikerouterGravel: false,
+            stravaHeatmapAll: true,
+            stravaHeatmapRide: true,
+            trailforksHeatmap: true,
+            ridewithgpsHeatmap: true,
+            garminHeatmap: true,
+            osmTraces: true,
         },
         countries: {
+            australia: {
+                qMines: true,
+                qRoads: true,
+                qLandUse: true,
+                qLandParcel: true,
+                qContours: true,
+                qFireScars: true,
+                nafiFireScars: true,
+                shipwrecks: true,
+                calSlopes: true,
+                indigenousGroups: true,
+                heatmap: true,
+            },
             france: {
                 ignFrCadastre: false,
                 ignSlope: false,

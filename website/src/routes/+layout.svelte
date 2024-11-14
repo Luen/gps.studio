@@ -17,13 +17,13 @@
 		guideTitles: Record<string, string>;
 	};
 
-	const appRoutes = ['/[[language]]/app', '/[[language]]/embed'];
+	const appRoutes = ['/[[language]]', '/[[language]]/embed'];
 
 	onMount(() => {
 		if ($page.url.searchParams.has('embed')) {
 			// convert old embedding options to new format and redirect to new embed page
 			let folders = $page.url.pathname.split('/');
-			let locale = folders.indexOf('l') >= 0 ? folders[folders.indexOf('l') + 1] ?? 'en' : 'en';
+			let locale = folders.indexOf('l') >= 0 ? (folders[folders.indexOf('l') + 1] ?? 'en') : 'en';
 			window.location.href = `${getURLForLanguage(locale, '/embed')}?options=${encodeURIComponent(JSON.stringify(convertOldEmbeddingOptions($page.url.searchParams)))}`;
 		}
 	});
