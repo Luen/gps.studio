@@ -98,7 +98,8 @@
 				]
 			},
 			projection: 'globe',
-			zoom: 0,
+			zoom: 3,
+			center: [140, -30],
 			hash: hash,
 			language,
 			attributionControl: false,

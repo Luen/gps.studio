@@ -31,7 +31,7 @@
 						href={getURLForLanguage($locale, '/')}
 					>
 						<Home size="16" class="mr-1" />
-						{$_('homepage.app')}
+						{$_('homepage.home')}
 					</Button>
 					<Button
 						variant="link"

@@ -17,7 +17,7 @@
 		guideTitles: Record<string, string>;
 	};
 
-	const appRoutes = ['/[[language]]', '/[[language]]/embed'];
+	const appRoutes = ['/[[language]]/app', '/[[language]]/embed'];
 
 	onMount(() => {
 		if ($page.url.searchParams.has('embed')) {
