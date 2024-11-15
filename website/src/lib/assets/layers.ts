@@ -907,7 +907,10 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         layers: [{
             id: 'qLandParcel',
             type: 'raster',
-            source: 'qLandParcel',
+            source: 'qLandParcel',  
+            paint: {
+                'raster-opacity': 0.6
+            }
         }],
     },
     qLandUse: {
@@ -926,6 +929,9 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             id: 'qLandUse',
             type: 'raster',
             source: 'qLandUse',
+            paint: {
+                'raster-opacity': 0.4
+            }
         }],
     },
     calSlopes:{
