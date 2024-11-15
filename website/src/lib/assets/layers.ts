@@ -359,7 +359,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qTopo: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/qtopo/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/qtopo/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
@@ -376,7 +376,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qImagery: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/qimagery/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/qimagery/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 19,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
@@ -393,7 +393,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qAerial: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/qaerial/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/qaerial/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 19,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
@@ -541,21 +541,22 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             source: 'tasImagery',
         }],
     },
-    getLostTopo: {
+    getlostTopo: {
         version: 8,
         sources: {
-            getLostTopo: {
+            getlostTopo: {
                 type: 'raster',
-                tiles: ['https://getlost.wanderstories.space/{z}/{x}/{y}.jpg'],
+                tiles: ['https://tiles.wanderstories.space/getlost/{z}/{x}/{y}.jpg'],
                 tileSize: 256,
                 maxzoom: 13,
-                attribution: '&copy; <a href="https://getlost.wanderstories.space" target="_blank">Get Lost</a>'
+                minzoom: 10,
+                attribution: '&copy; <a href="https://getlost.com.au/" target="_blank">Getlost Maps</a>'
             }
         },
         layers: [{
-            id: 'getLostTopo',
+            id: 'getlostTopo',
             type: 'raster',
-            source: 'getLostTopo',
+            source: 'getlostTopo',
         }],
     },
     natmapsTopo: {
@@ -563,7 +564,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             natmapsTopo: {
                 type: 'raster',
-                tiles: ['https://natmap.wanderstories.space/natmap/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/natmap/natmap/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 14,
                 attribution: '&copy; <a href="https://natmap.wanderstories.space" target="_blank">NatMaps</a>'
@@ -580,7 +581,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             nafiTopo: {
                 type: 'raster',
-                tiles: ['https://nafi.wanderstories.space/nafi-tiles-wsgi/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tiles: ['https://tiles.wanderstories.space/nafi/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
                 minzoom: 10,
                 maxzoom: 12,
@@ -599,7 +600,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             appleSatellite: {
                 type: 'raster',
-                tiles: ['https://applemaps.wanderstories.space/satellite/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/applemaps/satellite/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://www.apple.com/maps" target="_blank">Apple</a>'
@@ -616,7 +617,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             appleMaps: {
                 type: 'raster',
-                tiles: ['https://applemaps.wanderstories.space/standard/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/applemaps/standard/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://www.apple.com/maps" target="_blank">Apple</a>'
@@ -789,14 +790,14 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qContours: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/contours/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/contours/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qWater: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/water/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/water/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16, // Can do 17
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
@@ -818,7 +819,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qFireScars: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/FireScarMapping?service=WMS&request=GetMap&layers=&styles=&format=png32&transparent=true&version=1.1.1&id=FireScarMapping&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A0%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A0%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/FireScarMapping?service=WMS&request=GetMap&layers=&styles=&format=png32&transparent=true&version=1.1.1&id=FireScarMapping&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A0%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A0%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 11,
@@ -836,7 +837,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qMiningResources: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/MiningResources?service=WMS&request=GetMap&layers=MiningResources&styles=&format=png32&transparent=true&version=1.1.1&id=MiningResources&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A12%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A12%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A14%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A14%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A15%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A15%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A16%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A16%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A17%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A17%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/MiningResources?service=WMS&request=GetMap&layers=MiningResources&styles=&format=png32&transparent=true&version=1.1.1&id=MiningResources&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A12%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A12%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A14%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A14%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A15%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A15%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A16%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A16%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A17%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A17%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
                 maxzoom: 17,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
@@ -865,15 +866,15 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qRoads: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/RoadsAndTracks?service=WMS&request=GetMap&layers=RoadsAndTracks&styles=&format=png32&transparent=true&version=1.1.1&id=RoadsAndTracks&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A21%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A21%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A22%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A22%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A23%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A23%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A10%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A10%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/RoadsAndTracks?service=WMS&request=GetMap&layers=RoadsAndTracks&styles=&format=png32&transparent=true&version=1.1.1&id=RoadsAndTracks&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A21%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A21%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A22%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A22%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A23%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A23%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A10%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A10%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
-                maxzoom: 17, // can do 18
+                maxzoom: 17, // Can do 18
                 minzoom: 11, // Can do 8
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qParks: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/ParksTerrestrialProtectedAreas?service=WMS&request=GetMap&layers=ParksTerrestrialProtectedAreas&styles=&format=png32&transparent=true&version=1.1.1&id=ParksTerrestrialProtectedAreas&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A2%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A2%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/ParksTerrestrialProtectedAreas?service=WMS&request=GetMap&layers=ParksTerrestrialProtectedAreas&styles=&format=png32&transparent=true&version=1.1.1&id=ParksTerrestrialProtectedAreas&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A2%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A2%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
                 maxzoom: 17,
                 minzoom: 11,
@@ -896,7 +897,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qLandParcel: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/CadastralFramework?service=WMS&request=GetMap&layers=&styles=&format=png32&transparent=true&version=1.1.1&id=CadastralFramework&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A3%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A3%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A23%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A23%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A15%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A15%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A5%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A5%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A9%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A9%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A14%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A14%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/CadastralFramework?service=WMS&request=GetMap&layers=&styles=&format=png32&transparent=true&version=1.1.1&id=CadastralFramework&dpi=96&bboxSR=102100&imageSR=102100&f=image&dynamicLayers=%5B%7B%22id%22%3A3%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A3%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A23%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A23%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A15%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A15%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A5%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A5%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A9%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A9%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%2C%7B%22id%22%3A14%2C%22source%22%3A%7B%22type%22%3A%22mapLayer%22%2C%22mapLayerId%22%3A14%7D%2C%22drawingInfo%22%3A%7B%22showLabels%22%3Atrue%7D%7D%5D&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 11,
@@ -914,7 +915,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qLandUse: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/landuse/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/qldglobe/landuse/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 11,
@@ -932,7 +933,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             calSlopes: {
                 type: 'raster',
-                tiles: ['https://caltopo.com/tile/sc_s15-30c00ff00ps31-35cffff00ps36-45cff0000ps45-90c0000ff/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/caltopo/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 14,
                 attribution: '&copy; <a href="https://caltopo.com" target="_blank">CalTopo</a>'
@@ -949,8 +950,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             indigenousGroups: {
                 type: 'raster',
-                
-                tiles: ['https://aiatsis.gov.au/sites/default/files/maps/aiatsis_map/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/aiatsis/{z}/{y}/{x}'],
                 tileSize: 256,
                 maxzoom: 6,
                 minzoom: 2,
@@ -968,7 +968,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             shipwrecks: {
                 type: 'raster',
-                tiles: ['https://gis.environment.gov.au/gispub/rest/services/heritage/shipwrecks_query/MapServer/export?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
+                tiles: ['https://tiles.wanderstories.space/shipwrecks/?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
                 tileSize: 256,
                 maxzoom: 15,
                 attribution: '&copy; <a href="https://www.environment.gov.au/" target="_blank">Australian Government</a>'
@@ -985,7 +985,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             nafiFireScars: {
                 type: 'raster',
-                tiles: ['https://nafi.wanderstories.space/nafi-tiles-wsgi/?service=WMS&request=GetMap&layers=fire_scar_by_month_current%2Cnodata_raster&styles=null%2Cnull%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiFireScars&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tiles: ['https://tiles.wanderstories.space/nafi/?service=WMS&request=GetMap&layers=fire_scar_by_month_current%2Cnodata_raster&styles=null%2Cnull%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiFireScars&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 512,
                 minzoom: 12,
                 maxzoom: 15,
@@ -1003,7 +1003,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             heatmap: {
                 type: 'raster',
-                tiles: ['https://heatmap.wanderstories.space/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/heatmap/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://heatmap.wanderstories.space" target="_blank">Wanderstories</a>'
@@ -1020,7 +1020,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             stravaAll: {
                 type: 'raster',
-                tiles: ['https://strava.wanderstories.space/{z}/{x}/{y}/512/all/hot'],
+                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/all/hot'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
@@ -1037,7 +1037,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             stravaRide: {
                 type: 'raster',
-                tiles: ['https://strava.wanderstories.space/{z}/{x}/{y}/512/ride/hot'],
+                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/ride/hot'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
@@ -1054,7 +1054,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             trailforksHeatmap: {
                 type: 'raster',
-                tiles: ['https://trailforks.wanderstories.space/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/trailforks/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://trailforks.com" target="_blank">Trailforks</a>'
@@ -1530,7 +1530,7 @@ export const basemapTree: LayerTreeType = {
                 tasImagery: true,
                 nafiTopo: true,
                 natmapsTopo: true,
-                getLostTopo: true,
+                getlostTopo: true,
             },
             belgium: {
                 ignBe: true,
@@ -1817,7 +1817,7 @@ export const defaultBasemapTree: LayerTreeType = {
                 tasImagery: false,
                 nafiTopo: true,
                 natmapsTopo: true,
-                getLostTopo: true,
+                getlostTopo: true,
             },
             belgium: {
                 ignBe: false,

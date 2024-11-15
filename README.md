@@ -34,6 +34,89 @@ npm install
 npm run dev
 ```
 
+### Delpoy with Docker
+
+### Website
+
+Clone the [Luen/gps.studio](https://github.com/Luen/gps.studio) GitHub repository.
+
+```bash
+git clone git@github.com:Luen/gps.studio.git
+```
+
+Create the .env file:
+
+```bash
+echo PUBLIC_MAPBOX_TOKEN={YOUR_MAPBOX_TOKEN}\nPUBLIC_MAPBOX_TOKEN_BACKUP={YOUR_BACKUP_MAPBOX_TOKEN}  >> website/.env
+```
+
+Start the Docker container:
+
+```bash
+docker compose up --build -d
+```
+
+#### BRouter
+
+Clone the [Luen/brouter](https://github.com/gpxstudio/brouter) GitHub repository.
+
+```bash
+git clone git@github.com:gpxstudio/brouter.git
+```
+
+Build the docker image and run it with the following commands:
+
+```bash
+docker build -t brouter .
+```
+
+Download the Australian segments4 files with the following command:
+
+```bash
+wget -P misc/scripts/segments4/ https://brouter.de/brouter/segments4/E110_S10.rd5 \
+    https://brouter.de/brouter/segments4/E110_S15.rd5 \
+    https://brouter.de/brouter/segments4/E110_S20.rd5 \
+    https://brouter.de/brouter/segments4/E110_S25.rd5 \
+    https://brouter.de/brouter/segments4/E110_S30.rd5 \
+    https://brouter.de/brouter/segments4/E115_S10.rd5 \
+    https://brouter.de/brouter/segments4/E115_S15.rd5 \
+    https://brouter.de/brouter/segments4/E115_S20.rd5 \
+    https://brouter.de/brouter/segments4/E115_S25.rd5 \
+    https://brouter.de/brouter/segments4/E115_S30.rd5 \
+    https://brouter.de/brouter/segments4/E120_S10.rd5 \
+    https://brouter.de/brouter/segments4/E120_S15.rd5 \
+    https://brouter.de/brouter/segments4/E120_S20.rd5 \
+    https://brouter.de/brouter/segments4/E120_S25.rd5 \
+    https://brouter.de/brouter/segments4/E125_S10.rd5 \
+    https://brouter.de/brouter/segments4/E125_S15.rd5 \
+    https://brouter.de/brouter/segments4/E125_S20.rd5 \
+    https://brouter.de/brouter/segments4/E130_S10.rd5 \
+    https://brouter.de/brouter/segments4/E130_S15.rd5 \
+    https://brouter.de/brouter/segments4/E130_S20.rd5 \
+    https://brouter.de/brouter/segments4/E135_S10.rd5 \
+    https://brouter.de/brouter/segments4/E135_S15.rd5 \
+    https://brouter.de/brouter/segments4/E135_S20.rd5 \
+    https://brouter.de/brouter/segments4/E140_S10.rd5 \
+    https://brouter.de/brouter/segments4/E140_S15.rd5 \
+    https://brouter.de/brouter/segments4/E140_S20.rd5 \
+    https://brouter.de/brouter/segments4/E145_S10.rd5 \
+    https://brouter.de/brouter/segments4/E145_S15.rd5 \
+    https://brouter.de/brouter/segments4/E145_S20.rd5 \
+    https://brouter.de/brouter/segments4/E150_S10.rd5 \
+    https://brouter.de/brouter/segments4/E150_S15.rd5 \
+    https://brouter.de/brouter/segments4/E150_S20.rd5
+```
+
+Start the brouter server with the following command:
+
+```bash
+docker run --rm \
+    -v ./misc/scripts/segments4:/segments4 \
+    -p 17777:17777 \
+    --name brouter \
+    brouter
+```
+
 ## Credits
 
 Built on top of [**gpx.studio**](https://gpx.studio).

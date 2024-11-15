@@ -22,7 +22,7 @@
         "export": "Export...",
         "export_all": "Export all...",
         "export_options": "Export options",
-        "support_message": "The tool is free to use, but not free to run. Please consider supporting the website if you use it frequently. Thank you!",
+        "support_message": "The tool is free to use, but not free to run. Please consider signing up to Wanderstories if you use it frequently. Thank you!",
         "support_button": "Help keep the website free",
         "download_file": "Download file",
         "download_files": "Download files",
@@ -322,8 +322,8 @@
             "tasBase": "Tasmania Base",
             "tasImagery": "Tasmania Imagery",
             "nafiTopo": "NAFI Topo",
-            "natmapsTopo": "NatMaps Topo",
-            "getLostTopo": "Getlost Topo",
+            "natmapsTopo": "Geosciences Australia Topo",
+            "getlostTopo": "Getlost Topo",
             "stravaHeatmapAll": "Strava Heatmap All",
             "stravaHeatmapRide": "Strava Heatmap Ride",
             "trailforksHeatmap": "Trailforks Heatmap",
@@ -536,7 +536,7 @@
         "email": "Email",
         "contribute": "Contribute",
         "supported_by": "supported by",
-        "support_button": "Support gpx.studio on Ko-fi",
+        "support_button": "Support gpx.studio",
         "route_planning": "Route planning",
         "route_planning_description": "An intuitive interface to create itineraries tailored to each sport, based on OpenStreetMap data.",
         "file_processing": "Advanced file processing",
@@ -546,7 +546,7 @@
         "data_visualization": "Data visualization",
         "data_visualization_description": "An interactive elevation profile with detailed statistics to analyze recorded activities and future objectives.",
         "identity": "Free, ad-free and open source",
-        "identity_description": "The website is free to use, without ads, and the source code is publicly available on GitHub. This is only possible thanks to the incredible support of the community."
+        "identity_description": "The website is free to use, without ads, and the source code is publicly available on GitHub. This is only possible thanks to the incredible support of the gpx.studio community."
     },
     "docs": {
         "translate": "Improve the translation on Crowdin",

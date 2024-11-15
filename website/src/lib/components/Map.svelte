@@ -11,10 +11,10 @@
 	import { map } from '$lib/stores';
 	import { settings } from '$lib/db';
 	import { _ } from 'svelte-i18n';
-	import { PUBLIC_MAPBOX_TOKEN } from '$env/static/public';
+	import { PUBLIC_MAPBOX_TOKEN, PUBLIC_MAPBOX_TOKEN_BACKUP } from '$env/static/public';
 	import { page } from '$app/stores';
 
-	export let accessToken = PUBLIC_MAPBOX_TOKEN;
+	export let accessToken = Math.random() < 0.5 ? PUBLIC_MAPBOX_TOKEN : PUBLIC_MAPBOX_TOKEN_BACKUP;
 	export let geolocate = true;
 	export let geocoder = true;
 	export let hash = true;
@@ -79,7 +79,7 @@
 							sources: {},
 							layers: [],
 							glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
-							sprite: `https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/sprite?access_token=${PUBLIC_MAPBOX_TOKEN}`
+							sprite: `https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/sprite?access_token=${accessToken}`
 						}
 					},
 					{
@@ -98,7 +98,7 @@
 				]
 			},
 			projection: 'globe',
-			zoom: 3,
+			zoom: 2,
 			center: [140, -30],
 			hash: hash,
 			language,
