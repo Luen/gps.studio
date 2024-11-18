@@ -12,7 +12,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             wsOutdoors: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/topo/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/mapbox/topo/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>'
@@ -31,7 +31,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             mapboxSatellite: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/satellite/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/mapbox/satellite/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://www.mapbox.com/about/maps/" target="_blank">Mapbox</a>'
@@ -66,9 +66,11 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             openTopoMap: {
                 type: 'raster',
                 //tiles: ['https://tile.opentopomap.org/{z}/{x}/{y}.png'],
-                tiles: ['https://opentopomap.wanderstories.space/{z}/{x}/{y}.png'],
+                //tiles: ['https://opentopomap.wanderstories.space/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/opentopomap/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 17,
+                //maxzoom: 17,
+                maxzoom: 16,
                 attribution: '&copy; <a href="https://www.opentopomap.org" target="_blank">OpenTopoMap</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
             }
         },
@@ -1060,7 +1062,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             trailforksHeatmap: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/trailforks/{z}/{x}/{y}'],
+                tiles: ['https://tiles.wanderstories.space/trailforks/heatmap/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://trailforks.com" target="_blank">Trailforks</a>'
@@ -1077,7 +1079,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             ridewithgpsHeatmap: {
                 type: 'raster',
-                tiles: ['https://heatmap.ridewithgps.com/v1/map/default/normalized/{z}/{x}/{y}.png?end_color=%23E60026&end_opacity=255&mid_color=%23E64560&mid_opacity=200&midpoint=0.2&start_color=%23A1E6E6&start_opacity=150'],
+                tiles: ['https://tiles.wanderstories.space/ridewithgps/heatmap/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://ridewithgps.com" target="_blank">Ride with GPS</a>'
