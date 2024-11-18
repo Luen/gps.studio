@@ -977,7 +977,8 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             shipwrecks: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/shipwrecks/?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
+                //tiles: ['https://tiles.wanderstories.space/shipwrecks/?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
+                tiles: ['http://localhost:4009/shipwrecks/?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
                 tileSize: 256,
                 maxzoom: 15,
                 attribution: '&copy; <a href="https://www.environment.gov.au/" target="_blank">Australian Government</a>'
@@ -988,6 +989,28 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             type: 'raster',
             source: 'shipwrecks',
         }],
+    },
+    waterfalls: {
+        version: 8,
+        sources: {
+            waterfalls: {
+                type: 'vector',
+                tiles: ['https://waterfalls.wanderstories.space/waterfalls/{z}/{x}/{y}'],
+                minzoom: 10,
+                maxzoom: 15,
+                attribution: '&copy; <a href="https://wanderstories.space" target="_blank">Wanderstories</a>'
+            }
+        },
+        layers: [{
+            id: 'waterfalls',
+            type: 'circle',
+            source: 'waterfalls',
+            'source-layer': 'waterfalls',
+            paint: {
+                'circle-radius': 5,
+                'circle-color': '#f00'
+            }
+        }],            
     },
     nafiFireScars: {
         version: 8,
@@ -1625,8 +1648,9 @@ export const overlayTree: LayerTreeType = {
                 qFireScars: true,
                 nafiFireScars: true,
                 shipwrecks: true,
+                waterfalls: true,
                 calSlopes: true,
-                indigenousGroups: true,
+                indigenousGroups: false,
             },
             france: {
                 ignFrCadastre: true,
@@ -1727,6 +1751,7 @@ export const defaultOverlays: LayerTreeType = {
                 qFireScars: false,
                 nafiFireScars: false,
                 shipwrecks: false,
+                waterfalls: false,
                 calSlopes: false,
                 indigenousGroups: false,
             },
@@ -1912,6 +1937,7 @@ export const defaultOverlayTree: LayerTreeType = {
                 qFireScars: true,
                 nafiFireScars: true,
                 shipwrecks: false,
+                waterfalls: true,
                 calSlopes: true,
                 indigenousGroups: false,
             },
