@@ -1618,9 +1618,9 @@ export const overlayTree: LayerTreeType = {
                 qContours: true,
                 qFireScars: true,
                 nafiFireScars: true,
-                shipwrecks: false,
+                shipwrecks: true,
                 calSlopes: true,
-                indigenousGroups: false,
+                indigenousGroups: true,
             },
             france: {
                 ignFrCadastre: true,
