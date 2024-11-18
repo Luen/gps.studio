@@ -548,7 +548,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             getlostTopo: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/getlost/{z}/{x}/{y}.jpg'],
+                //tiles: ['https://tiles.wanderstories.space/getlost/{z}/{x}/{y}.jpg'],
+                tiles: ['https://getlost.wanderstories.space/{z}/{x}/{y}.jpg'],
                 tileSize: 256,
                 maxzoom: 13,
                 minzoom: 10,
