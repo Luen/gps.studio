@@ -959,7 +959,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             indigenousGroups: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/aiatsis/{z}/{y}/{x}'],
+                tiles: ['https://tiles.wanderstories.space/aiatsis/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 6,
                 minzoom: 2,
