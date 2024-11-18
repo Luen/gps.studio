@@ -1006,21 +1006,21 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             source: 'nafiFireScars',
         }],
     },
-    heatmap: {
+    wanderstoriesHeatmap: {
         version: 8,
         sources: {
-            heatmap: {
+            wanderstoriesHeatmap: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/heatmap/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 15,
                 attribution: '&copy; <a href="https://heatmap.wanderstories.space" target="_blank">Wanderstories</a>'
             }
         },
         layers: [{
-            id: 'heatmap',
+            id: 'wanderstoriesHeatmap',
             type: 'raster',
-            source: 'heatmap',
+            source: 'wanderstoriesHeatmap',
         }],
     },
     stravaHeatmapAll: {
@@ -1600,6 +1600,7 @@ export const overlayTree: LayerTreeType = {
             },
             cyclOSMlite: true,
             bikerouterGravel: true,
+            wanderstoriesHeatmap: true,
             stravaHeatmapAll: true,
             stravaHeatmapRide: true,
             trailforksHeatmap: true,
@@ -1619,7 +1620,6 @@ export const overlayTree: LayerTreeType = {
                 shipwrecks: false,
                 calSlopes: true,
                 indigenousGroups: false,
-                heatmap: true,
             },
             france: {
                 ignFrCadastre: true,
@@ -1702,6 +1702,7 @@ export const defaultOverlays: LayerTreeType = {
             },
             cyclOSMlite: false,
             bikerouterGravel: false,
+            wanderstoriesHeatmap: false,
             stravaHeatmapAll: false,
             stravaHeatmapRide: false,
             trailforksHeatmap: false,
@@ -1721,7 +1722,6 @@ export const defaultOverlays: LayerTreeType = {
                 shipwrecks: false,
                 calSlopes: false,
                 indigenousGroups: false,
-                heatmap: false,
             },
             france: {
                 ignFrCadastre: false,
@@ -1887,6 +1887,7 @@ export const defaultOverlayTree: LayerTreeType = {
             },
             cyclOSMlite: false,
             bikerouterGravel: false,
+            wanderstoriesHeatmap: true,
             stravaHeatmapAll: false,
             stravaHeatmapRide: false,
             trailforksHeatmap: false,
@@ -1906,7 +1907,6 @@ export const defaultOverlayTree: LayerTreeType = {
                 shipwrecks: false,
                 calSlopes: true,
                 indigenousGroups: false,
-                heatmap: true,
             },
             france: {
                 ignFrCadastre: false,
