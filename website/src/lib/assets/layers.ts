@@ -1095,44 +1095,50 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
     garminHeatmap: {
         version: 8,
         sources: {
+            //'https://connecttile.garmin.com/ROAD_CYCLING/{z}/{x}/{y}.png',
+            //'https://connecttile.garmin.com/MOUNTAIN_BIKING/{z}/{x}/{y}.png'
+            //'https://connecttile.garmin.com/GRAVEL_BIKING/{z}/{x}/{y}.png',
+            //'https://connecttile.garmin.com/RUNNING/{z}/{x}/{y}.png',
+            //'https://connecttile.garmin.com/TRAIL_RUNNING/{z}/{x}/{y}.png',
+            //'https://connecttile.garmin.com/HIKING/{z}/{x}/{y}.png',
             garminRoad: {
                 type: 'raster',
-                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/ROAD_CYCLING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
             },
             garminMtb: {
                 type: 'raster',
-                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/MOUNTAIN_BIKING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
             },
             garminGravel: {
                 type: 'raster',
-                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/GRAVEL_BIKING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
             },
             garminRunning: {
                 type: 'raster',
-                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/RUNNING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
             },
             garminTrail: {
                 type: 'raster',
-                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/TRAIL_RUNNING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
             },
             garminHiking: {
                 type: 'raster',
-                tiles: ['https://connecttile.garmin.com/HEAT/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/HIKING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
