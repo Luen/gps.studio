@@ -977,8 +977,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             shipwrecks: {
                 type: 'raster',
-                //tiles: ['https://tiles.wanderstories.space/shipwrecks/?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
-                tiles: ['http://localhost:4009/shipwrecks/?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
+                tiles: ['https://tiles.wanderstories.space/shipwrecks/?dpi=96&transparent=true&format=png32&layers=show%3A3%2C4%2C5%2C7%2C8%2C9%2C32&bbox={bbox-epsg-3857}&bboxSR=102100&imageSR=102100&size=256%2C256&f=image'],
                 tileSize: 256,
                 maxzoom: 15,
                 attribution: '&copy; <a href="https://www.environment.gov.au/" target="_blank">Australian Government</a>'
@@ -992,28 +991,58 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
     },
     waterfalls: {
         version: 8,
+        glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
         sources: {
             waterfalls: {
-                type: 'vector',
-                tiles: ['https://waterfalls-tiles.wanderstories.space/data/waterfalls/{z}/{x}/{y}.pbf'],
-                minzoom: 5,
-                maxzoom: 15,
+                type: 'geojson',
+                data: 'https://waterfalls.wanderstories.space/data/waterfalls.geojson',
                 attribution: '&copy; <a href="https://wanderstories.space" target="_blank">Wanderstories</a>'
             }
         },
         layers: [{
-            id: 'waterfalls',
-            type: 'circle',
+            id: 'waterfalls-symbol',
+            type: 'symbol',
             source: 'waterfalls',
-            'source-layer': 'waypoints_layer',
+            layout: {
+                'text-field': '▾',
+                'text-font': ['Arial Unicode MS Regular'],
+                'text-size': [
+                    'interpolate',
+                    ['linear'],
+                    ['zoom'],
+                    2, 16,    // Increased from 12
+                    5, 20,    // Increased from 14
+                    10, 24,   // Increased from 16
+                    15, 28    // Increased from 18
+                ],
+                'text-allow-overlap': true,
+                'text-ignore-placement': true
+            },
             paint: {
-                "circle-radius": [
-                    "interpolate", ["linear"], ["zoom"],
-                    5, 3, 15, 10
-                ], 
-                'circle-color': '#00f'
+                'text-color': '#0078D7',
+                'text-halo-color': '#ffffff',
+                'text-halo-width': 1
             }
-        }],
+        },
+        {
+            id: 'waterfalls-label',
+            type: 'symbol',
+            source: 'waterfalls',
+            minzoom: 11,
+            filter: ['has', 'name'],
+            layout: {
+                'text-field': ['get', 'name'],
+                'text-font': ['Arial Unicode MS Regular'],
+                'text-size': 12,
+                'text-offset': [0, 1.5],
+                'text-anchor': 'top'
+            },
+            paint: {
+                'text-color': '#000000',
+                'text-halo-color': '#ffffff',
+                'text-halo-width': 2
+            }
+        }]
     },
     nafiFireScars: {
         version: 8,
@@ -1121,12 +1150,6 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
     garminHeatmap: {
         version: 8,
         sources: {
-            //'https://connecttile.garmin.com/ROAD_CYCLING/{z}/{x}/{y}.png',
-            //'https://connecttile.garmin.com/MOUNTAIN_BIKING/{z}/{x}/{y}.png'
-            //'https://connecttile.garmin.com/GRAVEL_BIKING/{z}/{x}/{y}.png',
-            //'https://connecttile.garmin.com/RUNNING/{z}/{x}/{y}.png',
-            //'https://connecttile.garmin.com/TRAIL_RUNNING/{z}/{x}/{y}.png',
-            //'https://connecttile.garmin.com/HIKING/{z}/{x}/{y}.png',
             garminRoad: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/garmin/heatmap/ROAD_CYCLING/{z}/{x}/{y}.png'],
