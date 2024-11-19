@@ -995,8 +995,8 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             waterfalls: {
                 type: 'vector',
-                tiles: ['https://waterfalls.wanderstories.space/waterfalls/{z}/{x}/{y}'],
-                minzoom: 10,
+                tiles: ['https://waterfalls-tiles.wanderstories.space/data/waterfalls/{z}/{x}/{y}.pbf'],
+                minzoom: 5,
                 maxzoom: 15,
                 attribution: '&copy; <a href="https://wanderstories.space" target="_blank">Wanderstories</a>'
             }
@@ -1005,12 +1005,15 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             id: 'waterfalls',
             type: 'circle',
             source: 'waterfalls',
-            'source-layer': 'waterfalls',
+            'source-layer': 'waypoints_layer',
             paint: {
-                'circle-radius': 5,
-                'circle-color': '#f00'
+                "circle-radius": [
+                    "interpolate", ["linear"], ["zoom"],
+                    5, 3, 15, 10
+                ], 
+                'circle-color': '#00f'
             }
-        }],            
+        }],
     },
     nafiFireScars: {
         version: 8,
