@@ -1,4 +1,4 @@
-# BUIDL THE PROJECT
+# BUILD THE PROJECT
 FROM node:22 AS builder
 
 # Set the working directory for the GPX project
@@ -29,15 +29,20 @@ FROM node:22-slim AS production
 WORKDIR /app
 
 # Copy only the built assets from the builders
-COPY --from=builder /app/website/build /build
-COPY --from=builder /app/website/package*.json ./
+#COPY --from=builder /app/website/build ./build
+#COPY --from=builder /app/website/package*.json ./
 
 # Install only production dependencies
-ENV NODE_ENV=production
-RUN npx ci
+ENV NODE_ENV=production 
+#RUN npx ci
+
+# WORKAROUND: Need to install devDependencies as Vite is in devDependencies
+COPY --from=builder /app/website/ ./
 
 # Expose the port the server will run on
 EXPOSE 4173
 
 # Start the app
-CMD ["npm", "run", "preview", "--", "--host", "--", "--port", "4173"]
+CMD ["npm", "run", "preview", "--", "--host", "--port", "4173"]
+#CMD ["npx", "serve", "-s", "build", "-l", "4173"]
+#CMD ["npx", "vite", "preview", "--host", "--port", "4173"]
