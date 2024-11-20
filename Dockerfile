@@ -1,29 +1,43 @@
-# Use an official Node.js image as a base
+# BUIDL THE PROJECT
 FROM node:22 AS builder
 
 # Set the working directory for the GPX project
 WORKDIR /app/gpx
 
 # Copy the GPX project files
-COPY gpx/ .
+COPY gpx/ ./
 
-# Run the build command explicitly after install
+# Install and build
 RUN npm install && npm run build
 
-# Set up the website project in a new working directory
+# Set the working directory for the website project
 WORKDIR /app/website
 
-# Copy the remaining website files
-COPY website/ .
+# Copy the website project files
+COPY website/ ./
 
-# Install the website project dependencies
+# Perform a Clean Install
 RUN npx ci
 
-# Build the Vite app
+# Build the app
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build
 
-# Expose the port Vite's preview server will run on
+# BUILD THE PRODUCTION IMAGE
+FROM node:22-slim AS production
+
+# Set working directory in the production image
+WORKDIR /app
+
+# Copy only the built assets from the builders
+COPY --from=builder /app/website/build /build
+COPY --from=builder /app/website/package*.json ./
+
+# Install only production dependencies
+ENV NODE_ENV=production
+RUN npx ci
+
+# Expose the port the server will run on
 EXPOSE 4173
 
-# Start the Vite app in preview mode
-CMD ["npm", "run", "preview", "--", "--host"]
+# Start the app
+CMD ["npm", "run", "preview", "--", "--host", "--", "--port", "4173"]

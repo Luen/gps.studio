@@ -364,6 +364,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 tiles: ['https://tiles.wanderstories.space/qldglobe/qtopo/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
+                minzoom: 3,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -796,6 +797,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 tiles: ['https://tiles.wanderstories.space/qldglobe/contours/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
+                minzoom: 9,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qWater: {
@@ -803,6 +805,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 tiles: ['https://tiles.wanderstories.space/qldglobe/water/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16, // Can do 17
+                min: 9, // Can do more
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -810,8 +813,8 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             id: 'qContours',
             type: 'raster',
             source: 'qContours',
-            }, 
-            {
+        },
+        {
             id: 'qWater',
             type: 'raster',
             source: 'qWater',
@@ -910,7 +913,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         layers: [{
             id: 'qLandParcel',
             type: 'raster',
-            source: 'qLandParcel',  
+            source: 'qLandParcel',
             paint: {
                 'raster-opacity': 0.6
             }
@@ -937,7 +940,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             }
         }],
     },
-    calSlopes:{
+    calSlopes: {
         version: 8,
         sources: {
             calSlopes: {
@@ -952,6 +955,9 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             id: 'calSlopes',
             type: 'raster',
             source: 'calSlopes',
+            paint: {
+            'raster-opacity': 0.8
+            }
         }],
     },
     indigenousGroups: {
