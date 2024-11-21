@@ -1,5 +1,5 @@
 # BUILD THE PROJECT
-FROM node:22 AS builder
+FROM node:22-slim AS builder
 
 # Set the working directory for the GPX project
 WORKDIR /app/gpx
