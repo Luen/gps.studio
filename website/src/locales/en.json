@@ -80,8 +80,8 @@
         "unhide": "Unhide",
         "center": "Center",
         "open_in": "Open in",
-        "show_coordinates_maps": "Show Coordinates & Maps",
-        "copy_coordinates": "Copy coordinates"
+        "copy_coordinates": "Copy coordinates",
+        "show_coordinates_maps": "Show Coordinates & Maps"
     },
     "toolbar": {
         "routing": {
