@@ -280,13 +280,26 @@
 		}
 	}
 
+	function isQueensland(lat: number, lng: number) {
+		// Need to improve this
+		return lat >= -20 && lat <= -10 && lng >= 140 && lng <= 153;
+	}
+
 	$: utm = geo2utm(coordinates);
 	$: sixFigure = get6FigureRef(utm);
 	$: mapSheets = getMapSheets(coordinates.lat, coordinates.lng);
 	$: mapTitle = getMapTitle(mapSheets['10k']);
-	$: mapLinks = getMapLinksQld(mapSheets);
-	$: historicMaps = getHistoricMaps(coordinates.lat, coordinates.lng);
-	$: geoscienceMaps = getGeoscienceMaps(coordinates.lat, coordinates.lng);
+	$: mapLinks = isQueensland(coordinates.lat, coordinates.lng) ? getMapLinksQld(mapSheets) : null;
+	$: historicMaps = isQueensland(coordinates.lat, coordinates.lng)
+		? getHistoricMaps(coordinates.lat, coordinates.lng)
+		: null;
+	$: geoscienceMaps = isQueensland(coordinates.lat, coordinates.lng)
+		? getGeoscienceMaps(coordinates.lat, coordinates.lng)
+		: null;
+
+	function formatScale(scale: number): string {
+		return `1:${scale.toLocaleString()}`;
+	}
 </script>
 
 <div class="p-2 text-sm bg-background rounded-md shadow-md border border-border">
@@ -304,73 +317,49 @@
 			<td class="text-right">{sixFigure}</td>
 		</tr>
 		<tr>
-			<td colspan="2" class="border-t border-border">
+			<td colspan="3" class="border-t border-border">
 				<div class="text-xs mt-1">
-					<div class="font-bold mb-1">{mapTitle ? `${mapTitle} Maps` : 'Maps'}</div>
-					<div class="font-semibold mb-1">
-						Government Maps
-						<div class="grid grid-cols-3 gap-x-2">
-							<div>100k</div>
-							<div class="text-left font-mono">{mapLinks['100k'].sheet}</div>
-							<div class="text-right">
-								<a
-									href={mapLinks['100k'].topo}
-									target="_blank"
-									class="text-primary hover:underline px-1">topo</a
-								>/
-								<a
-									href={mapLinks['100k'].image}
-									target="_blank"
-									class="text-primary hover:underline px-1">img</a
-								>
-							</div>
+					<div class="font-bold mb-1">{mapTitle ? `${mapTitle}` : 'Maps'}</div>
+					{#if mapLinks}
+						<div class="font-semibold mb-1">Government Maps</div>
+						<div class="grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2">
+							<div>Title</div>
+							<div>Sheet</div>
+							<div>Scale</div>
+							<div>Links</div>
 
-							<div>50k</div>
-							<div class="text-left font-mono">{mapLinks['50k'].sheet}</div>
-							<div class="text-right">
-								<a
-									href={mapLinks['50k'].topo}
-									target="_blank"
-									class="text-primary hover:underline px-1">topo</a
-								>/
-								<a
-									href={mapLinks['50k'].image}
-									target="_blank"
-									class="text-primary hover:underline px-1">img</a
-								>
-							</div>
-
-							<div>25k</div>
-							<div class="text-left font-mono">{mapLinks['25k'].sheet}</div>
-							<div class="text-right">
-								<a
-									href={mapLinks['25k'].topo}
-									target="_blank"
-									class="text-primary hover:underline px-1">topo</a
-								>/
-								<a
-									href={mapLinks['25k'].image}
-									target="_blank"
-									class="text-primary hover:underline px-1">img</a
-								>
-							</div>
-
-							<div>10k</div>
-							<div class="text-left font-mono">{mapLinks['10k'].sheet}</div>
-							<div class="text-right">
-								<a
-									href={mapLinks['10k'].topo}
-									target="_blank"
-									class="text-primary hover:underline px-1">topo</a
-								>/
-								<a
-									href={mapLinks['10k'].image}
-									target="_blank"
-									class="text-primary hover:underline px-1">img</a
-								>
-							</div>
+							{#each ['100k', '50k', '25k', '10k'] as scale}
+								<div>Queensland {scale}</div>
+								<div class="font-mono whitespace-nowrap">{mapLinks[scale].sheet}</div>
+								<div>{formatScale(parseInt(scale.replace('k', '000')))}</div>
+								<div class="text-right whitespace-nowrap">
+									<a
+										href={mapLinks[scale].topo}
+										target="_blank"
+										title="Topographic map"
+										class="text-primary hover:underline px-1">🗺️</a
+									>
+									<a
+										href={mapLinks[scale].image}
+										target="_blank"
+										title="Satellite imagery"
+										class="text-primary hover:underline px-1">📡</a
+									>
+								</div>
+							{/each}
 						</div>
-					</div>
+					{:else}
+						<div class="grid grid-cols-[2fr_1fr_1fr] gap-x-2">
+							<div>Sheet</div>
+							<div>Scale</div>
+							<div>&nbsp;</div>
+							{#each ['100k', '50k', '25k', '10k'] as scale}
+								<div>{mapSheets[scale]}</div>
+								<div>{scale}</div>
+								<div>{formatScale(parseInt(scale.replace('k', '000')))}</div>
+							{/each}
+						</div>
+					{/if}
 				</div>
 			</td>
 		</tr>
@@ -383,19 +372,16 @@
 							{#await geoscienceMaps}
 								<div class="col-span-4">Loading...</div>
 							{:then maps}
-								<div
-									class="col-span-4 grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2 text-muted-foreground"
-								>
-									<div>Title</div>
-									<div>Year</div>
-									<div>Scale</div>
-									<div>Links</div>
-								</div>
+								<div>Title</div>
+								<div>Sheet</div>
+								<div>Scale</div>
+								<div>Links</div>
+
 								{#each maps as map}
 									<div title={map.attributes.NAME}>{map.attributes.TITLE}</div>
-									<div>{map.attributes.PUB_YEAR}</div>
-									<div>1:{map.attributes.SCALE_1}</div>
-									<div>
+									<div class="font-mono">{map.attributes.MAP_CODE}</div>
+									<div>1:{map.attributes.SCALE_1.toLocaleString()}</div>
+									<div class="text-right whitespace-nowrap">
 										<a
 											href={map.attributes.mapUrl}
 											target="_blank"
@@ -410,8 +396,6 @@
 										>
 									</div>
 								{/each}
-							{:catch error}
-								<div class="col-span-4">Error loading Geoscience maps</div>
 							{/await}
 						</div>
 					</div>
@@ -420,46 +404,37 @@
 		{/if}
 		{#if historicMaps}
 			<tr>
-				<td colspan="2" class="border-t border-border">
+				<td colspan="3" class="border-t border-border">
 					<div class="text-xs mt-1">
 						<div class="font-semibold mb-1">Historic Maps</div>
-						<div class="grid grid-cols-4 gap-x-2">
+						<div class="grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2">
 							{#await historicMaps}
-								<div>Loading...</div>
+								<div class="col-span-4">Loading...</div>
 							{:then maps}
-								<div
-									class="col-span-4 grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2 text-muted-foreground"
-								>
-									<div>Title</div>
-									<div>Date</div>
-									<div>Scale</div>
-									<div>Links</div>
-								</div>
+								<div>Title</div>
+								<div>Date</div>
+								<div>Scale</div>
+								<div>Links</div>
+
 								{#each maps as map}
-									<div
-										class="col-span-4 grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2 text-muted-foreground"
-									>
-										<div title={map.mapping_series || map.description}>{map.title}</div>
-										<div>{map.publication_date}</div>
-										<div>1:{map.map_scale}</div>
-										<div>
-											<a
-												href={map.download_link}
-												target="_blank"
-												title="Download map"
-												class="text-primary hover:underline px-1">↓</a
-											>
-											<a
-												href={map.map_preview}
-												target="_blank"
-												title="Preview map"
-												class="text-primary hover:underline px-1">👁️</a
-											>
-										</div>
+									<div title={map.mapping_series || map.description}>{map.title}</div>
+									<div>{map.publication_date}</div>
+									<div>1:{map.map_scale.toLocaleString()}</div>
+									<div class="text-right whitespace-nowrap">
+										<a
+											href={map.download_link}
+											target="_blank"
+											title="Download map"
+											class="text-primary hover:underline px-1">↓</a
+										>
+										<a
+											href={map.map_preview}
+											target="_blank"
+											title="Preview map"
+											class="text-primary hover:underline px-1">👁️</a
+										>
 									</div>
 								{/each}
-							{:catch error}
-								<div class="col-span-4">Error loading historic maps</div>
 							{/await}
 						</div>
 					</div>
