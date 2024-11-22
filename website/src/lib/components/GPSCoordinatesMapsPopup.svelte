@@ -171,6 +171,31 @@
 		};
 	}
 
+	function getMapSheetsNSW(mapSheet10k: string): { [key: string]: string } {
+		// Extract the base map number (first 4 digits)
+		const baseMap = mapSheet10k.slice(0, 4);
+
+		// Get the quadrant number (after the dash)
+		const thirdLastDigit = mapSheet10k.slice(-3, -2);
+		const secondLastDigit = mapSheet10k.slice(-2, -1);
+		const lastDigit = mapSheet10k.slice(-1);
+
+		// Convert quadrant number to N/S direction
+		const directionMap: { [key: string]: string } = {
+			'1': 'N',
+			'2': 'S',
+			'3': 'S',
+			'4': 'N'
+		};
+
+		return {
+			'100k': baseMap,
+			'50k': `${baseMap}-${directionMap[String(thirdLastDigit)]}`,
+			'25k': `${baseMap}-${String(thirdLastDigit)}${directionMap[String(secondLastDigit)]}`,
+			'10k': `${baseMap}-${String(thirdLastDigit)}${String(secondLastDigit)}${directionMap[String(lastDigit)]}`
+		};
+	}
+
 	function getMapLinksQld(mapSheets: { [key: string]: string }) {
 		return {
 			'100k': {
@@ -197,16 +222,24 @@
 	}
 
 	function getMapTitle(sheet: string | undefined): string {
-		// Return early if sheet is undefined
 		if (!sheet) return '';
 		try {
 			if (!qldMapBounds) return '';
-			const qldTitle = String(qldMapBounds[sheet as keyof typeof qldMapBounds] || '');
-			if (qldTitle) return qldTitle;
+			const qldSheet = sheet.slice(0, 4);
+			const qldTitle = qldMapBounds[qldSheet as keyof typeof qldMapBounds];
+			if (qldTitle) return String(qldTitle);
 
 			if (!nswMapBounds) return '';
-			const nswTitle = String(nswMapBounds[sheet as keyof typeof nswMapBounds] || '');
-			return nswTitle || '';
+			const nswSheetArray = getMapSheetsNSW(sheet);
+			let nswTitle;
+			nswTitle = nswMapBounds[nswSheetArray['10k'] as keyof typeof nswMapBounds];
+			if (nswTitle) return String(nswTitle);
+			nswTitle = nswMapBounds[nswSheetArray['25k'] as keyof typeof nswMapBounds];
+			if (nswTitle) return String(nswTitle);
+			nswTitle = nswMapBounds[nswSheetArray['50k'] as keyof typeof nswMapBounds];
+			if (nswTitle) return String(nswTitle);
+			nswTitle = nswMapBounds[nswSheetArray['100k'] as keyof typeof nswMapBounds];
+			return nswTitle ? String(nswTitle) : '';
 		} catch (error) {
 			console.error('Error in getMapTitle:', error);
 			return '';
@@ -216,7 +249,7 @@
 	$: utm = geo2utm(coordinates);
 	$: sixFigure = get6FigureRef(utm);
 	$: mapSheets = getMapSheets(coordinates.lat, coordinates.lng);
-	$: mapTitle = getMapTitle(mapSheets['100k']);
+	$: mapTitle = getMapTitle(mapSheets['10k']);
 	$: mapLinks = getMapLinksQld(mapSheets);
 </script>
 

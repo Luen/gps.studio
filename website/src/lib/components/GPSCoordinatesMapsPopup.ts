@@ -3,8 +3,8 @@ import mapboxgl from 'mapbox-gl';
 import GpsCoordinatesMapsPopup from './GPSCoordinatesMapsPopup.svelte';
 
 export class GpsPopup {
+    private static currentPopup: mapboxgl.Popup | null = null;
     private map: Map;
-    private popup: mapboxgl.Popup | null = null;
 
     constructor(map: Map) {
         this.map = map;
@@ -12,8 +12,8 @@ export class GpsPopup {
 
     showCenterCoordinates() {
         // Close existing popup if it exists
-        if (this.popup) {
-            this.popup.remove();
+        if (GpsPopup.currentPopup) {
+            GpsPopup.currentPopup.remove();
         }
 
         const center = this.map.getCenter();
@@ -29,7 +29,7 @@ export class GpsPopup {
             }
         });
 
-        this.popup = new mapboxgl.Popup({
+        GpsPopup.currentPopup = new mapboxgl.Popup({
             closeButton: true,
             closeOnClick: false,
             maxWidth: '400px',
