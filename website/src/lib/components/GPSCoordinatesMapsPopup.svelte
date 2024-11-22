@@ -196,23 +196,17 @@
 		};
 	}
 
-	function getMapTitle(sheet: string | undefined, state: 'QLD' | 'NSW'): string {
+	function getMapTitle(sheet: string | undefined): string {
 		// Return early if sheet is undefined
 		if (!sheet) return '';
-
-		// Get first 4 digits
-		const mapNumber = sheet.slice(0, 4);
-
 		try {
-			if (state === 'QLD') {
-				if (!qldMapBounds) return '';
-				const maptitle = String(qldMapBounds[mapNumber as keyof typeof qldMapBounds] || '');
-				return maptitle;
-			} else {
-				if (!nswMapBounds) return '';
-				const maptitle = String(nswMapBounds[sheet as keyof typeof nswMapBounds] || '');
-				return maptitle || '';
-			}
+			if (!qldMapBounds) return '';
+			const qldTitle = String(qldMapBounds[sheet as keyof typeof qldMapBounds] || '');
+			if (qldTitle) return qldTitle;
+
+			if (!nswMapBounds) return '';
+			const nswTitle = String(nswMapBounds[sheet as keyof typeof nswMapBounds] || '');
+			return nswTitle || '';
 		} catch (error) {
 			console.error('Error in getMapTitle:', error);
 			return '';
@@ -222,7 +216,7 @@
 	$: utm = geo2utm(coordinates);
 	$: sixFigure = get6FigureRef(utm);
 	$: mapSheets = getMapSheets(coordinates.lat, coordinates.lng);
-	$: mapTitle = getMapTitle(mapSheets['100k'], 'QLD');
+	$: mapTitle = getMapTitle(mapSheets['100k']);
 	$: mapLinks = getMapLinksQld(mapSheets);
 </script>
 
@@ -230,19 +224,18 @@
 	<table class="w-full">
 		<tr>
 			<td>GPS</td>
-			<td class="text-right">{formattedLat}</td>
-			<td class="text-right pl-4">{formattedLng}</td>
+			<td class="text-right">{formattedLat}, {formattedLng}</td>
 		</tr>
 		<tr>
 			<td>UTM</td>
-			<td colspan="2" class="text-right">{utm ? `${utm.zone} ${utm.x} ${utm.y}` : 'N/A'}</td>
+			<td class="text-right">{utm ? `${utm.zone} ${utm.x} ${utm.y}` : 'N/A'}</td>
 		</tr>
 		<tr>
 			<td>6FIGURE</td>
-			<td colspan="2" class="text-right">{sixFigure}</td>
+			<td class="text-right">{sixFigure}</td>
 		</tr>
 		<tr>
-			<td colspan="3" class="border-t border-border">
+			<td colspan="2" class="border-t border-border">
 				<div class="text-xs mt-1">
 					<div class="font-semibold mb-1">
 						Maps: {mapTitle}
