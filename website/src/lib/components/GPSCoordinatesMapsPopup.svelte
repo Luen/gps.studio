@@ -246,11 +246,34 @@
 		}
 	}
 
+	interface HistoricMap {
+		title: string;
+		publication_date: number;
+		map_scale: number;
+		download_link: string;
+		map_preview: string;
+		mapping_series?: string;
+		description?: string;
+	}
+
+	async function getHistoricMaps(lat: number, lng: number) {
+		try {
+			const url = `https://qldglobe.wanderstories.space/historical-maps?lat=${lat}&lon=${lng}`;
+			const response = await fetch(url);
+			const data: HistoricMap[] = await response.json();
+			return data.sort((a, b) => a.map_scale - b.map_scale);
+		} catch (error) {
+			console.error('Error fetching historic maps:', error);
+			return [];
+		}
+	}
+
 	$: utm = geo2utm(coordinates);
 	$: sixFigure = get6FigureRef(utm);
 	$: mapSheets = getMapSheets(coordinates.lat, coordinates.lng);
 	$: mapTitle = getMapTitle(mapSheets['10k']);
 	$: mapLinks = getMapLinksQld(mapSheets);
+	$: historicMaps = getHistoricMaps(coordinates.lat, coordinates.lng);
 </script>
 
 <div class="p-2 text-sm bg-background rounded-md shadow-md border border-border">
@@ -337,6 +360,54 @@
 				</div>
 			</td>
 		</tr>
+		{#if historicMaps}
+			<tr>
+				<td colspan="2" class="border-t border-border">
+					<div class="text-xs mt-1">
+						<div class="font-semibold mb-1">Historic Maps</div>
+						<div class="grid grid-cols-4 gap-x-2">
+							{#await historicMaps}
+								<div>Loading...</div>
+							{:then maps}
+								<div
+									class="col-span-4 grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2 text-muted-foreground"
+								>
+									<div>Title</div>
+									<div>Date</div>
+									<div>Scale</div>
+									<div>Links</div>
+								</div>
+								{#each maps as map}
+									<div
+										class="col-span-4 grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2 text-muted-foreground"
+									>
+										<div title={map.mapping_series || map.description}>{map.title}</div>
+										<div>{map.publication_date}</div>
+										<div>1:{map.map_scale}</div>
+										<div>
+											<a
+												href={map.download_link}
+												target="_blank"
+												title="Download map"
+												class="text-primary hover:underline px-1">↓</a
+											>
+											<a
+												href={map.map_preview}
+												target="_blank"
+												title="Preview map"
+												class="text-primary hover:underline px-1">👁️</a
+											>
+										</div>
+									</div>
+								{/each}
+							{:catch error}
+								<div class="col-span-4">Error loading historic maps</div>
+							{/await}
+						</div>
+					</div>
+				</td>
+			</tr>
+		{/if}
 	</table>
 </div>
 
