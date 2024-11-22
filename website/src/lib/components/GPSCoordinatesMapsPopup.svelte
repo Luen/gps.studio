@@ -268,12 +268,25 @@
 		}
 	}
 
+	async function getGeoscienceMaps(lat: number, lng: number) {
+		try {
+			const url = `https://natmap.wanderstories.space/maps?lat=${lat}&lon=${lng}`;
+			const response = await fetch(url);
+			const data = await response.json();
+			return data;
+		} catch (error) {
+			console.error('Error fetching Geoscience maps:', error);
+			return [];
+		}
+	}
+
 	$: utm = geo2utm(coordinates);
 	$: sixFigure = get6FigureRef(utm);
 	$: mapSheets = getMapSheets(coordinates.lat, coordinates.lng);
 	$: mapTitle = getMapTitle(mapSheets['10k']);
 	$: mapLinks = getMapLinksQld(mapSheets);
 	$: historicMaps = getHistoricMaps(coordinates.lat, coordinates.lng);
+	$: geoscienceMaps = getGeoscienceMaps(coordinates.lat, coordinates.lng);
 </script>
 
 <div class="p-2 text-sm bg-background rounded-md shadow-md border border-border">
@@ -293,8 +306,9 @@
 		<tr>
 			<td colspan="2" class="border-t border-border">
 				<div class="text-xs mt-1">
+					<div class="font-bold mb-1">{mapTitle ? `${mapTitle} Maps` : 'Maps'}</div>
 					<div class="font-semibold mb-1">
-						Maps: {mapTitle}
+						Government Maps
 						<div class="grid grid-cols-3 gap-x-2">
 							<div>100k</div>
 							<div class="text-left font-mono">{mapLinks['100k'].sheet}</div>
@@ -360,6 +374,50 @@
 				</div>
 			</td>
 		</tr>
+		{#if geoscienceMaps}
+			<tr>
+				<td colspan="3" class="border-t border-border">
+					<div class="text-xs mt-1">
+						<div class="font-semibold mb-1">Geoscience Australia Maps</div>
+						<div class="grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2">
+							{#await geoscienceMaps}
+								<div class="col-span-4">Loading...</div>
+							{:then maps}
+								<div
+									class="col-span-4 grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2 text-muted-foreground"
+								>
+									<div>Title</div>
+									<div>Year</div>
+									<div>Scale</div>
+									<div>Links</div>
+								</div>
+								{#each maps as map}
+									<div title={map.attributes.NAME}>{map.attributes.TITLE}</div>
+									<div>{map.attributes.PUB_YEAR}</div>
+									<div>1:{map.attributes.SCALE_1}</div>
+									<div>
+										<a
+											href={map.attributes.mapUrl}
+											target="_blank"
+											title="Download map"
+											class="text-primary hover:underline px-1">↓</a
+										>
+										<a
+											href={map.attributes.PID_URL}
+											target="_blank"
+											title="View metadata"
+											class="text-primary hover:underline px-1">ℹ️</a
+										>
+									</div>
+								{/each}
+							{:catch error}
+								<div class="col-span-4">Error loading Geoscience maps</div>
+							{/await}
+						</div>
+					</div>
+				</td>
+			</tr>
+		{/if}
 		{#if historicMaps}
 			<tr>
 				<td colspan="2" class="border-t border-border">
