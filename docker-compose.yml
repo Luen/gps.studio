@@ -11,3 +11,4 @@ services:
       - NODE_ENV=production
       - PUBLIC_MAPBOX_TOKEN=${PUBLIC_MAPBOX_TOKEN}
       - PUBLIC_MAPBOX_TOKEN_BACKUP=${PUBLIC_MAPBOX_TOKEN_BACKUP}
+    restart: unless-stopped
