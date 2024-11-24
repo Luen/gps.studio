@@ -913,10 +913,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         layers: [{
             id: 'qLandParcel',
             type: 'raster',
-            source: 'qLandParcel',
-            paint: {
-                'raster-opacity': 0.6
-            }
+            source: 'qLandParcel'
         }],
     },
     qLandUse: {
@@ -934,10 +931,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         layers: [{
             id: 'qLandUse',
             type: 'raster',
-            source: 'qLandUse',
-            paint: {
-                'raster-opacity': 0.4
-            }
+            source: 'qLandUse'
         }],
     },
     calSlopes: {
@@ -954,10 +948,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         layers: [{
             id: 'calSlopes',
             type: 'raster',
-            source: 'calSlopes',
-            paint: {
-            'raster-opacity': 0.8
-            }
+            source: 'calSlopes'
         }],
     },
     indigenousGroups: {
@@ -1558,6 +1549,11 @@ export const defaultOpacities: { [key: string]: number; } = {
     ignFrCadastre: 0.5,
     ignSlope: 0.4,
     swisstopoSlope: 0.4,
+    calSlopes: 0.5,
+    qLandUse: 0.4,
+    qLandParcel: 0.6,
+    qContours: 0.7,
+    qWater: 0.7,
 };
 
 export type LayerTreeType = { [key: string]: LayerTreeType | boolean; };
