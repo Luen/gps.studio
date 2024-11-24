@@ -48,12 +48,12 @@
 		<p class="text-sm text-muted-foreground">{$_('docs.answer_not_found')}</p>
 		<Button
 			variant="link"
-			href="https://www.reddit.com/r/wanderstories/"
+			href="https://www.facebook.com/groups/wanderstories"
 			target="_blank"
 			class="p-0 h-6 text-link"
 		>
 			<CornerDownRight size="16" class="mr-1" />
-			{$_('docs.ask_on_reddit')}
+			{$_('docs.ask_on_facebook')}
 		</Button>
 	</div>
 	{#if $locale === 'en'}

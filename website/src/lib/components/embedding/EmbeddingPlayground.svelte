@@ -30,7 +30,7 @@
 	let options = getDefaultEmbeddingOptions();
 	options.token = 'YOUR_MAPBOX_TOKEN';
 	options.files = [
-		'https://raw.githubusercontent.com/gpxstudio/gpx.studio/main/gpx/test-data/simple.gpx'
+		'https://raw.githubusercontent.com/Luen/gps.studio/main/gpx/test-data/simple.gpx'
 	];
 
 	let files = options.files[0];
@@ -320,7 +320,7 @@
 			</Label>
 			<pre class="bg-primary text-primary-foreground p-3 rounded-md whitespace-normal break-all">
                 <code class="language-html">
-                    {`<iframe src="https://gpx.studio${base}/embed?options=${encodeURIComponent(JSON.stringify(getCleanedEmbeddingOptions(options)))}${hash}" width="100%" height="600px" frameborder="0" style="outline: none;"/>`}
+                    {`<iframe src="https://studio.wanderstories.space${base}/embed?options=${encodeURIComponent(JSON.stringify(getCleanedEmbeddingOptions(options)))}${hash}" width="100%" height="600px" frameborder="0" style="outline: none;"/>`}
                 </code>
             </pre>
 		</fieldset>

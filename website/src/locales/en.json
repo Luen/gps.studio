@@ -554,6 +554,7 @@
         "translate": "Improve the translation on Crowdin",
         "answer_not_found": "Did not find what you were looking for?",
         "ask_on_reddit": "Ask the community on Reddit",
+        "ask_on_facebook": "Ask the community on the Facebook group",
         "search": {
             "search": "Search",
             "clear": "Clear",
