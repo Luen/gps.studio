@@ -14,7 +14,8 @@
 	import { PUBLIC_MAPBOX_TOKEN, PUBLIC_MAPBOX_TOKEN_BACKUP } from '$env/static/public';
 	import { page } from '$app/stores';
 
-	export let accessToken = Math.random() < 0.5 ? PUBLIC_MAPBOX_TOKEN : PUBLIC_MAPBOX_TOKEN_BACKUP;
+	//export let accessToken = Math.random() < 0.5 ? PUBLIC_MAPBOX_TOKEN : PUBLIC_MAPBOX_TOKEN_BACKUP;
+	export let accessToken = PUBLIC_MAPBOX_TOKEN;
 	export let geolocate = true;
 	export let geocoder = true;
 	export let hash = true;
