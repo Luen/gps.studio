@@ -110,6 +110,12 @@ wget -P misc/scripts/segments4/ https://brouter.de/brouter/segments4/E110_S10.rd
 Start the brouter server with the following command:
 
 ```bash
+docker compose up -d
+```
+
+OR
+
+```bash
 docker run --rm \
     -v ./misc/scripts/segments4:/segments4 \
     -p 17777:17777 \
