@@ -7,7 +7,7 @@ import bikerouterGravel from './custom/bikerouter-gravel.json';
 import { LucideArrowDownZA, TabletSmartphone } from 'lucide-svelte';
 
 export const basemaps: { [key: string]: string | StyleSpecification; } = {
-    wsOutdoors: {
+    /*wsOutdoors: {
         version: 8,
         sources: {
             wsOutdoors: {
@@ -23,7 +23,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             type: 'raster',
             source: 'wsOutdoors',
         }],
-    },
+    },*/
+    wsOutdoors: 'mapbox://styles/luenwarneke/cjzdctwa31lsp1ctbxj8mlei5',
     mapboxOutdoors: 'mapbox://styles/mapbox/outdoors-v12',
     //mapboxSatellite: 'mapbox://styles/mapbox/satellite-streets-v12',
     mapboxSatellite: {
