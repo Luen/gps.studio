@@ -22,6 +22,8 @@ liveQuery(() => db.overpassdata.toArray()).subscribe((pois) => {
 
 export class OverpassLayer {
     overpassUrl = 'https://overpass.private.coffee/api/interpreter';
+    // overpassUrl = 'https://overpass-api.de/api/interpreter';
+    // https://wiki.openstreetmap.org/wiki/Overpass_API#Public_Overpass_API_instances
     minZoom = 12;
     queryZoom = 12;
     expirationTime = 7 * 24 * 3600 * 1000;
