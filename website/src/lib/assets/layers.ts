@@ -798,7 +798,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 tiles: ['https://tiles.wanderstories.space/qldglobe/contours/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
-                minzoom: 9,
+                minzoom: 11,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qWater: {
