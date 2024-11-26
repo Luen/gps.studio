@@ -1246,18 +1246,20 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             openSeaMapProfile: { // Shading
                 type: 'raster',
-                tiles: ['http://tiles.wanderstories.space/openseamap/profile/{bbox-epsg-3857}'],
+                tiles: ['https://tiles.wanderstories.space/openseamap/profile/{bbox-epsg-3857}'],
                 tileSize: 256,
                 maxzoom: 17,
-                minzoom: 10,
+                minzoom: 3,
                 attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
             },
             openSeaMapDepth: { // Contours
                 type: 'raster',
-                tiles: ['http://tiles.wanderstories.space/openseamap/depth/{bbox-epsg-3857}'],
-                tileSize: 256,
+                tiles: ['https://tiles.wanderstories.space/openseamap/depth/{bbox-epsg-3857}'],
+                //tiles: ['http://localhost:4009/openseamap/depth/{bbox-epsg-3857}'],
+                // WIDTH=1559&HEIGHT=1418
+                tileSize: 1559,
                 maxzoom: 17,
-                minzoom: 10,
+                minzoom: 7, // Can do 3
                 attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
             },
             openSeaMapMarkers: {
@@ -1266,20 +1268,19 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 17,
-                minzoom: 10,
+                minzoom: 11,
                 attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
             },
         },
         layers: [{
+            id: 'openSeaMapProfile',
+            type: 'raster',
+            source: 'openSeaMapProfile',
+        },{
             id: 'openSeaMapDepth',
             type: 'raster',
             source: 'openSeaMapDepth',
         },{
-            id: 'openSeaMapProfile',
-            type: 'raster',
-            source: 'openSeaMapProfile',
-        },
-        {
             id: 'openSeaMapMarkers',
             type: 'raster',
             source: 'openSeaMapMarkers',
