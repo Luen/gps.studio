@@ -1244,19 +1244,44 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
     openSeaMap: {
         version: 8,
         sources: {
-            openSeaMap: {
+            openSeaMapProfile: {
                 type: 'raster',
-                tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
+                tiles: ['http://tiles.wanderstories.space/openseamap/profile/{bbox-epsg-3857}'],
                 tileSize: 256,
                 maxzoom: 17,
-                minzoom: 11,
+                minzoom: 10,
                 attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
-            }
+            },
+            openSeaMapDepth: { // Contours
+                type: 'raster',
+                tiles: ['http://tiles.wanderstories.space/openseamap/depth/{bbox-epsg-3857}'],
+                tileSize: 256,
+                maxzoom: 17,
+                minzoom: 10,
+                attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
+            },
+            openSeaMapMarkers: {
+                type: 'raster',
+                tiles: ['http://tiles.wanderstories.space/openseamap/markers/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 17,
+                minzoom: 10,
+                attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
+            },
         },
         layers: [{
-            id: 'openSeaMap',
+            id: 'openSeaMapDepth',
             type: 'raster',
-            source: 'openSeaMap',
+            source: 'openSeaMapDepth',
+        },{
+            id: 'openSeaMapProfile',
+            type: 'raster',
+            source: 'openSeaMapProfile',
+        },
+        {
+            id: 'openSeaMapMarkers',
+            type: 'raster',
+            source: 'openSeaMapMarkers',
         }],
     },
     cyclOSMlite: {
