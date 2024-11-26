@@ -1269,17 +1269,19 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 maxzoom: 17,
                 minzoom: 11,
                 attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
-            },
+            }
         },
         layers: [{
             id: 'openSeaMapProfile',
             type: 'raster',
             source: 'openSeaMapProfile',
-        },{
+        },
+        {
             id: 'openSeaMapDepth',
             type: 'raster',
             source: 'openSeaMapDepth',
-        },{
+        },
+        {
             id: 'openSeaMapMarkers',
             type: 'raster',
             source: 'openSeaMapMarkers',
