@@ -1263,7 +1263,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             },
             openSeaMapMarkers: { // POIs
                 type: 'raster',
-                tiles: ['http://tiles.wanderstories.space/openseamap/markers/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.wanderstories.space/openseamap/markers/{z}/{x}/{y}.png'],
                 //tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 17,
