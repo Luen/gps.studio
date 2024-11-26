@@ -1246,10 +1246,10 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
         sources: {
             openSeaMap: {
                 type: 'raster',
-                //tiles: ['https://t2.openseamap.org/tile/{z}/{x}/{y}.png'],
                 tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 17,
+                minzoom: 11,
                 attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
             }
         },
