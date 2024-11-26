@@ -1255,17 +1255,16 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             openSeaMapDepth: { // Contours
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/openseamap/depth/{bbox-epsg-3857}'],
-                //tiles: ['http://localhost:4009/openseamap/depth/{bbox-epsg-3857}'],
                 // WIDTH=1559&HEIGHT=1418
                 tileSize: 1559,
                 maxzoom: 17,
                 minzoom: 7, // Can do 3
                 attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
             },
-            openSeaMapMarkers: {
+            openSeaMapMarkers: { // POIs
                 type: 'raster',
-                //tiles: ['http://tiles.wanderstories.space/openseamap/markers/{z}/{x}/{y}.png'],
-                tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
+                tiles: ['http://tiles.wanderstories.space/openseamap/markers/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 17,
                 minzoom: 11,
@@ -1815,7 +1814,7 @@ export const defaultOverlays: LayerTreeType = {
             ridewithgpsHeatmap: false,
             garminHeatmap: false,
             osmTraces: false,
-            openSeaMap: true,
+            openSeaMap: false,
         },
         countries: {
             australia: {
