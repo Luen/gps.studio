@@ -1244,7 +1244,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
     openSeaMap: {
         version: 8,
         sources: {
-            openSeaMapProfile: {
+            openSeaMapProfile: { // Shading
                 type: 'raster',
                 tiles: ['http://tiles.wanderstories.space/openseamap/profile/{bbox-epsg-3857}'],
                 tileSize: 256,
