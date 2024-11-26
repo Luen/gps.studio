@@ -332,6 +332,7 @@
             "ridewithgpsHeatmap": "Ride with GPS Heatmap",
             "garminHeatmap": "Garmin Heatmap",
             "osmTraces": "OSM Traces",
+            "openSeaMap": "OpenSeaMap",
             "qMines": "Qld Mines",
             "qRoads": "Qld Roads",
             "qLandUse": "Qld Land Use",

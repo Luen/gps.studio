@@ -1241,6 +1241,24 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             source: 'osmTraces',
         }],
     },
+    openSeaMap: {
+        version: 8,
+        sources: {
+            openSeaMap: {
+                type: 'raster',
+                //tiles: ['https://t2.openseamap.org/tile/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://openseamap.org" target="_blank">OpenSeaMap</a>'
+            }
+        },
+        layers: [{
+            id: 'openSeaMap',
+            type: 'raster',
+            source: 'openSeaMap',
+        }],
+    },
     cyclOSMlite: {
         version: 8,
         sources: {
@@ -1666,6 +1684,7 @@ export const overlayTree: LayerTreeType = {
             ridewithgpsHeatmap: true,
             garminHeatmap: true,
             osmTraces: true,
+            openSeaMap: true,
         },
         countries: {
             australia: {
@@ -1769,6 +1788,7 @@ export const defaultOverlays: LayerTreeType = {
             ridewithgpsHeatmap: false,
             garminHeatmap: false,
             osmTraces: false,
+            openSeaMap: true,
         },
         countries: {
             australia: {
@@ -1955,6 +1975,7 @@ export const defaultOverlayTree: LayerTreeType = {
             ridewithgpsHeatmap: false,
             garminHeatmap: false,
             osmTraces: false,
+            openSeaMap: true,
         },
         countries: {
             australia: {
