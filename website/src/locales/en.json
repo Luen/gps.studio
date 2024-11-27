@@ -1,8 +1,8 @@
 {
     "metadata": {
-        "home_title": "the online GPX file editor",
+        "home_title": "the online GPS file editor",
         "app_title": "app",
-        "embed_title": "the online GPX file editor",
+        "embed_title": "the online GPS file editor",
         "help_title": "help",
         "404_title": "page not found",
         "description": "View, edit, and create GPX files online with advanced route planning capabilities and file processing tools, beautiful maps and detailed data visualizations."
@@ -334,8 +334,8 @@
             "osmTraces": "OSM Traces",
             "openSeaMap": "OpenSeaMap",
             "qMines": "Qld Mines",
-            "qRoads": "Qld Roads",
-            "osmTracks": "OSM Tracks",
+            "qRoads": "Qld Roads & Tracks",
+            "osmTracks": "OSM Roads & Tracks",
             "qLandUse": "Qld Land Use",
             "qLandParcel": "Qld Land Parcel",
             "qContours": "Qld Contours",
