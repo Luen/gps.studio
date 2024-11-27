@@ -335,6 +335,7 @@
             "openSeaMap": "OpenSeaMap",
             "qMines": "Qld Mines",
             "qRoads": "Qld Roads",
+            "osmTracks": "OSM Tracks",
             "qLandUse": "Qld Land Use",
             "qLandParcel": "Qld Land Parcel",
             "qContours": "Qld Contours",

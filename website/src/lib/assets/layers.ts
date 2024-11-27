@@ -870,6 +870,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
     },
     qRoads: {
         version: 8,
+        glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
         sources: {
             qRoads: {
                 type: 'raster',
@@ -886,7 +887,12 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 maxzoom: 17,
                 minzoom: 11,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
-            }
+            },
+            tracksAndRoutes: {
+                type: 'vector',
+                url: 'mapbox://luenwarneke.ck9jsx4h8055j2sqh20nvyzyi-5zmqy'
+            },
+        
         },
         layers: [{
             id: 'qRoads',
@@ -897,8 +903,66 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             id: 'qParks',
             type: 'raster',
             source: 'qParks',
+        },
+        {
+            id: 'tracksAndRoutesLines',
+            type: 'line',
+            source: 'tracksAndRoutes',
+            'source-layer': 'Old_Tracks',
+            filter: ['==', '$type', 'LineString'],
+            layout: {
+                'line-join': 'round',
+                'line-cap': 'round',
+            },
+            paint: {
+                //'line-color': '#333',
+                'line-color': '#ccc',
+                'line-width': 1,
+                'line-opacity': 0.7,
+                'line-dasharray': [2, 4]
+            }
+        },
+        {
+            id: 'tracksAndRoutesPoints',
+            type: 'symbol',
+            source: 'tracksAndRoutes',
+            'source-layer': 'Old_Tracks',
+            filter: ['==', '$type', 'Point'],
+            //filter: ['all', ['==', '$type', 'Point'], ['!has', 'highway']],
+            layout: {
+                'text-field': '•',
+                'text-size': 14,
+                'text-font': ['Arial Unicode MS Regular', 'Open Sans Regular'],
+                'text-allow-overlap': true,
+                'text-ignore-placement': true,
+            },
+            paint: {
+                'text-color': '#333',
+                'text-opacity': 0.7,
+            }
+        },
+        {
+            id: 'tracksAndRoutesLabel',
+            type: 'symbol',
+            source: 'tracksAndRoutes',
+            'source-layer': 'Old_Tracks',
+            filter: ['has', 'name'],
+            minzoom: 12,
+            layout: {
+                'text-field': ['get', 'name'],
+                'text-font': ['Arial Unicode MS Regular'],
+                'text-size': 11,
+                'text-offset': [0, 1.5],
+                'text-anchor': 'top'
+            },
+            paint: {
+                'text-color': '#000000',
+                'text-halo-color': '#cccccc',
+                'text-halo-width': 1
+            }
         }],
     },
+    osmTracks: 'mapbox://styles/luenwarneke/cm3z47ago00es01pzb5yj1qdm',
     qLandParcel: {
         version: 8,
         sources: {
@@ -1601,6 +1665,7 @@ export const defaultOpacities: { [key: string]: number; } = {
     qLandParcel: 0.6,
     qContours: 0.7,
     qWater: 0.7,
+    osmTracks: 0.5,
 };
 
 export type LayerTreeType = { [key: string]: LayerTreeType | boolean; };
@@ -1718,6 +1783,7 @@ export const overlayTree: LayerTreeType = {
             australia: {
                 qMines: true,
                 qRoads: true,
+                osmTracks: true,
                 qLandUse: true,
                 qLandParcel: true,
                 qContours: true,
@@ -1822,6 +1888,7 @@ export const defaultOverlays: LayerTreeType = {
             australia: {
                 qMines: false,
                 qRoads: false,
+                osmTracks: false,
                 qLandUse: false,
                 qLandParcel: false,
                 qContours: false,
@@ -2009,6 +2076,7 @@ export const defaultOverlayTree: LayerTreeType = {
             australia: {
                 qMines: true,
                 qRoads: true,
+                osmTracks: true,
                 qLandUse: true,
                 qLandParcel: true,
                 qContours: true,
