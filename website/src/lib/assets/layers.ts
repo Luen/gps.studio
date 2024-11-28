@@ -789,7 +789,270 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
     },
 };
 
-export const overlays: { [key: string]: string | StyleSpecification; } = {
+export const overlays: { [key: string]: StyleSpecification; } = {
+    wsArticleMarkers: {
+        version: 8,
+        glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
+        sources: {
+            wsArticleMarkers: {
+                type: 'geojson',
+                data: 'https://maps.wanderstories.space/WanderstoriesArticleMarkers.geojson',
+                cluster: true,
+                clusterMaxZoom: 14,
+                clusterRadius: 50
+            }
+        },
+        layers: [
+            // Clusters
+            {
+                id: 'wsArticleMarkers-clusters',
+                type: 'circle',
+                source: 'wsArticleMarkers',
+                filter: ['has', 'point_count'],
+                paint: {
+                    'circle-color': '#ffffff',
+                    'circle-radius': [
+                        'step',
+                        ['get', 'point_count'],
+                        20,
+                        10,
+                        30,
+                        50,
+                        40
+                    ],
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#cccccc'
+                }
+            },
+            // Cluster count
+            {
+                id: 'wsArticleMarkers-cluster-count',
+                type: 'symbol',
+                source: 'wsArticleMarkers',
+                filter: ['has', 'point_count'],
+                layout: {
+                    'text-field': '{point_count_abbreviated}',
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 12
+                },
+                paint: {
+                    'text-color': '#666666'
+                }
+            },
+            // Individual markers
+            {
+                id: 'wsArticleMarkers-bg',
+                type: 'circle',
+                source: 'wsArticleMarkers',
+                filter: ['!', ['has', 'point_count']],
+                paint: {
+                    'circle-radius': 15,
+                    'circle-color': '#ffffff',
+                    'circle-stroke-color': '#cccccc',
+                    'circle-stroke-width': 1
+                }
+            },
+            {
+                id: 'wsArticleMarkers-w',
+                type: 'symbol',
+                source: 'wsArticleMarkers',
+                filter: ['!', ['has', 'point_count']],
+                layout: {
+                    'text-field': 'W',
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 14,
+                    'text-allow-overlap': true,
+                    'text-anchor': 'center'
+                },
+                paint: {
+                    'text-color': '#cccccc'
+                }
+            },
+            {
+                id: 'wsArticleMarkers-grade',
+                type: 'symbol',
+                source: 'wsArticleMarkers',
+                filter: ['all', 
+                    ['!', ['has', 'point_count']],
+                    ['has', 'awtgs']
+                ],
+                layout: {
+                    'text-field': ['get', 'awtgs'],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 10,
+                    'text-allow-overlap': true,
+                    'text-anchor': 'center',
+                    'text-offset': [0, 0.8]
+                },
+                paint: {
+                    'text-color': '#cccccc'
+                }
+            },
+            // Title labels
+            {
+                id: 'wsArticleMarkers-title',
+                type: 'symbol',
+                source: 'wsArticleMarkers',
+                filter: ['!', ['has', 'point_count']],
+                layout: {
+                    'text-field': ['get', 'title'],
+                    'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
+                    'text-size': 11,
+                    'text-anchor': 'top',
+                    'text-offset': [0, 1.5],
+                    'text-max-width': 8,
+                    'text-allow-overlap': false,
+                    'text-ignore-placement': false
+                },
+                paint: {
+                    'text-color': '#666666',
+                    'text-halo-color': '#ffffff',
+                    'text-halo-width': 2
+                }
+            }
+        ]
+    },
+    qAlerts: {
+        version: 8,
+        glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
+        sources: {
+            qAlerts: {
+                type: 'geojson',
+                data: 'https://maps.wanderstories.space/QueenslandNationalParkAlerts.geojson',
+                cluster: false
+            },
+            qTraffic: {
+                type: 'geojson',
+                data: 'https://data.qldtraffic.qld.gov.au/events_v2.geojson',
+                generateId: true,
+                cluster: false,
+            }
+        },
+        layers: [
+            // Park Alerts Layer
+            {
+                id: 'qAlerts',
+                type: 'circle',
+                source: 'qAlerts',
+                paint: {
+                    'circle-radius': 6,
+                    'circle-color': '#ff9800',
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#fff'
+                }
+            },
+            {
+                id: 'qAlerts-text',
+                type: 'symbol',
+                source: 'qAlerts',
+                minzoom: 10, // Only show text when zoomed in
+                layout: {
+                    'text-field': [
+                        'concat',
+                        ['get', 'id'],
+                        ' ',
+                        ['get', 'title']
+                    ],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 12,
+                    'text-offset': [0, 1.5],
+                    'text-anchor': 'top',
+                    'text-max-width': 8,
+                    'text-allow-overlap': false
+                },
+                paint: {
+                    'text-halo-width': 1.5,
+                    'text-halo-color': '#fff',
+                    'text-color': '#000'
+                }
+            },
+            // Traffic Alerts Layer - Points Only
+            {
+                id: 'qTraffic',
+                type: 'circle',
+                source: 'qTraffic',
+                filter: ['all',
+                    // Filter for Point geometries
+                    ['any',
+                        ['==', ['get', 'type'], 'Point'],
+                        ['==', ['get', 'type'], 'MultiPoint'],
+                        ['==', ['geometry-type'], 'Point'],
+                        ['==', ['geometry-type'], 'MultiPoint']
+                    ],
+                    // Other filters
+                    ['!=', ['get', 'event_subtype'], 'Planned roadworks'],
+                    //['!=', ['get', 'event_type'], 'Special event'],
+                    //['!=', ['get', 'event_type'], 'Crash'],
+                    ['!=', ['get', 'event_subtype'], 'Stationary vehicle'],
+                    ['!=', ['get', 'event_due_to'], 'Pot holes'],
+                    ['!', ['all',
+                        ['==', ['get', 'advice'], 'Proceed with caution'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!', ['all',
+                        ['==', ['get', 'event_subtype'], 'Debris on road'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!=', ['get', 'delay'], 'No delays expected']
+                ],
+                paint: {
+                    'circle-radius': 6,
+                    'circle-color': '#2196f3',
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#fff'
+                }
+            },
+            {
+                id: 'qTraffic-text',
+                type: 'symbol',
+                source: 'qTraffic',
+                minzoom: 10, // Only show text when zoomed in
+                filter: ['all',
+                    // Filter for Point geometries
+                    ['any',
+                        ['==', ['get', 'type'], 'Point'],
+                        ['==', ['get', 'type'], 'MultiPoint'],
+                        ['==', ['geometry-type'], 'Point'],
+                        ['==', ['geometry-type'], 'MultiPoint']
+                    ],
+                    // Other filters
+                    ['!=', ['get', 'event_subtype'], 'Planned roadworks'],
+                    //['!=', ['get', 'event_type'], 'Special event'],
+                    //['!=', ['get', 'event_type'], 'Crash'],
+                    ['!=', ['get', 'event_subtype'], 'Stationary vehicle'],
+                    ['!=', ['get', 'event_due_to'], 'Pot holes'],
+                    ['!', ['all',
+                        ['==', ['get', 'advice'], 'Proceed with caution'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!', ['all',
+                        ['==', ['get', 'event_subtype'], 'Debris on road'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!=', ['get', 'delay'], 'No delays expected']
+                ],
+                layout: {
+                    'text-field': [
+                        'concat',
+                        ['get', 'event_type'],
+                        ': ',
+                        ['get', 'description']
+                    ],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 12,
+                    'text-offset': [0, 1.5],
+                    'text-anchor': 'top',
+                    'text-max-width': 8,
+                    'text-allow-overlap': false
+                },
+                paint: {
+                    'text-halo-width': 1.5,
+                    'text-halo-color': '#fff',
+                    'text-color': '#000'
+                }
+            },
+        ]
+    },
     qContours: {
         version: 8,
         sources: {
@@ -892,7 +1155,7 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
                 type: 'vector',
                 url: 'mapbox://luenwarneke.ck9jsx4h8055j2sqh20nvyzyi-5zmqy'
             },
-        
+
         },
         layers: [{
             id: 'qRoads',
@@ -1327,8 +1590,8 @@ export const overlays: { [key: string]: string | StyleSpecification; } = {
             },
             openSeaMapMarkers: { // POIs
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/openseamap/markers/{z}/{x}/{y}.png'],
-                //tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.wanderstories.space/openseamap/markers/{z}/{x}/{y}.png'],
+                tiles: ['https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 17,
                 minzoom: 11,
@@ -1753,8 +2016,8 @@ export const basemapTree: LayerTreeType = {
                 usgs: true,
             }
         },
-    },
-}
+    }
+};
 
 // Hierarchy containing all overlays
 export const overlayTree: LayerTreeType = {
@@ -1778,6 +2041,7 @@ export const overlayTree: LayerTreeType = {
             garminHeatmap: true,
             osmTraces: true,
             openSeaMap: true,
+            wsArticleMarkers: true,
         },
         countries: {
             australia: {
@@ -1793,6 +2057,7 @@ export const overlayTree: LayerTreeType = {
                 waterfalls: true,
                 calSlopes: true,
                 indigenousGroups: false,
+                qAlerts: true,
             },
             france: {
                 ignFrCadastre: true,
@@ -1883,6 +2148,7 @@ export const defaultOverlays: LayerTreeType = {
             garminHeatmap: false,
             osmTraces: false,
             openSeaMap: false,
+            wsArticleMarkers: true,
         },
         countries: {
             australia: {
@@ -1898,6 +2164,7 @@ export const defaultOverlays: LayerTreeType = {
                 waterfalls: false,
                 calSlopes: false,
                 indigenousGroups: false,
+                qAlerts: true,
             },
             france: {
                 ignFrCadastre: false,
@@ -2071,6 +2338,7 @@ export const defaultOverlayTree: LayerTreeType = {
             garminHeatmap: false,
             osmTraces: false,
             openSeaMap: true,
+            wsArticleMarkers: true,
         },
         countries: {
             australia: {
@@ -2086,6 +2354,7 @@ export const defaultOverlayTree: LayerTreeType = {
                 waterfalls: true,
                 calSlopes: true,
                 indigenousGroups: false,
+                qAlerts: true,
             },
             france: {
                 ignFrCadastre: false,

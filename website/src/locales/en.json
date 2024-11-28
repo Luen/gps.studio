@@ -333,6 +333,8 @@
             "garminHeatmap": "Garmin Heatmap",
             "osmTraces": "OSM Traces",
             "openSeaMap": "OpenSeaMap",
+            "wsArticleMarkers": "Wanderstories Articles",
+            "qAlerts": "Qld Alerts",
             "qMines": "Qld Mines",
             "qRoads": "Qld Roads & Tracks",
             "osmTracks": "OSM Roads & Tracks",
