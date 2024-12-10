@@ -586,7 +586,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             nafiTopo: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/nafi/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tiles: ['https://nafi.wanderstories.space/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                //tiles: ['https://tiles.wanderstories.space/nafi/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
                 minzoom: 10,
                 maxzoom: 12,
