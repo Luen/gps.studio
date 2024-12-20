@@ -499,7 +499,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             tasTopo: {
                 type: 'raster',
-                tiles: ['https://services.thelist.tas.gov.au/arcgis/rest/services/Basemaps/Topographic/ImageServer/tile/{z}/{y}/{x}'],
+                tiles: ['https://services.thelist.tas.gov.au/arcgis/rest/services/Basemaps/Topographic/MapServer/tile/{z}/{y}/{x}'],
                 tileSize: 256,
                 maxzoom: 16,
                 attribution: '&copy; <a href="https://maps.thelist.tas.gov.au" target="_blank">Tasmania LIST</a>'
@@ -509,6 +509,23 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             id: 'tasTopo',
             type: 'raster',
             source: 'tasTopo',
+        }],
+    },
+    tasTopo25k: {
+        version: 8,
+        sources: {
+            tasTopo25k: {
+                type: 'raster',
+                tiles: ['https://services.thelist.tas.gov.au/arcgis/rest/services/Basemaps/Tasmap25K/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://maps.thelist.tas.gov.au" target="_blank">Tasmania LIST</a>'
+            }
+        },
+        layers: [{
+            id: 'tasTopo25k',
+            type: 'raster',
+            source: 'tasTopo25k',
         }],
     },
     tasBase: {
@@ -528,12 +545,29 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             source: 'tasBase',
         }],
     },
+    tasHillshade: {
+        version: 8,
+        sources: {
+            tasHillshade: {
+                type: 'raster',
+                tiles: ['https://services.thelist.tas.gov.au/arcgis/rest/services/Basemaps/Hillshade/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://maps.thelist.tas.gov.au" target="_blank">Tasmania LIST</a>'
+            }
+        },
+        layers: [{
+            id: 'tasHillshade',
+            type: 'raster',
+            source: 'tasHillshade',
+        }],
+    },
     tasImagery: {
         version: 8,
         sources: {
             tasImagery: {
                 type: 'raster',
-                tiles: ['https://services.thelist.tas.gov.au/arcgis/rest/services/Basemaps/Orthophoto/ImageServer/tile/{z}/{y}/{x}'],
+                tiles: ['https://services.thelist.tas.gov.au/arcgis/rest/services/Basemaps/Orthophoto/MapServer/tile/{z}/{y}/{x}'],
                 tileSize: 256,
                 maxzoom: 19,
                 attribution: '&copy; <a href="https://maps.thelist.tas.gov.au" target="_blank">Tasmania LIST</a>'
@@ -1968,7 +2002,9 @@ export const basemapTree: LayerTreeType = {
                 vicImagery: true,
                 saImagery: true,
                 tasTopo: true,
-                tasBase: true,
+                tasTopo25k: true,
+                tasBase: false,
+                tasHillshade: true,
                 tasImagery: true,
                 nafiTopo: true,
                 natmapsTopo: true,
@@ -2265,7 +2301,9 @@ export const defaultBasemapTree: LayerTreeType = {
                 vicImagery: false,
                 saImagery: false,
                 tasTopo: false,
+                tasTopo25k: false,
                 tasBase: false,
+                tasHillshade: false,
                 tasImagery: false,
                 nafiTopo: true,
                 natmapsTopo: true,
