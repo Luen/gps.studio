@@ -1428,6 +1428,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             wanderstoriesHeatmap: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/heatmap/{z}/{x}/{y}'],
+                //tiles: ['https://heatmap.wanderstories.space/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 15,
                 attribution: '&copy; <a href="https://heatmap.wanderstories.space" target="_blank">Wanderstories</a>'
@@ -2185,7 +2186,7 @@ export const defaultOverlays: LayerTreeType = {
             garminHeatmap: false,
             osmTraces: false,
             openSeaMap: false,
-            wsArticleMarkers: true,
+            wsArticleMarkers: false,
         },
         countries: {
             australia: {
@@ -2201,7 +2202,7 @@ export const defaultOverlays: LayerTreeType = {
                 waterfalls: false,
                 calSlopes: false,
                 indigenousGroups: false,
-                qAlerts: true,
+                qAlerts: false,
             },
             france: {
                 ignFrCadastre: false,
