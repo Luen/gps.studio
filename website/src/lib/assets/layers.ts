@@ -1447,7 +1447,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/all/hot'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
                 attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
             }
         },
@@ -1464,7 +1464,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/ride/hot'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
                 attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
             }
         },
