@@ -1522,7 +1522,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         layers: [{
             id: 'stravaWinter',
             type: 'raster',
-            source: 'strastravaWintervaWater',
+            source: 'stravaWinter',
         }],
     },
     trailforksHeatmap: {
