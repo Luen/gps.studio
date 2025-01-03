@@ -1474,6 +1474,57 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'stravaRide',
         }],
     },
+    stravaHeatmapRun: {
+        version: 8,
+        sources: {
+            stravaRun: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/run/hot'],
+                tileSize: 256,
+                maxzoom: 14,
+                attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
+            }
+        },
+        layers: [{
+            id: 'stravaRun',
+            type: 'raster',
+            source: 'stravaRun',
+        }],
+    },
+    stravaHeatmapWater: {
+        version: 8,
+        sources: {
+            stravaWater: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/water/hot'],
+                tileSize: 256,
+                maxzoom: 14,
+                attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
+            }
+        },
+        layers: [{
+            id: 'stravaWater',
+            type: 'raster',
+            source: 'stravaWater',
+        }],
+    },
+    stravaHeatmapWinter: {
+        version: 8,
+        sources: {
+            stravaWinter: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/winter/hot'],
+                tileSize: 256,
+                maxzoom: 14,
+                attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
+            }
+        },
+        layers: [{
+            id: 'stravaWinter',
+            type: 'raster',
+            source: 'strastravaWintervaWater',
+        }],
+    },
     trailforksHeatmap: {
         version: 8,
         sources: {
@@ -1514,6 +1565,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             garminRoad: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/garmin/heatmap/ROAD_CYCLING/{z}/{x}/{y}.png'],
+                //tiles: ['https://connecttile.garmin.com/ROAD_CYCLING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1521,6 +1573,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             garminMtb: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/garmin/heatmap/MOUNTAIN_BIKING/{z}/{x}/{y}.png'],
+                //tiles: ['https://connecttile.garmin.com/MOUNTAIN_BIKING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1528,6 +1581,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             garminGravel: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/garmin/heatmap/GRAVEL_BIKING/{z}/{x}/{y}.png'],
+                //tiles: ['https://connecttile.garmin.com/GRAVEL_BIKING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1535,6 +1589,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             garminRunning: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/garmin/heatmap/RUNNING/{z}/{x}/{y}.png'],
+                //tiles: ['https://connecttile.garmin.com/RUNNING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1542,6 +1597,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             garminTrail: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/garmin/heatmap/TRAIL_RUNNING/{z}/{x}/{y}.png'],
+                //tiles: ['https://connecttile.garmin.com/TRAIL_RUNNING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1549,6 +1605,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             garminHiking: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/garmin/heatmap/HIKING/{z}/{x}/{y}.png'],
+                //tiles: ['https://connecttile.garmin.com/HIKING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -2074,6 +2131,9 @@ export const overlayTree: LayerTreeType = {
             wanderstoriesHeatmap: true,
             stravaHeatmapAll: true,
             stravaHeatmapRide: true,
+            stravaHeatmapRun: true,
+            stravaHeatmapWater: true,
+            stravaHeatmapWinter: true,
             trailforksHeatmap: true,
             ridewithgpsHeatmap: true,
             garminHeatmap: true,
@@ -2181,6 +2241,9 @@ export const defaultOverlays: LayerTreeType = {
             wanderstoriesHeatmap: false,
             stravaHeatmapAll: false,
             stravaHeatmapRide: false,
+            stravaHeatmapRun: false,
+            stravaHeatmapWater: false,
+            stravaHeatmapWinter: false,
             trailforksHeatmap: false,
             ridewithgpsHeatmap: false,
             garminHeatmap: false,
@@ -2373,6 +2436,9 @@ export const defaultOverlayTree: LayerTreeType = {
             wanderstoriesHeatmap: true,
             stravaHeatmapAll: false,
             stravaHeatmapRide: false,
+            stravaHeatmapRun: false,
+            stravaHeatmapWater: false,
+            stravaHeatmapWinter: false,
             trailforksHeatmap: false,
             ridewithgpsHeatmap: false,
             garminHeatmap: false,
