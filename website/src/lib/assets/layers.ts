@@ -1649,7 +1649,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             osmTraces: {
                 type: 'raster',
-                tiles: ['https://gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'],
+                tiles: ['https://a.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png', 'https://b.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png', 'https://c.gps-tile.openstreetmap.org/lines/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://openstreetmap.org" target="_blank">OpenStreetMap</a>'
