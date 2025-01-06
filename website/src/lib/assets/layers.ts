@@ -1430,6 +1430,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 tiles: ['https://tiles.wanderstories.space/heatmap/{z}/{x}/{y}'],
                 //tiles: ['https://heatmap.wanderstories.space/{z}/{x}/{y}'],
                 tileSize: 256,
+                minzoom: 3,
                 maxzoom: 15,
                 attribution: '&copy; <a href="https://heatmap.wanderstories.space" target="_blank">Wanderstories</a>'
             }
