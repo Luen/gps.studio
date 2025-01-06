@@ -2594,10 +2594,8 @@ export const overpassQueryData: Record<string, OverpassQueryData> = {
         tags: [{
             amenity: ["drinking_water", "water_point"]
         }, {
-            natural: "spring",
+            natural: ["spring", "water_tap"],
             drinking_water: "yes"
-        }, {
-            man_made: "water_tap"
         }],
         symbol: "Drinking Water"
     },
