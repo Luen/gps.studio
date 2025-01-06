@@ -2596,6 +2596,8 @@ export const overpassQueryData: Record<string, OverpassQueryData> = {
         }, {
             natural: "spring",
             drinking_water: "yes"
+        }, {
+            man_made: "water_tap"
         }],
         symbol: "Drinking Water"
     },
