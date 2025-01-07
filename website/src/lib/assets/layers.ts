@@ -2140,6 +2140,7 @@ export const overlayTree: LayerTreeType = {
             garminHeatmap: true,
             osmTraces: true,
             openSeaMap: true,
+            waterfalls: true,
             wsArticleMarkers: true,
         },
         countries: {
@@ -2153,7 +2154,6 @@ export const overlayTree: LayerTreeType = {
                 qFireScars: true,
                 nafiFireScars: true,
                 shipwrecks: true,
-                waterfalls: true,
                 calSlopes: true,
                 indigenousGroups: false,
                 qAlerts: true,
@@ -2250,6 +2250,7 @@ export const defaultOverlays: LayerTreeType = {
             garminHeatmap: false,
             osmTraces: false,
             openSeaMap: false,
+            waterfalls: false,
             wsArticleMarkers: false,
         },
         countries: {
@@ -2263,7 +2264,6 @@ export const defaultOverlays: LayerTreeType = {
                 qFireScars: false,
                 nafiFireScars: false,
                 shipwrecks: false,
-                waterfalls: false,
                 calSlopes: false,
                 indigenousGroups: false,
                 qAlerts: false,
@@ -2445,6 +2445,7 @@ export const defaultOverlayTree: LayerTreeType = {
             garminHeatmap: false,
             osmTraces: false,
             openSeaMap: true,
+            waterfalls: true,
             wsArticleMarkers: true,
         },
         countries: {
@@ -2458,7 +2459,6 @@ export const defaultOverlayTree: LayerTreeType = {
                 qFireScars: true,
                 nafiFireScars: true,
                 shipwrecks: false,
-                waterfalls: true,
                 calSlopes: true,
                 indigenousGroups: false,
                 qAlerts: true,
