@@ -1653,7 +1653,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/Running/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1670,7 +1671,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/TrailRunning/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1687,7 +1689,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/AllTrails/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1704,7 +1707,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/AllWalking/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1721,7 +1725,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/Cycling/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1738,7 +1743,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/MountainBiking/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1755,7 +1761,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/CrosscountrySkiing/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1772,7 +1779,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/AllDownhill/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1789,7 +1797,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/AllSwimming/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1806,7 +1815,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/Triathlon/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1823,7 +1833,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/AllPaddling/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1840,7 +1851,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/AllRollerSports/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1857,7 +1869,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/SkiTouring/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1874,7 +1887,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/Mountaineering/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1891,7 +1905,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/AllSurfAndBeach/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
@@ -1908,7 +1923,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://suunto.wanderstories.space/Golf/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 14,
+                minzoom: 8,
                 attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
             }
         },
