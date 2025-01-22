@@ -620,8 +620,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             nafiTopo: {
                 type: 'raster',
-                tiles: ['https://nafi.wanderstories.space/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
-                //tiles: ['https://tiles.wanderstories.space/nafi/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                //tiles: ['https://nafi.wanderstories.space/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tiles: ['https://tiles.wanderstories.space/nafi/?service=WMS&request=GetMap&layers=topo_layer%2Csat_layer_overlay%2Csat_layer_labels%2Cnodata_raster&styles=null%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiTopo&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
                 tileSize: 256,
                 minzoom: 10,
                 maxzoom: 12,
@@ -1119,6 +1119,25 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'qWater',
         }],
     },
+    nafiFireScars: {
+        version: 8,
+        sources: {
+            nafiFireScars: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/nafi/?service=WMS&request=GetMap&layers=fire_scar_by_month_current%2Cnodata_raster&styles=null%2Cnull%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiFireScars&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                //tiles: ['https://map3.nafi3-dev.firenorth.org.au/nafi-tiles-wsgi/?LAYERS=fire_scar_by_month_2024%2Cfire_scar_by_month_current%2Cnodata_raster&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&FORMAT=image%2Fpng&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
+                tileSize: 256,
+                maxzoom: 12,
+                minzoom: 15,
+                attribution: '&copy; NAFI'
+            }
+        },
+        layers: [{
+            id: 'nafiFireScars',
+            type: 'raster',
+            source: 'nafiFireScars',
+        }],
+    },
     qFireScars: {
         version: 8,
         sources: {
@@ -1403,24 +1422,6 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 'text-halo-width': 2
             }
         }]
-    },
-    nafiFireScars: {
-        version: 8,
-        sources: {
-            nafiFireScars: {
-                type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/nafi/?service=WMS&request=GetMap&layers=fire_scar_by_month_current%2Cnodata_raster&styles=null%2Cnull%2Cnull%2Cnull&format=image%2Fpng&transparent=true&version=1.1.1&id=nafiFireScars&SRS=EPSG%3A900913&WIDTH=512&HEIGHT=512&width=256&height=256&srs=EPSG%3A3857&bbox={bbox-epsg-3857}'],
-                tileSize: 512,
-                minzoom: 12,
-                maxzoom: 15,
-                attribution: '&copy; NAFI'
-            }
-        },
-        layers: [{
-            id: 'nafiFireScars',
-            type: 'raster',
-            source: 'nafiFireScars',
-        }],
     },
     wanderstoriesHeatmap: {
         version: 8,
@@ -1725,7 +1726,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'cyclOSMlite',
         }],
     },
-    bikerouterGravel: bikerouterGravel,
+    bikerouterGravel: bikerouterGravel as StyleSpecification,
     swisstopoSlope: {
         version: 8,
         sources: {
