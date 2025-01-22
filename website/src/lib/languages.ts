@@ -2,7 +2,6 @@ export const languages: Record<string, string> = {
     'en': 'English',
     /*
     'es': 'Español',
-    /*'es': 'Español',
     'de': 'Deutsch',
     'fr': 'Français',
     'it': 'Italiano',
