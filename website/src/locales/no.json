@@ -33,7 +33,7 @@
         "select_all": "Velg alle",
         "view": "Visning",
         "elevation_profile": "Høydeprofil",
-        "vertical_file_view": "Vertical file list",
+        "tree_file_view": "File tree",
         "switch_basemap": "Bytt til forrige basekart",
         "toggle_overlays": "Vis/skjul kartlag",
         "toggle_3d": "Skru av/på 3D",
@@ -157,10 +157,10 @@
                 "service": "Service road",
                 "track": "Track",
                 "footway": "Footway",
-                "path": "Path",
-                "pedestrian": "Pedestrian",
+                "path": "Sti",
+                "pedestrian": "Fotgjenger",
                 "cycleway": "Cycleway",
-                "steps": "Steps",
+                "steps": "Skritt",
                 "road": "Road",
                 "bridleway": "Horseriding path",
                 "platform": "Platform",
@@ -377,14 +377,6 @@
             "tram-stop": "Tram Stop",
             "bus-stop": "Bus Stop",
             "ferry": "Ferry"
-        },
-        "color": {
-            "blue": "Blå",
-            "bluered": "Blue Red",
-            "gray": "Grå",
-            "hot": "Hot",
-            "purple": "Lilla",
-            "orange": "Orange"
         }
     },
     "chart": {

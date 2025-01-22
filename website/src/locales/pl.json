@@ -1,7 +1,7 @@
 {
     "metadata": {
         "home_title": "edytor online plików GPX",
-        "app_title": "app",
+        "app_title": "",
         "embed_title": "edytor online plików GPX",
         "help_title": "pomoc",
         "404_title": "nie odnaleziono strony",
@@ -33,7 +33,7 @@
         "select_all": "Zaznacz wszystko",
         "view": "Wyświetl",
         "elevation_profile": "Profil wysokości",
-        "vertical_file_view": "Pionowa lista plików",
+        "tree_file_view": "File tree",
         "switch_basemap": "Przełącz na poprzednią mapę",
         "toggle_overlays": "Przełącz nakładki",
         "toggle_3d": "Przełącz widok 3D",
@@ -377,14 +377,6 @@
             "tram-stop": "Przystanek tramwajowy",
             "bus-stop": "Przystanek autobusowy",
             "ferry": "Prom"
-        },
-        "color": {
-            "blue": "Niebieski",
-            "bluered": "Niebiesko-czerwony",
-            "gray": "Szary",
-            "hot": "Gorący",
-            "purple": "Fioletowy",
-            "orange": "Pomarańczowy"
         }
     },
     "chart": {

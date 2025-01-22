@@ -33,7 +33,7 @@
         "select_all": "Selecionar todos",
         "view": "Visualizar",
         "elevation_profile": "Perfil de elevação",
-        "vertical_file_view": "Lista vertical de arquivos",
+        "tree_file_view": "File tree",
         "switch_basemap": "Trocar para mapa base anterior",
         "toggle_overlays": "Alternar sobreposições",
         "toggle_3d": "Alternar 3D",
@@ -377,14 +377,6 @@
             "tram-stop": "Parada de bonde",
             "bus-stop": "Parada de Ônibus",
             "ferry": "Balsa"
-        },
-        "color": {
-            "blue": "Azul",
-            "bluered": "Azul Vermelho",
-            "gray": "Cinzento",
-            "hot": "Popular",
-            "purple": "Roxo",
-            "orange": "Laranja"
         }
     },
     "chart": {

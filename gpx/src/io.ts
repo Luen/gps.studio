@@ -2,11 +2,29 @@ import { XMLParser, XMLBuilder } from "fast-xml-parser";
 import { GPXFileType } from "./types";
 import { GPXFile } from "./gpx";
 
+const attributesWithNamespace = {
+    'RoutePointExtension': 'gpxx:RoutePointExtension',
+    'rpt': 'gpxx:rpt',
+    'TrackPointExtension': 'gpxtpx:TrackPointExtension',
+    'PowerExtension': 'gpxpx:PowerExtension',
+    'atemp': 'gpxtpx:atemp',
+    'hr': 'gpxtpx:hr',
+    'cad': 'gpxtpx:cad',
+    'Extensions': 'gpxtpx:Extensions',
+    'PowerInWatts': 'gpxpx:PowerInWatts',
+    'power': 'gpxpx:PowerExtension',
+    'line': 'gpx_style:line',
+    'color': 'gpx_style:color',
+    'opacity': 'gpx_style:opacity',
+    'width': 'gpx_style:width',
+};
+
 export function parseGPX(gpxData: string): GPXFile {
     const parser = new XMLParser({
         ignoreAttributes: false,
         attributeNamePrefix: "",
         attributesGroupName: 'attributes',
+        removeNSPrefix: true,
         isArray(name: string) {
             return name === 'trk' || name === 'trkseg' || name === 'trkpt' || name === 'wpt' || name === 'rte' || name === 'rtept' || name === 'gpxx:rpt';
         },
@@ -17,9 +35,8 @@ export function parseGPX(gpxData: string): GPXFile {
             return attrValue;
         },
         transformTagName(tagName: string) {
-            if (tagName === 'power') {
-                // Transform the simple <power> tag to the more complex <gpxpx:PowerExtension> tag, the nested <gpxpx:PowerInWatts> tag is then handled by the tagValueProcessor
-                return 'gpxpx:PowerExtension';
+            if (attributesWithNamespace[tagName]) {
+                return attributesWithNamespace[tagName];
             }
             return tagName;
         },
@@ -34,7 +51,8 @@ export function parseGPX(gpxData: string): GPXFile {
                     return new Date(tagValue);
                 }
 
-                if (tagName === 'gpxtpx:atemp' || tagName === 'gpxtpx:hr' || tagName === 'gpxtpx:cad' || tagName === 'gpxpx:PowerInWatts' || tagName === 'opacity' || tagName === 'weight') {
+                if (tagName === 'gpxtpx:atemp' || tagName === 'gpxtpx:hr' || tagName === 'gpxtpx:cad' || tagName === 'gpxpx:PowerInWatts' ||
+                    tagName === 'gpx_style:opacity' || tagName === 'gpx_style:width') {
                     return parseFloat(tagValue);
                 }
 

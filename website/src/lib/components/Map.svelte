@@ -29,7 +29,7 @@
 		easing: () => 1
 	};
 
-	const { distanceUnits, elevationProfile, verticalFileView, bottomPanelSize, rightPanelSize } =
+	const { distanceUnits, elevationProfile, treeFileView, bottomPanelSize, rightPanelSize } =
 		settings;
 	let scaleControl = new mapboxgl.ScaleControl({
 		unit: $distanceUnits
@@ -50,20 +50,6 @@
 		} else if (language === '' || language === undefined) {
 			language = 'en';
 		}
-
-		const loadJson = mapboxgl.Style.prototype._load;
-		mapboxgl.Style.prototype._load = function (json, validate) {
-			if (
-				json['sources'] &&
-				json['sources']['mapbox-satellite'] &&
-				json['sources']['mapbox-satellite']['data'] &&
-				json['sources']['mapbox-satellite']['data']['data']
-			) {
-				// Temporary fix for https://github.com/gpxstudio/gpx.studio/issues/129
-				delete json['sources']['mapbox-satellite']['data']['data'];
-			}
-			loadJson.call(this, json, validate);
-		};
 
 		let newMap = new mapboxgl.Map({
 			container: 'map',
@@ -218,10 +204,7 @@
 		}
 	});
 
-	$: if (
-		$map &&
-		(!$verticalFileView || !$elevationProfile || $bottomPanelSize || $rightPanelSize)
-	) {
+	$: if ($map && (!$treeFileView || !$elevationProfile || $bottomPanelSize || $rightPanelSize)) {
 		$map.resize();
 	}
 </script>

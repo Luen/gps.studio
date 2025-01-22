@@ -33,7 +33,7 @@
         "select_all": "Seleccionar-ho tot",
         "view": "Vista",
         "elevation_profile": "Perfil d’elevacions",
-        "vertical_file_view": "Llista de fitxers vertical",
+        "tree_file_view": "File tree",
         "switch_basemap": "Canviar al mapa base anterior",
         "toggle_overlays": "Intercanvia capes",
         "toggle_3d": "Canvia a 3D",
@@ -156,13 +156,13 @@
                 "living_street": "Carrer residencial",
                 "service": "Via de servei",
                 "track": "Pista",
-                "footway": "Camí de vianants",
+                "footway": "Camí per a vianants",
                 "path": "Camí",
                 "pedestrian": "Vianant",
                 "cycleway": "Carril bici",
                 "steps": "Graons",
                 "road": "Carretera",
-                "bridleway": "Camí de cavalls",
+                "bridleway": "Camí per a cavalls",
                 "platform": "Plataforma",
                 "raceway": "Circuit de competició",
                 "rest_area": "Àrea de descans",
@@ -377,14 +377,6 @@
             "tram-stop": "Parada de tramvia",
             "bus-stop": "Parada d'autobús",
             "ferry": "Ferri"
-        },
-        "color": {
-            "blue": "Blau",
-            "bluered": "Blau vermell",
-            "gray": "Gris",
-            "hot": "Popular",
-            "purple": "Lila",
-            "orange": "Taronja"
         }
     },
     "chart": {

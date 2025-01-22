@@ -69,13 +69,14 @@
 		nodeColors = [];
 
 		if (node instanceof GPXFile) {
-			let style = node.getStyle();
+			let defaultColor = undefined;
 
 			let layer = gpxLayers.get(item.getFileId());
 			if (layer) {
-				style.color.push(layer.layerColor);
+				defaultColor = layer.layerColor;
 			}
 
+			let style = node.getStyle(defaultColor);
 			style.color.forEach((c) => {
 				if (!nodeColors.includes(c)) {
 					nodeColors.push(c);
@@ -84,8 +85,8 @@
 		} else if (node instanceof Track) {
 			let style = node.getStyle();
 			if (style) {
-				if (style.color && !nodeColors.includes(style.color)) {
-					nodeColors.push(style.color);
+				if (style['gpx_style:color'] && !nodeColors.includes(style['gpx_style:color'])) {
+					nodeColors.push(style['gpx_style:color']);
 				}
 			}
 			if (nodeColors.length === 0) {

@@ -14,20 +14,20 @@
 	export let item: ListItem;
 	export let open = false;
 
-	const { defaultOpacity, defaultWeight } = settings;
+	const { defaultOpacity, defaultWidth } = settings;
 
 	let colors: string[] = [];
 	let color: string | undefined = undefined;
 	let opacity: number[] = [];
-	let weight: number[] = [];
+	let width: number[] = [];
 	let colorChanged = false;
 	let opacityChanged = false;
-	let weightChanged = false;
+	let widthChanged = false;
 
 	function setStyleInputs() {
 		colors = [];
 		opacity = [];
-		weight = [];
+		width = [];
 
 		$selection.forEach((item) => {
 			if (item instanceof ListFileItem) {
@@ -47,9 +47,9 @@
 							opacity.push(o);
 						}
 					});
-					style.weight.forEach((w) => {
-						if (!weight.includes(w)) {
-							weight.push(w);
+					style.width.forEach((w) => {
+						if (!width.includes(w)) {
+							width.push(w);
 						}
 					});
 				}
@@ -60,14 +60,14 @@
 					let track = file.trk[item.getTrackIndex()];
 					let style = track.getStyle();
 					if (style) {
-						if (style.color && !colors.includes(style.color)) {
-							colors.push(style.color);
+						if (style['gpx_style:color'] && !colors.includes(style['gpx_style:color'])) {
+							colors.push(style['gpx_style:color']);
 						}
-						if (style.opacity && !opacity.includes(style.opacity)) {
-							opacity.push(style.opacity);
+						if (style['gpx_style:opacity'] && !opacity.includes(style['gpx_style:opacity'])) {
+							opacity.push(style['gpx_style:opacity']);
 						}
-						if (style.weight && !weight.includes(style.weight)) {
-							weight.push(style.weight);
+						if (style['gpx_style:width'] && !width.includes(style['gpx_style:width'])) {
+							width.push(style['gpx_style:width']);
 						}
 					}
 					if (!colors.includes(layer.layerColor)) {
@@ -79,11 +79,11 @@
 
 		color = colors[0];
 		opacity = [opacity[0] ?? $defaultOpacity];
-		weight = [weight[0] ?? $defaultWeight];
+		width = [width[0] ?? $defaultWidth];
 
 		colorChanged = false;
 		opacityChanged = false;
-		weightChanged = false;
+		widthChanged = false;
 	}
 
 	$: if ($selection && open) {
@@ -123,37 +123,37 @@
 			{$_('menu.style.width')}
 			<div class="w-40 p-2">
 				<Slider
-					bind:value={weight}
-					id="weight"
+					bind:value={width}
+					id="width"
 					min={1}
 					max={10}
 					step={1}
-					onValueChange={() => (weightChanged = true)}
+					onValueChange={() => (widthChanged = true)}
 				/>
 			</div>
 		</Label>
 		<Button
 			variant="outline"
-			disabled={!colorChanged && !opacityChanged && !weightChanged}
+			disabled={!colorChanged && !opacityChanged && !widthChanged}
 			on:click={() => {
 				let style = {};
 				if (colorChanged) {
-					style.color = color;
+					style['gpx_style:color'] = color;
 				}
 				if (opacityChanged) {
-					style.opacity = opacity[0];
+					style['gpx_style:opacity'] = opacity[0];
 				}
-				if (weightChanged) {
-					style.weight = weight[0];
+				if (widthChanged) {
+					style['gpx_style:width'] = width[0];
 				}
 				dbUtils.setStyleToSelection(style);
 
 				if (item instanceof ListFileItem && $selection.size === gpxLayers.size) {
-					if (style.opacity) {
-						$defaultOpacity = style.opacity;
+					if (style['gpx_style:opacity']) {
+						$defaultOpacity = style['gpx_style:opacity'];
 					}
-					if (style.weight) {
-						$defaultWeight = style.weight;
+					if (style['gpx_style:width']) {
+						$defaultWidth = style['gpx_style:width'];
 					}
 				}
 

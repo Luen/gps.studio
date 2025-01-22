@@ -33,7 +33,7 @@
         "select_all": "Sélectionner tout",
         "view": "Affichage",
         "elevation_profile": "Profil altimétrique",
-        "vertical_file_view": "Liste de fichiers verticale",
+        "tree_file_view": "Arborescence de fichiers",
         "switch_basemap": "Basculer au fond de carte précédent",
         "toggle_overlays": "Afficher/cacher les surcouches",
         "toggle_3d": "Activer/désactiver la 3D",
@@ -377,14 +377,6 @@
             "tram-stop": "Arrêt de tram",
             "bus-stop": "Arrêt de bus",
             "ferry": "Ferry"
-        },
-        "color": {
-            "blue": "Bleu",
-            "bluered": "Bleu rouge",
-            "gray": "Gris",
-            "hot": "Vif",
-            "purple": "Violet",
-            "orange": "Orange"
         }
     },
     "chart": {

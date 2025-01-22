@@ -189,6 +189,7 @@ export function isSafari() {
 
 export function getURLForLanguage(lang: string | null | undefined, path: string): string {
     let newPath = path.replace(base, '');
+
     let languageInPath = newPath.split('/')[1];
     if (!languages.hasOwnProperty(languageInPath)) {
         languageInPath = 'en';
@@ -199,6 +200,10 @@ export function getURLForLanguage(lang: string | null | undefined, path: string)
         if (lang === null || lang === undefined) {
             lang = 'en';
         }
+    }
+
+    if (newPath === '/' && lang !== 'en') {
+        newPath = '';
     }
 
     if (languageInPath === 'en') {

@@ -1,5 +1,5 @@
 ---
-title: GPX file format
+title: GPX 文件格式
 ---
 
 <script>
@@ -8,27 +8,27 @@ title: GPX file format
 
 # { title }
 
-The <a href="https://www.topografix.com/gpx.asp" target="_blank">GPX file format</a> is an open standard for exchanging GPS data between applications and GPS devices.
-It essentially consists of a series of GPS points encoding one or multiple GPS traces, and, optionally, some points of interest.
+<a href="https://www.topografix.com/gpx.asp" target="_blank">GPX 文件格式</a> 是应用程序和 GPS 设备之间交换 GPS 数据的一种开放标准。
+它本质上由一系列 GPS 点组成，用以编码形成一条或多条轨迹，以及兴趣点（可选）。
 
-GPX files may also contain metadata, of which the **name** and **description** fields are the most useful for users.
+还可以包含元数据，其中 **名称（name）** 和 **描述（description）** 字段对用户最有用。
 
-### <Waypoints size="16" class="inline-block" style="margin-bottom: 2px" /> Tracks, segments, and GPS points
+### <Waypoints size="16" class="inline-block" style="margin-bottom: 2px" /> 轨迹、路段和 GPS 点
 
-As mentioned above, a GPX file can contain multiple GPS traces.
-These are organized in a hierarchical structure, with tracks at the top level.
+如上所述，GPX 文件可包含多条 GPS 轨迹。
+它们按照分层结构组织起来，其中轨迹位于顶层：
 
-- A **track** is made of a sequence of disconnected segments.
-  Furthermore, it can contain metadata such as a **name**, a **description**, and **appearance properties**.
-- A **segment** is a sequence of GPS points that form a continuous path.
-- A **GPS point** is a location with a latitude, a longitude, and optionally a timestamp and an altitude.
-  Some devices also store additional information such as heart rate, cadence, temperature, and power.
+- **轨迹** 由一系列不相连的路段组成。
+  它可以包含 **名称**、**描述** 和 **外观属性** 等元数据；
+- **路段** 是由一系列 GPS 点组成的连续路径；
+- **GPS 点** 主要用来存储一个位置的经纬度，也可包含时间戳和高度信息。
+  一些设备可能还会记录心率、节奏、温度和功率等其他信息；
 
-In most cases, GPX files contain a single track with a single segment.
-However, the hierarchy described above allows for more advanced use cases, such as planning multi-day trips with several variants for each day.
+GPX 文件通常只包含一条轨迹，且该轨迹仅有一个路段。
+不过这个层级结构支持高级用法，例如用来规划多日旅程且每日可包含多个行程信息。
 
-### <MapPin size="16" class="inline-block" style="margin-bottom: 2px" /> Points of interest
+### <MapPin size="16" class="inline-block" style="margin-bottom: 2px" /> 兴趣点
 
-**Points of interest** (technically called _waypoints_) represent locations of interest to show either on a GPS device or on a digital map.
+**兴趣点**（_航点_）用来表示 GPS 设备或数字地图上需要显示的特殊位置。
 
-In addition to its coordinates, a point of interest can have a **name** and a **description**.
+除坐标外，兴趣点也可包含 **名称** 和 **描述** 信息。

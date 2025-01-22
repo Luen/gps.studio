@@ -22,7 +22,7 @@
 		Sun,
 		Moon,
 		Layers,
-		GalleryVertical,
+		ListTree,
 		Languages,
 		Settings,
 		Info,
@@ -85,7 +85,7 @@
 		velocityUnits,
 		temperatureUnits,
 		elevationProfile,
-		verticalFileView,
+		treeFileView,
 		currentBasemap,
 		previousBasemap,
 		currentOverlays,
@@ -284,7 +284,7 @@
 	<div
 		class="w-fit flex flex-row items-center justify-center p-1 bg-background rounded-b-md md:rounded-md pointer-events-auto shadow-md"
 	>
-		<a href="./" target="_blank" class="shrink-0">
+		<a href={getURLForLanguage($locale, '/')} target="_blank" class="shrink-0">
 			<Logo class="h-5 mt-0.5 mx-2 md:hidden" iconOnly={true} width="16" />
 			<Logo class="h-5 mt-0.5 mx-2 hidden md:block" width="96" />
 		</a>
@@ -399,7 +399,7 @@
 						{/if}
 						<Shortcut key="H" ctrl={true} />
 					</Menubar.Item>
-					{#if $verticalFileView}
+					{#if $treeFileView}
 						{#if $selection.getSelected().some((item) => item instanceof ListFileItem)}
 							<Menubar.Separator />
 							<Menubar.Item
@@ -440,7 +440,7 @@
 						{$_('menu.center')}
 						<Shortcut key="⏎" ctrl={true} />
 					</Menubar.Item>
-					{#if $verticalFileView}
+					{#if $treeFileView}
 						<Menubar.Separator />
 						<Menubar.Item on:click={copySelection} disabled={$selection.size === 0}>
 							<ClipboardCopy size="16" class="mr-1" />
@@ -483,9 +483,9 @@
 						{$_('menu.elevation_profile')}
 						<Shortcut key="P" ctrl={true} />
 					</Menubar.CheckboxItem>
-					<Menubar.CheckboxItem bind:checked={$verticalFileView}>
-						<GalleryVertical size="16" class="mr-1" />
-						{$_('menu.vertical_file_view')}
+					<Menubar.CheckboxItem bind:checked={$treeFileView}>
+						<ListTree size="16" class="mr-1" />
+						{$_('menu.tree_file_view')}
 						<Shortcut key="L" ctrl={true} />
 					</Menubar.CheckboxItem>
 					<Menubar.Separator />
@@ -630,7 +630,126 @@
 <LayerControlSettings bind:open={layerSettingsOpen} />
 
 <svelte:window
-	on:keydown={handleKeydown}
+	on:keydown={(e) => {
+		let targetInput =
+			e.target.tagName === 'INPUT' ||
+			e.target.tagName === 'TEXTAREA' ||
+			e.target.tagName === 'SELECT' ||
+			e.target.role === 'combobox' ||
+			e.target.role === 'radio' ||
+			e.target.role === 'menu' ||
+			e.target.role === 'menuitem' ||
+			e.target.role === 'menuitemradio' ||
+			e.target.role === 'menuitemcheckbox';
+
+		if (e.key === '+' && (e.metaKey || e.ctrlKey)) {
+			createFile();
+			e.preventDefault();
+		} else if (e.key === 'o' && (e.metaKey || e.ctrlKey)) {
+			triggerFileInput();
+			e.preventDefault();
+		} else if (e.key === 'd' && (e.metaKey || e.ctrlKey)) {
+			dbUtils.duplicateSelection();
+			e.preventDefault();
+		} else if (e.key === 'c' && (e.metaKey || e.ctrlKey)) {
+			if (!targetInput) {
+				copySelection();
+				e.preventDefault();
+			}
+		} else if (e.key === 'x' && (e.metaKey || e.ctrlKey)) {
+			if (!targetInput) {
+				cutSelection();
+				e.preventDefault();
+			}
+		} else if (e.key === 'v' && (e.metaKey || e.ctrlKey)) {
+			if (!targetInput) {
+				pasteSelection();
+				e.preventDefault();
+			}
+		} else if ((e.key === 's' || e.key == 'S') && (e.metaKey || e.ctrlKey)) {
+			if (e.shiftKey) {
+				if ($fileObservers.size > 0) {
+					$exportState = ExportState.ALL;
+				}
+			} else if ($selection.size > 0) {
+				$exportState = ExportState.SELECTION;
+			}
+			e.preventDefault();
+		} else if ((e.key === 'z' || e.key == 'Z') && (e.metaKey || e.ctrlKey)) {
+			if (e.shiftKey) {
+				dbUtils.redo();
+			} else {
+				dbUtils.undo();
+			}
+			e.preventDefault();
+		} else if ((e.key === 'Backspace' || e.key === 'Delete') && (e.metaKey || e.ctrlKey)) {
+			if (!targetInput) {
+				if (e.shiftKey) {
+					dbUtils.deleteAllFiles();
+				} else {
+					dbUtils.deleteSelection();
+				}
+				e.preventDefault();
+			}
+		} else if (e.key === 'a' && (e.metaKey || e.ctrlKey)) {
+			if (!targetInput) {
+				selectAll();
+				e.preventDefault();
+			}
+		} else if (e.key === 'i' && (e.metaKey || e.ctrlKey)) {
+			if (
+				$selection.size === 1 &&
+				$selection
+					.getSelected()
+					.every((item) => item instanceof ListFileItem || item instanceof ListTrackItem)
+			) {
+				$editMetadata = true;
+			}
+			e.preventDefault();
+		} else if (e.key === 'p' && (e.metaKey || e.ctrlKey)) {
+			$elevationProfile = !$elevationProfile;
+			e.preventDefault();
+		} else if (e.key === 'l' && (e.metaKey || e.ctrlKey)) {
+			$treeFileView = !$treeFileView;
+			e.preventDefault();
+		} else if (e.key === 'h' && (e.metaKey || e.ctrlKey)) {
+			if ($allHidden) {
+				dbUtils.setHiddenToSelection(false);
+			} else {
+				dbUtils.setHiddenToSelection(true);
+			}
+			e.preventDefault();
+		} else if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+			if ($selection.size > 0) {
+				centerMapOnSelection();
+			}
+		} else if (e.key === 'F1') {
+			switchBasemaps();
+			e.preventDefault();
+		} else if (e.key === 'F2') {
+			toggleOverlays();
+			e.preventDefault();
+		} else if (e.key === 'F3') {
+			$distanceMarkers = !$distanceMarkers;
+			e.preventDefault();
+		} else if (e.key === 'F4') {
+			$directionMarkers = !$directionMarkers;
+			e.preventDefault();
+		} else if (e.key === 'F5') {
+			$routing = !$routing;
+			e.preventDefault();
+		} else if (
+			e.key === 'ArrowRight' ||
+			e.key === 'ArrowDown' ||
+			e.key === 'ArrowLeft' ||
+			e.key === 'ArrowUp'
+		) {
+			if (!targetInput) {
+				updateSelectionFromKey(e.key === 'ArrowRight' || e.key === 'ArrowDown', e.shiftKey);
+				e.preventDefault();
+			}
+		}
+	}}
 	on:dragover={(e) => e.preventDefault()}
 	on:drop={handleDrop}
 />

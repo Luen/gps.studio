@@ -85,7 +85,7 @@ export const settings = {
     elevationProfile: dexieSettingStore('elevationProfile', true),
     additionalDatasets: dexieSettingStore<string[]>('additionalDatasets', []),
     elevationFill: dexieSettingStore<'slope' | 'surface' | undefined>('elevationFill', undefined),
-    verticalFileView: dexieSettingStore<boolean>('fileView', false),
+    treeFileView: dexieSettingStore<boolean>('fileView', false),
     minimizeRoutingMenu: dexieSettingStore('minimizeRoutingMenu', false),
     routing: dexieSettingStore('routing', true),
     routingProfile: dexieSettingStore('routingProfile', 'bike'),
@@ -107,7 +107,7 @@ export const settings = {
     streetViewSource: dexieSettingStore('streetViewSource', 'mapillary'),
     fileOrder: dexieSettingStore<string[]>('fileOrder', []),
     defaultOpacity: dexieSettingStore('defaultOpacity', 0.7),
-    defaultWeight: dexieSettingStore('defaultWeight', (browser && window.innerWidth < 600) ? 8 : 5),
+    defaultWidth: dexieSettingStore('defaultWidth', (browser && window.innerWidth < 600) ? 8 : 5),
     bottomPanelSize: dexieSettingStore('bottomPanelSize', 170),
     rightPanelSize: dexieSettingStore('rightPanelSize', 240),
 };
@@ -593,7 +593,11 @@ export const dbUtils = {
                 if (file && originalFile) {
                     if (level === ListLevel.FILE) {
                         toMerge.trk.push(...originalFile.trk.map((track) => track.clone()));
-                        toMerge.wpt.push(...originalFile.wpt.map((wpt) => wpt.clone()));
+                        for (const wpt of originalFile.wpt) {
+                            if (!toMerge.wpt.some((w) => w.equals(wpt))) {
+                                toMerge.wpt.push(wpt.clone());
+                            }
+                        }
                         if (first) {
                             target = items[0];
                             targetFile = file;
