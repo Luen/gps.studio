@@ -1646,6 +1646,278 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             },
         ],
     },
+    suuntoHeatmapRunning: {
+        version: 8,
+        sources: {
+            suuntoHeatmapRunning: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/Running/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapRunning',
+            type: 'raster',
+            source: 'suuntoHeatmapRunning',
+        }],
+    },
+    suuntoHeatmapTrailRunning: {
+        version: 8,
+        sources: {
+            suuntoHeatmapTrailRunning: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/TrailRunning/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapTrailRunning',
+            type: 'raster',
+            source: 'suuntoHeatmapTrailRunning',
+        }],
+    },
+    suuntoHeatmapAllTrails: {
+        version: 8,
+        sources: {
+            suuntoHeatmapAllTrails: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/AllTrails/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapAllTrails',
+            type: 'raster',
+            source: 'suuntoHeatmapAllTrails',
+        }],
+    },
+    suuntoHeatmapAllWalking: {
+        version: 8,
+        sources: {
+            suuntoHeatmapAllWalking: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/AllWalking/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapAllWalking',
+            type: 'raster',
+            source: 'suuntoHeatmapAllWalking',
+        }],
+    },
+    suuntoHeatmapCycling: {
+        version: 8,
+        sources: {
+            suuntoHeatmapCycling: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/Cycling/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapCycling',
+            type: 'raster',
+            source: 'suuntoHeatmapCycling',
+        }],
+    },
+    suuntoHeatmapMountainBiking: {
+        version: 8,
+        sources: {
+            suuntoHeatmapMountainBiking: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/MountainBiking/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapMountainBiking',
+            type: 'raster',
+            source: 'suuntoHeatmapMountainBiking',
+        }],
+    },
+    suuntoHeatmapCrosscountrySkiing: {
+        version: 8,
+        sources: {
+            suuntoHeatmapCrosscountrySkiing: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/CrosscountrySkiing/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapCrosscountrySkiing',
+            type: 'raster',
+            source: 'suuntoHeatmapCrosscountrySkiing',
+        }],
+    },
+    suuntoHeatmapAllDownhill: {
+        version: 8,
+        sources: {
+            suuntoHeatmapAllDownhill: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/AllDownhill/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapAllDownhill',
+            type: 'raster',
+            source: 'suuntoHeatmapAllDownhill',
+        }],
+    },
+    suuntoHeatmapAllSwimming: {
+        version: 8,
+        sources: {
+            suuntoHeatmapAllSwimming: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/AllSwimming/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapAllSwimming',
+            type: 'raster',
+            source: 'suuntoHeatmapAllSwimming',
+        }],
+    },
+    suuntoHeatmapTriathlon: {
+        version: 8,
+        sources: {
+            suuntoHeatmapTriathlon: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/Triathlon/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapTriathlon',
+            type: 'raster',
+            source: 'suuntoHeatmapTriathlon',
+        }],
+    },
+    suuntoHeatmapAllPaddling: {
+        version: 8,
+        sources: {
+            suuntoHeatmapAllPaddling: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/AllPaddling/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapAllPaddling',
+            type: 'raster',
+            source: 'suuntoHeatmapAllPaddling',
+        }],
+    },
+    suuntoHeatmapAllRollerSports: {
+        version: 8,
+        sources: {
+            suuntoHeatmapAllRollerSports: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/AllRollerSports/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapAllRollerSports',
+            type: 'raster',
+            source: 'suuntoHeatmapAllRollerSports',
+        }],
+    },
+    suuntoHeatmapSkiTouring: {
+        version: 8,
+        sources: {
+            suuntoHeatmapSkiTouring: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/SkiTouring/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapSkiTouring',
+            type: 'raster',
+            source: 'suuntoHeatmapSkiTouring',
+        }],
+    },
+    suuntoHeatmapMountaineering: {
+        version: 8,
+        sources: {
+            suuntoHeatmapMountaineering: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/Mountaineering/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapMountaineering',
+            type: 'raster',
+            source: 'suuntoHeatmapMountaineering',
+        }],
+    },
+    suuntoHeatmapAllSurfAndBeach: {
+        version: 8,
+        sources: {
+            suuntoHeatmapAllSurfAndBeach: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/AllSurfAndBeach/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapAllSurfAndBeach',
+            type: 'raster',
+            source: 'suuntoHeatmapAllSurfAndBeach',
+        }],
+    },
+    suuntoHeatmapGolf: {
+        version: 8,
+        sources: {
+            suuntoHeatmapGolf: {
+                type: 'raster',
+                tiles: ['https://suunto.wanderstories.space/Golf/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://suunto.com" target="_blank">Suunto</a>'
+            }
+        },
+        layers: [{
+            id: 'suuntoHeatmapGolf',
+            type: 'raster',
+            source: 'suuntoHeatmapGolf',
+        }],
+    },
     osmTraces: {
         version: 8,
         sources: {
@@ -2139,6 +2411,22 @@ export const overlayTree: LayerTreeType = {
             trailforksHeatmap: true,
             ridewithgpsHeatmap: true,
             garminHeatmap: true,
+            suuntoHeatmapRunning: true,
+            suuntoHeatmapTrailRunning: true,
+            suuntoHeatmapAllTrails: true,
+            suuntoHeatmapAllWalking: true,
+            suuntoHeatmapCycling: true,
+            suuntoHeatmapMountainBiking: true,
+            suuntoHeatmapCrosscountrySkiing: true,
+            suuntoHeatmapAllDownhill: true,
+            suuntoHeatmapAllSwimming: true,
+            suuntoHeatmapTriathlon: true,
+            suuntoHeatmapAllPaddling: true,
+            suuntoHeatmapAllRollerSports: true,
+            suuntoHeatmapSkiTouring: true,
+            suuntoHeatmapMountaineering: true,
+            suuntoHeatmapAllSurfAndBeach: true,
+            suuntoHeatmapGolf: true,
             osmTraces: true,
             openSeaMap: true,
             waterfalls: true,
@@ -2249,6 +2537,22 @@ export const defaultOverlays: LayerTreeType = {
             trailforksHeatmap: false,
             ridewithgpsHeatmap: false,
             garminHeatmap: false,
+            suuntoHeatmapRunning: false,
+            suuntoHeatmapTrailRunning: false,
+            suuntoHeatmapAllTrails: false,
+            suuntoHeatmapAllWalking: false,
+            suuntoHeatmapCycling: false,
+            suuntoHeatmapMountainBiking: false,
+            suuntoHeatmapCrosscountrySkiing: false,
+            suuntoHeatmapAllDownhill: false,
+            suuntoHeatmapAllSwimming: false,
+            suuntoHeatmapTriathlon: false,
+            suuntoHeatmapAllPaddling: false,
+            suuntoHeatmapAllRollerSports: false,
+            suuntoHeatmapSkiTouring: false,
+            suuntoHeatmapMountaineering: false,
+            suuntoHeatmapAllSurfAndBeach: false,
+            suuntoHeatmapGolf: false,
             osmTraces: false,
             openSeaMap: false,
             waterfalls: false,
@@ -2444,6 +2748,22 @@ export const defaultOverlayTree: LayerTreeType = {
             trailforksHeatmap: false,
             ridewithgpsHeatmap: false,
             garminHeatmap: false,
+            suuntoHeatmapRunning: false,
+            suuntoHeatmapTrailRunning: false,
+            suuntoHeatmapAllTrails: false,
+            suuntoHeatmapAllWalking: false,
+            suuntoHeatmapCycling: false,
+            suuntoHeatmapMountainBiking: false,
+            suuntoHeatmapCrosscountrySkiing: false,
+            suuntoHeatmapAllDownhill: false,
+            suuntoHeatmapAllSwimming: false,
+            suuntoHeatmapTriathlon: false,
+            suuntoHeatmapAllPaddling: false,
+            suuntoHeatmapAllRollerSports: false,
+            suuntoHeatmapSkiTouring: false,
+            suuntoHeatmapMountaineering: false,
+            suuntoHeatmapAllSurfAndBeach: false,
+            suuntoHeatmapGolf: false,
             osmTraces: false,
             openSeaMap: true,
             waterfalls: true,
