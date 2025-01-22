@@ -373,7 +373,7 @@
 			$elevationProfile = !$elevationProfile;
 			e.preventDefault();
 		} else if (e.key === 'l' && (e.metaKey || e.ctrlKey)) {
-			$verticalFileView = !$verticalFileView;
+			$treeFileView = !$verticalFileView;
 			e.preventDefault();
 		} else if (e.key === 'h' && (e.metaKey || e.ctrlKey)) {
 			if ($allHidden) {
