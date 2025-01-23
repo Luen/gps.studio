@@ -1559,90 +1559,110 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'ridewithgpsHeatmap',
         }],
     },
-    garminHeatmap: {
+    garminHeatmapRoad: {
         version: 8,
         sources: {
-            garminRoad: {
+            garminHeatmapRoad: {
                 type: 'raster',
                 tiles: ['https://tiles.wanderstories.space/garmin/heatmap/ROAD_CYCLING/{z}/{x}/{y}.png'],
                 //tiles: ['https://connecttile.garmin.com/ROAD_CYCLING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
-            },
-            garminMtb: {
-                type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/MOUNTAIN_BIKING/{z}/{x}/{y}.png'],
-                //tiles: ['https://connecttile.garmin.com/MOUNTAIN_BIKING/{z}/{x}/{y}.png'],
-                tileSize: 256,
-                maxzoom: 18,
-                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
-            },
-            garminGravel: {
-                type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/GRAVEL_BIKING/{z}/{x}/{y}.png'],
-                //tiles: ['https://connecttile.garmin.com/GRAVEL_BIKING/{z}/{x}/{y}.png'],
-                tileSize: 256,
-                maxzoom: 18,
-                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
-            },
-            garminRunning: {
-                type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/RUNNING/{z}/{x}/{y}.png'],
-                //tiles: ['https://connecttile.garmin.com/RUNNING/{z}/{x}/{y}.png'],
-                tileSize: 256,
-                maxzoom: 18,
-                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
-            },
-            garminTrail: {
-                type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/TRAIL_RUNNING/{z}/{x}/{y}.png'],
-                //tiles: ['https://connecttile.garmin.com/TRAIL_RUNNING/{z}/{x}/{y}.png'],
-                tileSize: 256,
-                maxzoom: 18,
-                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
-            },
-            garminHiking: {
-                type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/HIKING/{z}/{x}/{y}.png'],
-                //tiles: ['https://connecttile.garmin.com/HIKING/{z}/{x}/{y}.png'],
-                tileSize: 256,
-                maxzoom: 18,
-                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
-            },
+            }
         },
         layers: [
             {
-                id: 'garminRoad',
+                id: 'garminHeatmapRoad',
                 type: 'raster',
-                source: 'garminRoad',
-            },
-            {
-                id: 'garminMtb',
-                type: 'raster',
-                source: 'garminMtb',
-            },
-            {
-                id: 'garminGravel',
-                type: 'raster',
-                source: 'garminGravel',
-            },
-            {
-                id: 'garminRunning',
-                type: 'raster',
-                source: 'garminRunning',
-            },
-            {
-                id: 'garminTrail',
-                type: 'raster',
-                source: 'garminTrail',
-            },
-            {
-                id: 'garminHiking',
-                type: 'raster',
-                source: 'garminHiking',
+                source: 'garminHeatmapRoad',
             },
         ],
+    },
+    garminHeatmapMtb: {
+        version: 8,
+        sources: {
+            garminHeatmapMtb: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/MOUNTAIN_BIKING/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            }
+        },
+        layers: [{
+            id: 'garminHeatmapMtb',
+            type: 'raster',
+            source: 'garminHeatmapMtb',
+        }],
+    },
+    garminHeatmapGravel: {
+        version: 8,
+        sources: {
+            garminHeatmapGravel: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/GRAVEL_BIKING/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            }
+        },
+        layers: [{
+            id: 'garminHeatmapGravel',
+            type: 'raster',
+            source: 'garminHeatmapGravel',
+        }],
+    },
+    garminHeatmapRunning: {
+        version: 8,
+        sources: {
+            garminHeatmapRunning: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/RUNNING/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            }
+        },
+        layers: [{
+            id: 'garminHeatmapRunning',
+            type: 'raster',
+            source: 'garminHeatmapRunning',
+        }],
+    },
+    garminHeatmapTrail: {
+        version: 8,
+        sources: {
+            garminHeatmapTrail: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/TRAIL_RUNNING/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            }
+        },
+        layers: [{
+            id: 'garminHeatmapTrail',
+            type: 'raster',
+            source: 'garminHeatmapTrail',
+        }],
+    },
+    garminHeatmapHiking: {
+        version: 8,
+        sources: {
+            garminHeatmapHiking: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/HIKING/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
+            }
+        },
+        layers: [{
+            id: 'garminHeatmapHiking',
+            type: 'raster',
+            source: 'garminHeatmapHiking',
+        }],
     },
     suuntoHeatmapRunning: {
         version: 8,
@@ -2424,7 +2444,12 @@ export const overlayTree: LayerTreeType = {
             stravaHeatmapWinter: true,
             trailforksHeatmap: true,
             ridewithgpsHeatmap: true,
-            garminHeatmap: true,
+            garminHeatmapRoad: true,
+            garminHeatmapMtb: true,
+            garminHeatmapGravel: true,
+            garminHeatmapRunning: true,
+            garminHeatmapTrail: true,
+            garminHeatmapHiking: true,
             suuntoHeatmapRunning: true,
             suuntoHeatmapTrailRunning: true,
             suuntoHeatmapAllTrails: true,
@@ -2550,7 +2575,12 @@ export const defaultOverlays: LayerTreeType = {
             stravaHeatmapWinter: false,
             trailforksHeatmap: false,
             ridewithgpsHeatmap: false,
-            garminHeatmap: false,
+            garminHeatmapRoad: false,
+            garminHeatmapMtb: false,
+            garminHeatmapGravel: false,
+            garminHeatmapRunning: false,
+            garminHeatmapTrail: false,
+            garminHeatmapHiking: false,
             suuntoHeatmapRunning: false,
             suuntoHeatmapTrailRunning: false,
             suuntoHeatmapAllTrails: false,
@@ -2761,7 +2791,12 @@ export const defaultOverlayTree: LayerTreeType = {
             stravaHeatmapWinter: false,
             trailforksHeatmap: false,
             ridewithgpsHeatmap: false,
-            garminHeatmap: false,
+            garminHeatmapRoad: false,
+            garminHeatmapMtb: false,
+            garminHeatmapGravel: false,
+            garminHeatmapRunning: false,
+            garminHeatmapTrail: false,
+            garminHeatmapHiking: false,
             suuntoHeatmapRunning: false,
             suuntoHeatmapTrailRunning: false,
             suuntoHeatmapAllTrails: false,
