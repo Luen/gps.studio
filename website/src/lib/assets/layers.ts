@@ -2695,7 +2695,7 @@ export const defaultBasemapTree: LayerTreeType = {
             appleMaps: false,
             googleMaps: false,
             googleTerrain: false,
-            mapboxSatellite: false,
+            mapboxSatellite: true,
             arcImagery: true,
             esriClarity: true,
             esriImagery: true,
