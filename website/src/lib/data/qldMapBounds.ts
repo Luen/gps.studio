@@ -1,0 +1,1 @@
+export interface MapBound { [key: string]: string; } export const qldMapBounds: MapBound = { "9541-1S": "BILAMBIL", "9641-4S": "TWEED HEADS", "9341-2N": "KILLARNEY", "9441-3N": "MOUNT LINDESAY", "9441-2N": "COUGAL", "9541-3N": "TYALGUM", "9541-2N": "MURWILLUMBAH", "9641-3N": "CUDGEN" };
