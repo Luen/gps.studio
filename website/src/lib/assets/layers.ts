@@ -1039,12 +1039,81 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 }
             },
             {
-                id: 'qTraffic-text',
+                id: 'qTraffic-lines',
+                type: 'line',
+                source: 'qTraffic',
+                filter: ['all',
+                    // Filter for Line geometries only
+                    ['any',
+                        ['==', ['get', 'type'], 'LineString'],
+                        ['==', ['get', 'type'], 'MultiLineString'],
+                        ['==', ['geometry-type'], 'LineString'],
+                        ['==', ['geometry-type'], 'MultiLineString']
+                    ],
+                    // Other filters
+                    ['!=', ['get', 'event_subtype'], 'Planned roadworks'],
+                    ['!=', ['get', 'event_subtype'], 'Stationary vehicle'],
+                    ['!=', ['get', 'event_due_to'], 'Pot holes'],
+                    ['!', ['all',
+                        ['==', ['get', 'advice'], 'Proceed with caution'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!', ['all',
+                        ['==', ['get', 'event_subtype'], 'Debris on road'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!=', ['get', 'delay'], 'No delays expected']
+                ],
+                paint: {
+                    'line-color': '#2196f3',
+                    'line-width': 3,
+                    'line-opacity': 0.8
+                },
+                layout: {
+                    'line-cap': 'round',
+                    'line-join': 'round'
+                }
+            },
+            {
+                id: 'qTraffic-points',
+                type: 'circle',
+                source: 'qTraffic',
+                filter: ['all',
+                    // Filter for Point geometries only
+                    ['any',
+                        ['==', ['get', 'type'], 'Point'],
+                        ['==', ['get', 'type'], 'MultiPoint'],
+                        ['==', ['geometry-type'], 'Point'],
+                        ['==', ['geometry-type'], 'MultiPoint']
+                    ],
+                    // Other filters
+                    ['!=', ['get', 'event_subtype'], 'Planned roadworks'],
+                    ['!=', ['get', 'event_subtype'], 'Stationary vehicle'],
+                    ['!=', ['get', 'event_due_to'], 'Pot holes'],
+                    ['!', ['all',
+                        ['==', ['get', 'advice'], 'Proceed with caution'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!', ['all',
+                        ['==', ['get', 'event_subtype'], 'Debris on road'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!=', ['get', 'delay'], 'No delays expected']
+                ],
+                paint: {
+                    'circle-radius': 6,
+                    'circle-color': '#2196f3',
+                    'circle-stroke-width': 1,
+                    'circle-stroke-color': '#fff'
+                }
+            },
+            {
+                id: 'qTraffic-text-points',
                 type: 'symbol',
                 source: 'qTraffic',
                 minzoom: 10, // Only show text when zoomed in
                 filter: ['all',
-                    // Filter for Point and Line geometries
+                    // Only points
                     ['any',
                         ['==', ['get', 'type'], 'Point'],
                         ['==', ['get', 'type'], 'MultiPoint'],
@@ -1082,6 +1151,54 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                     'text-anchor': 'top',
                     'text-max-width': 8,
                     'text-allow-overlap': false
+                },
+                paint: {
+                    'text-halo-width': 1.5,
+                    'text-halo-color': '#fff',
+                    'text-color': '#000'
+                }
+            },
+            {
+                id: 'qTraffic-text-lines',
+                type: 'symbol',
+                source: 'qTraffic',
+                minzoom: 10, // Only show text when zoomed in
+                filter: ['all',
+                    // Only lines
+                    ['any',
+                        ['==', ['get', 'type'], 'LineString'],
+                        ['==', ['get', 'type'], 'MultiLineString'],
+                        ['==', ['geometry-type'], 'LineString'],
+                        ['==', ['geometry-type'], 'MultiLineString']
+                    ],
+                    // Other filters
+                    ['!=', ['get', 'event_subtype'], 'Planned roadworks'],
+                    ['!=', ['get', 'event_subtype'], 'Stationary vehicle'],
+                    ['!=', ['get', 'event_due_to'], 'Pot holes'],
+                    ['!', ['all',
+                        ['==', ['get', 'advice'], 'Proceed with caution'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!', ['all',
+                        ['==', ['get', 'event_subtype'], 'Debris on road'],
+                        ['!=', ['get', 'event_priority'], 'High']
+                    ]],
+                    ['!=', ['get', 'delay'], 'No delays expected']
+                ],
+                layout: {
+                    'text-field': [
+                        'concat',
+                        ['get', 'event_type'],
+                        ': ',
+                        ['get', 'description']
+                    ],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 12,
+                    'symbol-placement': 'line',
+                    'text-keep-upright': true,
+                    'text-allow-overlap': false,
+                    'text-max-angle': 45,
+                    'text-padding': 5
                 },
                 paint: {
                     'text-halo-width': 1.5,
