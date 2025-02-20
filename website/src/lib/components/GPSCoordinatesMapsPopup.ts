@@ -13,6 +13,11 @@ export class GpsPopup {
     }
 
     showCenterCoordinates() {
+        const center = this.map.getCenter();
+        this.showCoordinatesAt(center);
+    }
+
+    showCoordinatesAt(coordinates: { lat: number; lng: number }) {
         // Close existing popup if it exists
         if (this.popup) {
             this.popup.remove();
@@ -20,19 +25,17 @@ export class GpsPopup {
             this.popupComponent = null;
         }
 
-        const center = this.map.getCenter();
         const container = document.createElement('div');
         
-        // @ts-expect-error - Svelte component constructor type mismatch
         this.popupComponent = new GpsCoordinatesMapsPopupComponent({
             target: container,
             props: {
                 coordinates: {
-                    lat: center.lat,
-                    lng: center.lng
+                    lat: coordinates.lat,
+                    lng: coordinates.lng
                 }
             }
-        });
+        }) as SvelteComponent;
 
         this.popup = new mapboxgl.Popup({
             closeButton: true,
@@ -40,7 +43,7 @@ export class GpsPopup {
             maxWidth: '400px',
             className: 'accessible-popup'
         })
-            .setLngLat(center)
+            .setLngLat(coordinates)
             .setDOMContent(container)
             .addTo(this.map);
 

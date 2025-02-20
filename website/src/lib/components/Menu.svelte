@@ -510,7 +510,7 @@
 						<Shortcut key="{$_('menu.ctrl')}+{$_('menu.drag')}" />
 					</Menubar.Item>
 					<Menubar.Separator />
-					<Menubar.Item on:click={showCoordinatesMaps}>
+					<Menubar.Item inset on:click={showCoordinatesMaps}>
 						<Map size="16" class="mr-1" />
 						{$_('menu.show_coordinates_maps')}
 					</Menubar.Item>

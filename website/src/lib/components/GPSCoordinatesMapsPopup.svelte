@@ -171,6 +171,31 @@
 		};
 	}
 
+	function getMapSheetsNSW(mapSheet10k: string): { [key: string]: string } {
+		// Extract the base map number (first 4 digits)
+		const baseMap = mapSheet10k.slice(0, 4);
+
+		// Get the quadrant number (after the dash)
+		const thirdLastDigit = mapSheet10k.slice(-3, -2);
+		const secondLastDigit = mapSheet10k.slice(-2, -1);
+		const lastDigit = mapSheet10k.slice(-1);
+
+		// Convert quadrant number to N/S direction
+		const directionMap: { [key: string]: string } = {
+			'1': 'N',
+			'2': 'S',
+			'3': 'S',
+			'4': 'N'
+		};
+
+		return {
+			'100k': baseMap,
+			'50k': `${baseMap}-${directionMap[String(thirdLastDigit)]}`,
+			'25k': `${baseMap}-${String(thirdLastDigit)}${directionMap[String(secondLastDigit)]}`,
+			'10k': `${baseMap}-${String(thirdLastDigit)}${String(secondLastDigit)}${directionMap[String(lastDigit)]}`
+		};
+	}
+
 	function getMapLinksQld(mapSheets: { [key: string]: string }) {
 		return {
 			'100k': {
@@ -196,121 +221,226 @@
 		};
 	}
 
-	function getMapTitle(sheet: string | undefined, state: 'QLD' | 'NSW'): string {
-		// Return early if sheet is undefined
+	function getMapTitle(sheet: string | undefined): string {
 		if (!sheet) return '';
-
-		// Get first 4 digits
-		const mapNumber = sheet.slice(0, 4);
-
 		try {
-			if (state === 'QLD') {
-				if (!qldMapBounds) return '';
-				const maptitle = String(qldMapBounds[mapNumber as keyof typeof qldMapBounds] || '');
-				return maptitle;
-			} else {
-				if (!nswMapBounds) return '';
-				const maptitle = String(nswMapBounds[sheet as keyof typeof nswMapBounds] || '');
-				return maptitle || '';
-			}
+			if (!qldMapBounds) return '';
+			const qldSheet = sheet.slice(0, 4);
+			const qldTitle = qldMapBounds[qldSheet as keyof typeof qldMapBounds];
+			if (qldTitle) return String(qldTitle);
+
+			if (!nswMapBounds) return '';
+			const nswSheetArray = getMapSheetsNSW(sheet);
+			let nswTitle;
+			nswTitle = nswMapBounds[nswSheetArray['10k'] as keyof typeof nswMapBounds];
+			if (nswTitle) return String(nswTitle);
+			nswTitle = nswMapBounds[nswSheetArray['25k'] as keyof typeof nswMapBounds];
+			if (nswTitle) return String(nswTitle);
+			nswTitle = nswMapBounds[nswSheetArray['50k'] as keyof typeof nswMapBounds];
+			if (nswTitle) return String(nswTitle);
+			nswTitle = nswMapBounds[nswSheetArray['100k'] as keyof typeof nswMapBounds];
+			return nswTitle ? String(nswTitle) : '';
 		} catch (error) {
 			console.error('Error in getMapTitle:', error);
 			return '';
 		}
 	}
 
+	interface HistoricMap {
+		title: string;
+		publication_date: number;
+		map_scale: number;
+		download_link: string;
+		map_preview: string;
+		mapping_series?: string;
+		description?: string;
+	}
+
+	async function getHistoricMaps(lat: number, lng: number) {
+		try {
+			const url = `https://qldglobe.wanderstories.space/historical-maps?lat=${lat}&lon=${lng}`;
+			const response = await fetch(url);
+			const data: HistoricMap[] = await response.json();
+			return data.sort((a, b) => a.map_scale - b.map_scale);
+		} catch (error) {
+			console.error('Error fetching historic maps:', error);
+			return [];
+		}
+	}
+
+	async function getGeoscienceMaps(lat: number, lng: number) {
+		try {
+			const url = `https://natmap.wanderstories.space/maps?lat=${lat}&lon=${lng}`;
+			const response = await fetch(url);
+			const data = await response.json();
+			return data;
+		} catch (error) {
+			console.error('Error fetching Geoscience maps:', error);
+			return [];
+		}
+	}
+
+	function isQueensland(lat: number, lng: number) {
+		// Need to improve this
+		return lat >= -20 && lat <= -10 && lng >= 140 && lng <= 153;
+	}
+
 	$: utm = geo2utm(coordinates);
 	$: sixFigure = get6FigureRef(utm);
 	$: mapSheets = getMapSheets(coordinates.lat, coordinates.lng);
-	$: mapTitle = getMapTitle(mapSheets['100k'], 'QLD');
-	$: mapLinks = getMapLinksQld(mapSheets);
+	$: mapTitle = getMapTitle(mapSheets['10k']);
+	$: mapLinks = isQueensland(coordinates.lat, coordinates.lng) ? getMapLinksQld(mapSheets) : null;
+	$: historicMaps = isQueensland(coordinates.lat, coordinates.lng)
+		? getHistoricMaps(coordinates.lat, coordinates.lng)
+		: null;
+	$: geoscienceMaps = isQueensland(coordinates.lat, coordinates.lng)
+		? getGeoscienceMaps(coordinates.lat, coordinates.lng)
+		: null;
+
+	function formatScale(scale: number): string {
+		return `1:${scale.toLocaleString()}`;
+	}
 </script>
 
 <div class="p-2 text-sm bg-background rounded-md shadow-md border border-border">
 	<table class="w-full">
 		<tr>
 			<td>GPS</td>
-			<td class="text-right">{formattedLat}</td>
-			<td class="text-right pl-4">{formattedLng}</td>
+			<td class="text-right">{formattedLat}, {formattedLng}</td>
 		</tr>
 		<tr>
 			<td>UTM</td>
-			<td colspan="2" class="text-right">{utm ? `${utm.zone} ${utm.x} ${utm.y}` : 'N/A'}</td>
+			<td class="text-right">{utm ? `${utm.zone} ${utm.x} ${utm.y}` : 'N/A'}</td>
 		</tr>
 		<tr>
 			<td>6FIGURE</td>
-			<td colspan="2" class="text-right">{sixFigure}</td>
+			<td class="text-right">{sixFigure}</td>
 		</tr>
 		<tr>
 			<td colspan="3" class="border-t border-border">
 				<div class="text-xs mt-1">
-					<div class="font-semibold mb-1">
-						Maps: {mapTitle}
-						<div class="grid grid-cols-3 gap-x-2">
-							<div>100k</div>
-							<div class="text-left font-mono">{mapLinks['100k'].sheet}</div>
-							<div class="text-right">
-								<a
-									href={mapLinks['100k'].topo}
-									target="_blank"
-									class="text-primary hover:underline px-1">topo</a
-								>/
-								<a
-									href={mapLinks['100k'].image}
-									target="_blank"
-									class="text-primary hover:underline px-1">img</a
-								>
-							</div>
+					<div class="font-bold mb-1">{mapTitle ? `${mapTitle}` : 'Maps'}</div>
+					{#if mapLinks}
+						<div class="font-semibold mb-1">Government Maps</div>
+						<div class="grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2">
+							<div>Title</div>
+							<div>Sheet</div>
+							<div>Scale</div>
+							<div>Links</div>
 
-							<div>50k</div>
-							<div class="text-left font-mono">{mapLinks['50k'].sheet}</div>
-							<div class="text-right">
-								<a
-									href={mapLinks['50k'].topo}
-									target="_blank"
-									class="text-primary hover:underline px-1">topo</a
-								>/
-								<a
-									href={mapLinks['50k'].image}
-									target="_blank"
-									class="text-primary hover:underline px-1">img</a
-								>
-							</div>
-
-							<div>25k</div>
-							<div class="text-left font-mono">{mapLinks['25k'].sheet}</div>
-							<div class="text-right">
-								<a
-									href={mapLinks['25k'].topo}
-									target="_blank"
-									class="text-primary hover:underline px-1">topo</a
-								>/
-								<a
-									href={mapLinks['25k'].image}
-									target="_blank"
-									class="text-primary hover:underline px-1">img</a
-								>
-							</div>
-
-							<div>10k</div>
-							<div class="text-left font-mono">{mapLinks['10k'].sheet}</div>
-							<div class="text-right">
-								<a
-									href={mapLinks['10k'].topo}
-									target="_blank"
-									class="text-primary hover:underline px-1">topo</a
-								>/
-								<a
-									href={mapLinks['10k'].image}
-									target="_blank"
-									class="text-primary hover:underline px-1">img</a
-								>
-							</div>
+							{#each ['100k', '50k', '25k', '10k'] as scale}
+								<div>Queensland {scale}</div>
+								<div class="font-mono whitespace-nowrap">{mapLinks[scale].sheet}</div>
+								<div>{formatScale(parseInt(scale.replace('k', '000')))}</div>
+								<div class="text-right whitespace-nowrap">
+									<a
+										href={mapLinks[scale].topo}
+										target="_blank"
+										title="Topographic map"
+										class="text-primary hover:underline px-1">🗺️</a
+									>
+									<a
+										href={mapLinks[scale].image}
+										target="_blank"
+										title="Satellite imagery"
+										class="text-primary hover:underline px-1">📡</a
+									>
+								</div>
+							{/each}
 						</div>
-					</div>
+					{:else}
+						<div class="grid grid-cols-[2fr_1fr_1fr] gap-x-2">
+							<div>Sheet</div>
+							<div>Scale</div>
+							<div>&nbsp;</div>
+							{#each ['100k', '50k', '25k', '10k'] as scale}
+								<div>{mapSheets[scale]}</div>
+								<div>{scale}</div>
+								<div>{formatScale(parseInt(scale.replace('k', '000')))}</div>
+							{/each}
+						</div>
+					{/if}
 				</div>
 			</td>
 		</tr>
+		{#if geoscienceMaps}
+			<tr>
+				<td colspan="3" class="border-t border-border">
+					<div class="text-xs mt-1">
+						<div class="font-semibold mb-1">Geoscience Australia Maps</div>
+						<div class="grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2">
+							{#await geoscienceMaps}
+								<div class="col-span-4">Loading...</div>
+							{:then maps}
+								<div>Title</div>
+								<div>Sheet</div>
+								<div>Scale</div>
+								<div>Links</div>
+
+								{#each maps as map}
+									<div title={map.attributes.NAME}>{map.attributes.TITLE}</div>
+									<div class="font-mono">{map.attributes.MAP_CODE}</div>
+									<div>1:{map.attributes.SCALE_1.toLocaleString()}</div>
+									<div class="text-right whitespace-nowrap">
+										<a
+											href={map.attributes.mapUrl}
+											target="_blank"
+											title="Download map"
+											class="text-primary hover:underline px-1">↓</a
+										>
+										<a
+											href={map.attributes.PID_URL}
+											target="_blank"
+											title="View metadata"
+											class="text-primary hover:underline px-1">ℹ️</a
+										>
+									</div>
+								{/each}
+							{/await}
+						</div>
+					</div>
+				</td>
+			</tr>
+		{/if}
+		{#if historicMaps}
+			<tr>
+				<td colspan="3" class="border-t border-border">
+					<div class="text-xs mt-1">
+						<div class="font-semibold mb-1">Historic Maps</div>
+						<div class="grid grid-cols-[2fr_0.5fr_0.5fr_0.5fr] gap-x-2">
+							{#await historicMaps}
+								<div class="col-span-4">Loading...</div>
+							{:then maps}
+								<div>Title</div>
+								<div>Date</div>
+								<div>Scale</div>
+								<div>Links</div>
+
+								{#each maps as map}
+									<div title={map.mapping_series || map.description}>{map.title}</div>
+									<div>{map.publication_date}</div>
+									<div>1:{map.map_scale.toLocaleString()}</div>
+									<div class="text-right whitespace-nowrap">
+										<a
+											href={map.download_link}
+											target="_blank"
+											title="Download map"
+											class="text-primary hover:underline px-1">↓</a
+										>
+										<a
+											href={map.map_preview}
+											target="_blank"
+											title="Preview map"
+											class="text-primary hover:underline px-1">👁️</a
+										>
+									</div>
+								{/each}
+							{/await}
+						</div>
+					</div>
+				</td>
+			</tr>
+		{/if}
 	</table>
 </div>
 
