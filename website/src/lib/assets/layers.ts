@@ -1198,7 +1198,9 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                     'text-keep-upright': true,
                     'text-allow-overlap': false,
                     'text-max-angle': 45,
-                    'text-padding': 5
+                    'text-padding': 5,
+                    'text-offset': [0, 1], // Add offset above the line
+                    'text-anchor': 'bottom' // Ensure consistent placement above the line
                 },
                 paint: {
                     'text-halo-width': 1.5,
