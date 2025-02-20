@@ -1006,17 +1006,19 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'circle',
                 source: 'qTraffic',
                 filter: ['all',
-                    // Filter for Point geometries
+                    // Filter for Point and Line geometries
                     ['any',
                         ['==', ['get', 'type'], 'Point'],
                         ['==', ['get', 'type'], 'MultiPoint'],
                         ['==', ['geometry-type'], 'Point'],
-                        ['==', ['geometry-type'], 'MultiPoint']
+                        ['==', ['geometry-type'], 'MultiPoint'],
+                        ['==', ['get', 'type'], 'LineString'],
+                        ['==', ['get', 'type'], 'MultiLineString'],
+                        ['==', ['geometry-type'], 'LineString'],
+                        ['==', ['geometry-type'], 'MultiLineString']
                     ],
                     // Other filters
                     ['!=', ['get', 'event_subtype'], 'Planned roadworks'],
-                    //['!=', ['get', 'event_type'], 'Special event'],
-                    //['!=', ['get', 'event_type'], 'Crash'],
                     ['!=', ['get', 'event_subtype'], 'Stationary vehicle'],
                     ['!=', ['get', 'event_due_to'], 'Pot holes'],
                     ['!', ['all',
@@ -1042,17 +1044,19 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 source: 'qTraffic',
                 minzoom: 10, // Only show text when zoomed in
                 filter: ['all',
-                    // Filter for Point geometries
+                    // Filter for Point and Line geometries
                     ['any',
                         ['==', ['get', 'type'], 'Point'],
                         ['==', ['get', 'type'], 'MultiPoint'],
                         ['==', ['geometry-type'], 'Point'],
-                        ['==', ['geometry-type'], 'MultiPoint']
+                        ['==', ['geometry-type'], 'MultiPoint'],
+                        ['==', ['get', 'type'], 'LineString'],
+                        ['==', ['get', 'type'], 'MultiLineString'],
+                        ['==', ['geometry-type'], 'LineString'],
+                        ['==', ['geometry-type'], 'MultiLineString']
                     ],
                     // Other filters
                     ['!=', ['get', 'event_subtype'], 'Planned roadworks'],
-                    //['!=', ['get', 'event_type'], 'Special event'],
-                    //['!=', ['get', 'event_type'], 'Crash'],
                     ['!=', ['get', 'event_subtype'], 'Stationary vehicle'],
                     ['!=', ['get', 'event_due_to'], 'Pot holes'],
                     ['!', ['all',
@@ -1125,8 +1129,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://nafi.wanderstories.space/fire_scar_by_month_current/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 12,
-                minzoom: 15,
+                minzoom: 12,
+                maxzoom: 15,
                 attribution: '&copy; NAFI'
             }
         },

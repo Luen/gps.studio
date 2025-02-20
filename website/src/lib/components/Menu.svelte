@@ -71,14 +71,13 @@
 	import { anySelectedLayer } from '$lib/components/layer-control/utils';
 	import { defaultOverlays } from '$lib/assets/layers';
 	import LayerControlSettings from '$lib/components/layer-control/LayerControlSettings.svelte';
-	import { allowedPastes, ListFileItem, ListTrackItem } from '$lib/components/file-list/FileList';
+	import { allowedPastes, ListFileItem, ListTrackItem, type ListItem, type ListLevel } from '$lib/components/file-list/FileList';
 	import Export from '$lib/components/Export.svelte';
 	import { mode, setMode, systemPrefersMode } from 'mode-watcher';
 	import { _, locale } from 'svelte-i18n';
 	import { languages } from '$lib/languages';
 	import { getURLForLanguage } from '$lib/utils';
 	import { GpsPopup } from '$lib/components/GPSCoordinatesMapsPopup';
-	import type { ListItem } from '$lib/types';
 
 	const {
 		distanceUnits,
@@ -125,6 +124,8 @@
 
 	$: selectedMode = $mode ?? $systemPrefersMode ?? 'light';
 
+	$: localeValue = $locale || 'en';
+
 	function showCoordinatesMaps() {
 		if ($map) {
 			const popup = new GpsPopup($map);
@@ -134,7 +135,7 @@
 
 	// Type guard for ListTrackItem
 	function isListTrackItem(item: ListItem): item is ListTrackItem {
-		return 'getTrackIndex' in item;
+		return item instanceof ListTrackItem;
 	}
 
 	// Fix event target type checking
@@ -270,322 +271,12 @@
 	}
 
 	// Fix mode change type checking
-	function handleModeChange(value: string) {
+	function handleModeChange(e: CustomEvent<string>) {
+		const value = e.detail;
 		if (value === 'light' || value === 'dark' || value === 'system') {
 			setMode(value);
 		}
 	}
-
-	// Fix locale type checking
-	$: localeValue = $locale || 'en';
-
-	function showCoordinatesMaps() {
-		if ($map) {
-			const popup = new GpsPopup($map);
-			popup.showCenterCoordinates();
-		}
-	}
-
-	// Type guard for ListTrackItem
-	function isListTrackItem(item: ListItem): item is ListTrackItem {
-		return 'getTrackIndex' in item;
-	}
-
-	// Fix event target type checking
-	function handleKeydown(e: KeyboardEvent) {
-		const target = e.target as HTMLElement;
-		const targetInput =
-			target?.tagName === 'INPUT' ||
-			target?.tagName === 'TEXTAREA' ||
-			target?.tagName === 'SELECT' ||
-			target?.getAttribute('role') === 'combobox' ||
-			target?.getAttribute('role') === 'radio' ||
-			target?.getAttribute('role') === 'menu' ||
-			target?.getAttribute('role') === 'menuitem' ||
-			target?.getAttribute('role') === 'menuitemradio' ||
-			target?.getAttribute('role') === 'menuitemcheckbox';
-
-		if (e.key === '+' && (e.metaKey || e.ctrlKey)) {
-			createFile();
-			e.preventDefault();
-		} else if (e.key === 'o' && (e.metaKey || e.ctrlKey)) {
-			triggerFileInput();
-			e.preventDefault();
-		} else if (e.key === 'd' && (e.metaKey || e.ctrlKey)) {
-			dbUtils.duplicateSelection();
-			e.preventDefault();
-		} else if (e.key === 'c' && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				copySelection();
-				e.preventDefault();
-			}
-		} else if (e.key === 'x' && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				cutSelection();
-				e.preventDefault();
-			}
-		} else if (e.key === 'v' && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				pasteSelection();
-				e.preventDefault();
-			}
-		} else if ((e.key === 's' || e.key == 'S') && (e.metaKey || e.ctrlKey)) {
-			if (e.shiftKey) {
-				if ($fileObservers.size > 0) {
-					$exportState = ExportState.ALL;
-				}
-			} else if ($selection.size > 0) {
-				$exportState = ExportState.SELECTION;
-			}
-			e.preventDefault();
-		} else if ((e.key === 'z' || e.key == 'Z') && (e.metaKey || e.ctrlKey)) {
-			if (e.shiftKey) {
-				dbUtils.redo();
-			} else {
-				dbUtils.undo();
-			}
-			e.preventDefault();
-		} else if ((e.key === 'Backspace' || e.key === 'Delete') && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				if (e.shiftKey) {
-					dbUtils.deleteAllFiles();
-				} else {
-					dbUtils.deleteSelection();
-				}
-				e.preventDefault();
-			}
-		} else if (e.key === 'a' && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				selectAll();
-				e.preventDefault();
-			}
-		} else if (e.key === 'i' && (e.metaKey || e.ctrlKey)) {
-			if (
-				$selection.size === 1 &&
-				$selection
-					.getSelected()
-					.every((item) => item instanceof ListFileItem || item instanceof ListTrackItem)
-			) {
-				$editMetadata = true;
-			}
-			e.preventDefault();
-		} else if (e.key === 'p' && (e.metaKey || e.ctrlKey)) {
-			$elevationProfile = !$elevationProfile;
-			e.preventDefault();
-		} else if (e.key === 'l' && (e.metaKey || e.ctrlKey)) {
-			$treeFileView = !$verticalFileView;
-			e.preventDefault();
-		} else if (e.key === 'h' && (e.metaKey || e.ctrlKey)) {
-			if ($allHidden) {
-				dbUtils.setHiddenToSelection(false);
-			} else {
-				dbUtils.setHiddenToSelection(true);
-			}
-			e.preventDefault();
-		} else if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-			if ($selection.size > 0) {
-				centerMapOnSelection();
-			}
-		} else if (e.key === 'F1') {
-			switchBasemaps();
-			e.preventDefault();
-		} else if (e.key === 'F2') {
-			toggleOverlays();
-			e.preventDefault();
-		} else if (e.key === 'F3') {
-			$distanceMarkers = !$distanceMarkers;
-			e.preventDefault();
-		} else if (e.key === 'F4') {
-			$directionMarkers = !$directionMarkers;
-			e.preventDefault();
-		} else if (e.key === 'F5') {
-			$routing = !$routing;
-			e.preventDefault();
-		} else if (
-			e.key === 'ArrowRight' ||
-			e.key === 'ArrowDown' ||
-			e.key === 'ArrowLeft' ||
-			e.key === 'ArrowUp'
-		) {
-			if (!targetInput) {
-				updateSelectionFromKey(e.key === 'ArrowRight' || e.key === 'ArrowDown', e.shiftKey);
-				e.preventDefault();
-			}
-		}
-	}
-
-	// Fix drop event type checking
-	function handleDrop(e: DragEvent) {
-		e.preventDefault();
-		const files = e.dataTransfer?.files;
-		if (files && files.length > 0) {
-			loadFiles(files);
-		}
-	}
-
-	// Fix mode change type checking
-	function handleModeChange(value: string) {
-		if (value === 'light' || value === 'dark' || value === 'system') {
-			setMode(value);
-		}
-	}
-
-	// Fix locale type checking
-	$: localeValue = $locale || 'en';
-
-	function showCoordinatesMaps() {
-		if ($map) {
-			const popup = new GpsPopup($map);
-			popup.showCenterCoordinates();
-		}
-	}
-
-	// Type guard for ListTrackItem
-	function isListTrackItem(item: ListItem): item is ListTrackItem {
-		return 'getTrackIndex' in item;
-	}
-
-	// Fix event target type checking
-	function handleKeydown(e: KeyboardEvent) {
-		const target = e.target as HTMLElement;
-		const targetInput =
-			target?.tagName === 'INPUT' ||
-			target?.tagName === 'TEXTAREA' ||
-			target?.tagName === 'SELECT' ||
-			target?.getAttribute('role') === 'combobox' ||
-			target?.getAttribute('role') === 'radio' ||
-			target?.getAttribute('role') === 'menu' ||
-			target?.getAttribute('role') === 'menuitem' ||
-			target?.getAttribute('role') === 'menuitemradio' ||
-			target?.getAttribute('role') === 'menuitemcheckbox';
-
-		if (e.key === '+' && (e.metaKey || e.ctrlKey)) {
-			createFile();
-			e.preventDefault();
-		} else if (e.key === 'o' && (e.metaKey || e.ctrlKey)) {
-			triggerFileInput();
-			e.preventDefault();
-		} else if (e.key === 'd' && (e.metaKey || e.ctrlKey)) {
-			dbUtils.duplicateSelection();
-			e.preventDefault();
-		} else if (e.key === 'c' && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				copySelection();
-				e.preventDefault();
-			}
-		} else if (e.key === 'x' && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				cutSelection();
-				e.preventDefault();
-			}
-		} else if (e.key === 'v' && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				pasteSelection();
-				e.preventDefault();
-			}
-		} else if ((e.key === 's' || e.key == 'S') && (e.metaKey || e.ctrlKey)) {
-			if (e.shiftKey) {
-				if ($fileObservers.size > 0) {
-					$exportState = ExportState.ALL;
-				}
-			} else if ($selection.size > 0) {
-				$exportState = ExportState.SELECTION;
-			}
-			e.preventDefault();
-		} else if ((e.key === 'z' || e.key == 'Z') && (e.metaKey || e.ctrlKey)) {
-			if (e.shiftKey) {
-				dbUtils.redo();
-			} else {
-				dbUtils.undo();
-			}
-			e.preventDefault();
-		} else if ((e.key === 'Backspace' || e.key === 'Delete') && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				if (e.shiftKey) {
-					dbUtils.deleteAllFiles();
-				} else {
-					dbUtils.deleteSelection();
-				}
-				e.preventDefault();
-			}
-		} else if (e.key === 'a' && (e.metaKey || e.ctrlKey)) {
-			if (!targetInput) {
-				selectAll();
-				e.preventDefault();
-			}
-		} else if (e.key === 'i' && (e.metaKey || e.ctrlKey)) {
-			if (
-				$selection.size === 1 &&
-				$selection
-					.getSelected()
-					.every((item) => item instanceof ListFileItem || item instanceof ListTrackItem)
-			) {
-				$editMetadata = true;
-			}
-			e.preventDefault();
-		} else if (e.key === 'p' && (e.metaKey || e.ctrlKey)) {
-			$elevationProfile = !$elevationProfile;
-			e.preventDefault();
-		} else if (e.key === 'l' && (e.metaKey || e.ctrlKey)) {
-			$verticalFileView = !$verticalFileView;
-			e.preventDefault();
-		} else if (e.key === 'h' && (e.metaKey || e.ctrlKey)) {
-			if ($allHidden) {
-				dbUtils.setHiddenToSelection(false);
-			} else {
-				dbUtils.setHiddenToSelection(true);
-			}
-			e.preventDefault();
-		} else if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
-			if ($selection.size > 0) {
-				centerMapOnSelection();
-			}
-		} else if (e.key === 'F1') {
-			switchBasemaps();
-			e.preventDefault();
-		} else if (e.key === 'F2') {
-			toggleOverlays();
-			e.preventDefault();
-		} else if (e.key === 'F3') {
-			$distanceMarkers = !$distanceMarkers;
-			e.preventDefault();
-		} else if (e.key === 'F4') {
-			$directionMarkers = !$directionMarkers;
-			e.preventDefault();
-		} else if (e.key === 'F5') {
-			$routing = !$routing;
-			e.preventDefault();
-		} else if (
-			e.key === 'ArrowRight' ||
-			e.key === 'ArrowDown' ||
-			e.key === 'ArrowLeft' ||
-			e.key === 'ArrowUp'
-		) {
-			if (!targetInput) {
-				updateSelectionFromKey(e.key === 'ArrowRight' || e.key === 'ArrowDown', e.shiftKey);
-				e.preventDefault();
-			}
-		}
-	}
-
-	// Fix drop event type checking
-	function handleDrop(e: DragEvent) {
-		e.preventDefault();
-		const files = e.dataTransfer?.files;
-		if (files && files.length > 0) {
-			loadFiles(files);
-		}
-	}
-
-	// Fix mode change type checking
-	function handleModeChange(value: string) {
-		if (value === 'light' || value === 'dark' || value === 'system') {
-			setMode(value);
-		}
-	}
-
-	// Fix locale type checking
-	$: localeValue = $locale || 'en';
 </script>
 
 <div class="absolute md:top-2 left-0 right-0 z-20 flex flex-row justify-center pointer-events-none">
@@ -721,8 +412,10 @@
 							<Menubar.Separator />
 							<Menubar.Item
 								on:click={() => {
-									let item = $selection.getSelected()[0];
-									dbUtils.addNewSegment(item.getFileId(), item.getTrackIndex());
+									const item = $selection.getSelected()[0];
+									if (isListTrackItem(item)) {
+										dbUtils.addNewSegment(item.getFileId(), item.getTrackIndex());
+									}
 								}}
 								disabled={$selection.size !== 1}
 							>
@@ -764,7 +457,7 @@
 							disabled={$copied === undefined ||
 								$copied.length === 0 ||
 								($selection.size > 0 &&
-									!allowedPastes[$copied[0].level].includes($selection.getSelected().pop()?.level))}
+									!allowedPastes[$copied[0].level].includes($selection.getSelected()[0]?.level || 'ROOT'))}
 							on:click={pasteSelection}
 						>
 							<ClipboardPaste size="16" class="mr-1" />
@@ -891,7 +584,7 @@
 							{$_('menu.mode')}
 						</Menubar.SubTrigger>
 						<Menubar.SubContent>
-							<Menubar.RadioGroup bind:value={selectedMode} onValueChange={handleModeChange}>
+							<Menubar.RadioGroup bind:value={selectedMode} on:change={(e) => handleModeChange(e.detail)}>
 								<Menubar.RadioItem value="light">{$_('menu.light')}</Menubar.RadioItem>
 								<Menubar.RadioItem value="dark">{$_('menu.dark')}</Menubar.RadioItem>
 							</Menubar.RadioGroup>
