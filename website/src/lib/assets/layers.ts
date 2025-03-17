@@ -2590,6 +2590,7 @@ export const overlayTree: LayerTreeType = {
             suuntoHeatmapAllSurfAndBeach: true,
             suuntoHeatmapGolf: true,
             osmTraces: true,
+            osmTracks: true,
             openSeaMap: true,
             waterfalls: true,
             wsArticleMarkers: true,
@@ -2598,7 +2599,6 @@ export const overlayTree: LayerTreeType = {
             australia: {
                 qMines: true,
                 qRoads: true,
-                osmTracks: true,
                 qLandUse: true,
                 qLandParcel: true,
                 qContours: true,
@@ -2721,6 +2721,7 @@ export const defaultOverlays: LayerTreeType = {
             suuntoHeatmapAllSurfAndBeach: false,
             suuntoHeatmapGolf: false,
             osmTraces: false,
+            osmTracks: false,
             openSeaMap: false,
             waterfalls: false,
             wsArticleMarkers: false,
@@ -2729,7 +2730,6 @@ export const defaultOverlays: LayerTreeType = {
             australia: {
                 qMines: false,
                 qRoads: false,
-                osmTracks: false,
                 qLandUse: false,
                 qLandParcel: false,
                 qContours: false,
@@ -2937,6 +2937,7 @@ export const defaultOverlayTree: LayerTreeType = {
             suuntoHeatmapAllSurfAndBeach: false,
             suuntoHeatmapGolf: false,
             osmTraces: false,
+            osmTracks: true,
             openSeaMap: true,
             waterfalls: true,
             wsArticleMarkers: true,
@@ -2945,7 +2946,6 @@ export const defaultOverlayTree: LayerTreeType = {
             australia: {
                 qMines: true,
                 qRoads: true,
-                osmTracks: true,
                 qLandUse: true,
                 qLandParcel: true,
                 qContours: true,
