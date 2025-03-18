@@ -1,12 +1,141 @@
 <script lang="ts">
 	import { qldMapBounds } from '$lib/data/qldMapBounds';
 	import { nswMapBounds } from '$lib/data/nswMapBounds';
+	import { PUBLIC_W3W_API_KEY } from '$env/static/public';
 	export let coordinates: { lng: number; lat: number };
 
 	$: formattedLat =
 		Math.abs(coordinates.lat).toFixed(6) + '° ' + (coordinates.lat >= 0 ? 'N' : 'S');
 	$: formattedLng =
 		Math.abs(coordinates.lng).toFixed(6) + '° ' + (coordinates.lng >= 0 ? 'E' : 'W');
+
+	// Convert decimal degrees to DMS
+	function toDMS(degrees: number, isLatitude: boolean): string {
+		const direction = isLatitude 
+			? (degrees >= 0 ? 'N' : 'S')
+			: (degrees >= 0 ? 'E' : 'W');
+		
+		const absValue = Math.abs(degrees);
+		const d = Math.floor(absValue);
+		const mFloat = (absValue - d) * 60;
+		const m = Math.floor(mFloat);
+		const s = ((mFloat - m) * 60).toFixed(2);
+		
+		return `${d}° ${m}' ${s}" ${direction}`;
+	}
+
+	// Convert decimal coordinates to MGRS
+	function toMGRS(lat: number, lng: number): string {
+		// Using UTM as a stepping stone to MGRS
+		const utm = geo2utm({ lng, lat });
+		if (!utm) return "Invalid coordinates";
+		
+		// Basic MGRS format based on UTM 
+		// Note: This is a simplified version, a proper implementation would need more detailed conversion
+		return utm.zone + " " + utm.x.substr(0, 5) + " " + utm.y.substr(0, 5);
+	}
+
+	// Get What3Words
+	async function getWhat3Words(lat: number, lng: number): Promise<string> {
+		try {
+			// Use the convert-to-3wa endpoint with lat,lng format
+			const url = `https://api.what3words.com/v3/convert-to-3wa?coordinates=${lat},${lng}&language=en&key=${PUBLIC_W3W_API_KEY}&format=json`;
+			
+			const response = await fetch(url);
+			if (!response.ok) {
+				console.error(`What3Words API error: ${response.status} ${response.statusText}`);
+				return "api.request.failed";
+			}
+			
+			const data = await response.json();
+			
+			if (data && data.words) {
+				return data.words;
+			} else if (data && data.error) {
+				console.error("What3Words API error:", data.error);
+				return `error.${data.error.code || 'unknown'}`;
+			}
+			
+			return "error.fetching.words";
+		} catch (error) {
+			console.error('Error fetching What3Words:', error);
+			return "api.call.failed";
+		}
+	}
+
+	// Get elevation data
+	async function getElevation(lat: number, lng: number): Promise<{meters: number, feet: number} | null> {
+		try {
+			// Try primary API endpoint
+			const url = `https://api.open-elevation.com/api/v1/lookup?locations=${lat},${lng}`;
+			console.log("Elevation API call:", url);
+			
+			let response;
+			try {
+				// Fetch doesn't support timeout in RequestInit, so use AbortController with setTimeout
+				const controller = new AbortController();
+				const timeoutId = setTimeout(() => controller.abort(), 5000); // 5-second timeout
+				
+				response = await fetch(url, { signal: controller.signal });
+				clearTimeout(timeoutId);
+			} catch (e) {
+				console.log("Primary elevation API failed, trying alternative");
+				// If primary fails, try alternative
+				return getElevationAlternative(lat, lng);
+			}
+			
+			if (!response.ok) {
+				console.error(`Elevation API error: ${response.status} ${response.statusText}`);
+				return getElevationAlternative(lat, lng);
+			}
+			
+			const data = await response.json();
+			console.log("Elevation API response:", data);
+			
+			if (data && data.results && data.results.length > 0) {
+				const elevation = data.results[0].elevation;
+				return {
+					meters: elevation,
+					feet: Math.round(elevation * 3.28084)
+				};
+			}
+			return getElevationAlternative(lat, lng);
+		} catch (error) {
+			console.error('Error fetching elevation data:', error);
+			return getElevationAlternative(lat, lng);
+		}
+	}
+
+	// Alternative elevation API
+	async function getElevationAlternative(lat: number, lng: number): Promise<{meters: number, feet: number} | null> {
+		try {
+			// Alternative API: USGS Elevation Point Query Service
+			const url = `https://nationalmap.gov/epqs/pqs.php?x=${lng}&y=${lat}&units=Meters&output=json`;
+			console.log("Trying alternative elevation API:", url);
+			
+			const response = await fetch(url);
+			if (!response.ok) {
+				console.error(`Alternative elevation API error: ${response.status} ${response.statusText}`);
+				return null;
+			}
+			
+			const data = await response.json();
+			if (data && data.USGS_Elevation_Point_Query_Service && 
+				data.USGS_Elevation_Point_Query_Service.Elevation_Query && 
+				data.USGS_Elevation_Point_Query_Service.Elevation_Query.Elevation) {
+				
+				const elevation = parseFloat(data.USGS_Elevation_Point_Query_Service.Elevation_Query.Elevation);
+				return {
+					meters: elevation,
+					feet: Math.round(elevation * 3.28084)
+				};
+			}
+			return null;
+		} catch (error) {
+			console.error('Error fetching alternative elevation data:', error);
+			return null;
+		}
+	}
 
 	function geo2utm(gps: { lng: number; lat: number }) {
 		const lw = gps.lng;
@@ -296,6 +425,10 @@
 	$: geoscienceMaps = isQueensland(coordinates.lat, coordinates.lng)
 		? getGeoscienceMaps(coordinates.lat, coordinates.lng)
 		: null;
+	$: latDMS = toDMS(coordinates.lat, true);
+	$: lngDMS = toDMS(coordinates.lng, false);
+	$: what3words = getWhat3Words(coordinates.lat, coordinates.lng);
+	$: elevation = getElevation(coordinates.lat, coordinates.lng);
 
 	function formatScale(scale: number): string {
 		return `1:${scale.toLocaleString()}`;
@@ -309,6 +442,10 @@
 			<td class="text-right">{formattedLat}, {formattedLng}</td>
 		</tr>
 		<tr>
+			<td>DMS</td>
+			<td class="text-right">{latDMS}, {lngDMS}</td>
+		</tr>
+		<tr>
 			<td>UTM</td>
 			<td class="text-right">{utm ? `${utm.zone} ${utm.x} ${utm.y}` : 'N/A'}</td>
 		</tr>
@@ -316,6 +453,51 @@
 			<td>6FIGURE</td>
 			<td class="text-right">{sixFigure}</td>
 		</tr>
+		{#await what3words}
+			<tr>
+				<td>what3words</td>
+				<td class="text-right">Loading...</td>
+			</tr>
+		{:then words}
+			<tr>
+				<td>what3words</td>
+				<td class="text-right">
+					{#if words.startsWith('error') || words.startsWith('api')}
+						{words}
+					{:else}
+						///{words}
+					{/if}
+				</td>
+			</tr>
+		{:catch}
+			<tr>
+				<td>what3words</td>
+				<td class="text-right">Error fetching</td>
+			</tr>
+		{/await}
+		{#await elevation}
+			<tr>
+				<td>Elevation</td>
+				<td class="text-right">Loading...</td>
+			</tr>
+		{:then elev}
+			{#if elev}
+				<tr>
+					<td>Elevation</td>
+					<td class="text-right">{elev.meters} m ({elev.feet} ft)</td>
+				</tr>
+			{:else}
+				<tr>
+					<td>Elevation</td>
+					<td class="text-right">Not available</td>
+				</tr>
+			{/if}
+		{:catch}
+			<tr>
+				<td>Elevation</td>
+				<td class="text-right">Error fetching</td>
+			</tr>
+		{/await}
 		<tr>
 			<td colspan="3" class="border-t border-border">
 				<div class="text-xs mt-1">

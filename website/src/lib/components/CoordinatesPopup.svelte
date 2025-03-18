@@ -3,36 +3,90 @@
 	import { trackpointPopup } from '$lib/components/gpx-layer/GPXLayerPopup';
 	import { TrackPoint } from 'gpx';
 	import * as ContextMenu from '$lib/components/ui/context-menu';
-	import { Map } from 'lucide-svelte';
+	import { Map, ClipboardCopy, Compass } from 'lucide-svelte';
 	import { _ } from 'svelte-i18n';
 	import { GpsPopup } from './GPSCoordinatesMapsPopup';
+	import { onDestroy } from 'svelte';
 
 	let contextMenuPosition: { lat: number; lng: number } | null = null;
+	let contextMenuOpen = false;
 
 	function showCoordinatesMaps() {
 		if ($map && contextMenuPosition) {
 			const popup = new GpsPopup($map);
 			popup.showCoordinatesAt(contextMenuPosition);
 			contextMenuPosition = null;
+			contextMenuOpen = false;
+		}
+	}
+
+	function copyCoordinates() {
+		if (contextMenuPosition) {
+			navigator.clipboard.writeText(
+				`${contextMenuPosition.lat.toFixed(6)}, ${contextMenuPosition.lng.toFixed(6)}`
+			);
+			contextMenuOpen = false;
+		}
+	}
+
+	function handleContextMenu(e: any) {
+		e.preventDefault();
+		contextMenuPosition = {
+			lat: e.lngLat.lat,
+			lng: e.lngLat.lng
+		};
+		contextMenuOpen = true;
+	}
+
+	function handleMapClick() {
+		if (contextMenuOpen) {
+			contextMenuOpen = false;
 		}
 	}
 
 	$: if ($map) {
-		$map.on('contextmenu', (e) => {
-			contextMenuPosition = {
-				lat: e.lngLat.lat,
-				lng: e.lngLat.lng
-			};
-		});
+		// Add event listeners
+		$map.on('contextmenu', handleContextMenu);
+		$map.on('click', handleMapClick);
 	}
+
+	onDestroy(() => {
+		// Remove event listeners when component is destroyed
+		if ($map) {
+			$map.off('contextmenu', handleContextMenu);
+			$map.off('click', handleMapClick);
+		}
+	});
 </script>
 
-<ContextMenu.Root>
-	<ContextMenu.Trigger />
-	<ContextMenu.Content>
-		<ContextMenu.Item on:click={showCoordinatesMaps}>
+{#if contextMenuOpen && contextMenuPosition && $map}
+	<div 
+		class="absolute z-50 bg-popover rounded-md border shadow-md p-1 text-popover-foreground min-w-[8rem]"
+		style="left: {$map.project(contextMenuPosition).x}px; top: {($map.project(contextMenuPosition).y + 10)}px;"
+	>
+		<div class="px-2 py-1.5 text-sm font-mono border-b mb-1 flex items-center">
+			<Compass size="14" class="mr-1.5 shrink-0" />
+			<span>{contextMenuPosition.lat.toFixed(6)}°, {contextMenuPosition.lng.toFixed(6)}°</span>
+		</div>
+		<button 
+			class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm select-none hover:bg-accent hover:text-accent-foreground"
+			on:click={copyCoordinates}
+		>
+			<ClipboardCopy size="16" class="mr-1" />
+			{$_('menu.copy_coordinates')}
+		</button>
+		<button 
+			class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm select-none hover:bg-accent hover:text-accent-foreground"
+			on:click={showCoordinatesMaps}
+		>
 			<Map size="16" class="mr-1" />
-			{$_('menu.show_coordinates_maps')}
-		</ContextMenu.Item>
-	</ContextMenu.Content>
-</ContextMenu.Root>
+			Show Maps
+		</button>
+	</div>
+{/if}
+
+<style>
+	:global(.mapboxgl-canvas-container) {
+		pointer-events: auto;
+	}
+</style>
