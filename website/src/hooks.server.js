@@ -44,16 +44,17 @@ export async function handle({ event, resolve }) {
 		headTag += `   <link rel="alternate" hreflang="${lang}" href="https://studio.wanderstories.space${getURLForLanguage(lang, path)}" />
 `;
 	}
-	
-	const GA_MEASUREMENT_ID = 'UA-80362404-2'
+
+	const GA_MEASUREMENT_ID = 'G-8YRS2SPLX3';
 	// Add Google Analytics script
 	headTag += `
 <script async src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}"></script>
 <script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', '${GA_MEASUREMENT_ID}', { page_path: '${path}' });
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '${GA_MEASUREMENT_ID}');
 </script>`;
 
 	const response = await resolve(event, {
