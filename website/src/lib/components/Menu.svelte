@@ -42,7 +42,9 @@
 		FileX,
 		BookOpenText,
 		ChartArea,
-		Maximize
+		Maximize,
+		Cloud,
+		CloudRain
 	} from 'lucide-svelte';
 
 	import {
@@ -71,13 +73,16 @@
 	import { anySelectedLayer } from '$lib/components/layer-control/utils';
 	import { defaultOverlays } from '$lib/assets/layers';
 	import LayerControlSettings from '$lib/components/layer-control/LayerControlSettings.svelte';
-	import { allowedPastes, ListFileItem, ListTrackItem, type ListItem, type ListLevel } from '$lib/components/file-list/FileList';
+	import { allowedPastes, ListFileItem, ListTrackItem, type ListItem, ListLevel } from '$lib/components/file-list/FileList';
 	import Export from '$lib/components/Export.svelte';
 	import { mode, setMode, systemPrefersMode } from 'mode-watcher';
 	import { _, locale } from 'svelte-i18n';
 	import { languages } from '$lib/languages';
 	import { getURLForLanguage } from '$lib/utils';
 	import { GpsPopup } from '$lib/components/GPSCoordinatesMapsPopup';
+	import CatchmentPopup from '$lib/components/CatchmentPopup.svelte';
+	import WeatherPopup from '$lib/components/WeatherPopup.svelte';
+	import mapboxgl from 'mapbox-gl';
 
 	const {
 		distanceUnits,
@@ -130,6 +135,54 @@
 		if ($map) {
 			const popup = new GpsPopup($map);
 			popup.showCenterCoordinates();
+		}
+	}
+
+	function showCatchmentPopup() {
+		if ($map) {
+			const center = $map.getCenter();
+			const container = document.createElement('div');
+			
+			// Create Mapbox popup
+			new mapboxgl.Popup({
+				maxWidth: '400px',
+				className: 'catchment-popup'
+			})
+				.setLngLat([center.lng, center.lat])
+				.setDOMContent(container)
+				.addTo($map);
+			
+			// Initialize Svelte component in the container
+			new CatchmentPopup({
+				target: container,
+				props: {
+					coordinates: { lat: center.lat, lng: center.lng }
+				}
+			});
+		}
+	}
+
+	function showWeatherPopup() {
+		if ($map) {
+			const center = $map.getCenter();
+			const container = document.createElement('div');
+			
+			// Create Mapbox popup
+			new mapboxgl.Popup({
+				maxWidth: '400px',
+				className: 'weather-popup'
+			})
+				.setLngLat([center.lng, center.lat])
+				.setDOMContent(container)
+				.addTo($map);
+			
+			// Initialize WeatherPopup component
+			new WeatherPopup({
+				target: container,
+				props: {
+					coordinates: { lat: center.lat, lng: center.lng }
+				}
+			});
 		}
 	}
 
@@ -457,7 +510,7 @@
 							disabled={$copied === undefined ||
 								$copied.length === 0 ||
 								($selection.size > 0 &&
-									!allowedPastes[$copied[0].level].includes($selection.getSelected()[0]?.level || 'ROOT'))}
+									!allowedPastes[$copied[0].level].includes($selection.getSelected()[0]?.level ?? 0))}
 							on:click={pasteSelection}
 						>
 							<ClipboardPaste size="16" class="mr-1" />
@@ -513,6 +566,14 @@
 					<Menubar.Item inset on:click={showCoordinatesMaps}>
 						<Map size="16" class="mr-1" />
 						{$_('menu.show_coordinates_maps')}
+					</Menubar.Item>
+					<Menubar.Item inset on:click={showCatchmentPopup}>
+						<Map size="16" class="mr-1" />
+						{$_('menu.calculate_catchment')}
+					</Menubar.Item>
+					<Menubar.Item inset on:click={showWeatherPopup}>
+						<CloudRain size="16" class="mr-1" />
+						{$_('menu.weather_forecast')}
 					</Menubar.Item>
 				</Menubar.Content>
 			</Menubar.Menu>
@@ -636,11 +697,17 @@
 	on:drop={handleDrop}
 />
 
-<style lang="postcss">
+<style>
 	div :global(button) {
-		@apply hover:bg-accent;
-		@apply px-3;
-		@apply py-0.5;
-		@apply transition-colors;
+		background-color: transparent;
+		padding: 0 0.75rem;
+		padding-top: 0.125rem;
+		padding-bottom: 0.125rem;
+		transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-duration: 150ms;
+	}
+	div :global(button:hover) {
+		background-color: hsl(var(--accent));
 	}
 </style>

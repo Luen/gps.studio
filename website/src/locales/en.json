@@ -81,7 +81,11 @@
         "center": "Center",
         "open_in": "Open in",
         "copy_coordinates": "Copy coordinates",
-        "show_coordinates_maps": "Show Coordinates & Maps"
+        "show_coordinates_maps": "Show Coordinates & Maps",
+        "calculate_catchment": "Calculate Catchment",
+        "weather_forecast": "Weather Forecast",
+        "hourly_forecast": "Hourly Forecast",
+        "chance_of_rain": "chance of rain"
     },
     "toolbar": {
         "routing": {
