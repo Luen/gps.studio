@@ -1,0 +1,39 @@
+/* Global styles for map popups */
+.mapboxgl-canvas-container {
+    pointer-events: auto;
+}
+
+.mapboxgl-popup-content {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+.coordinates-popup .mapboxgl-popup-content {
+    padding: 10px;
+    max-width: 250px;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: hsl(var(--popover-foreground));
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-md);
+}
+
+/* Additional popup styles can be added here */
+.weather-popup .mapboxgl-popup-content {
+    padding: 10px;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: hsl(var(--popover-foreground));
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--border));
+}
+
+.catchment-popup .mapboxgl-popup-content {
+    padding: 10px;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: hsl(var(--popover-foreground));
+    border-radius: 0.5rem;
+    border: 1px solid hsl(var(--border));
+} 

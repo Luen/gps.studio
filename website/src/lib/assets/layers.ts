@@ -375,6 +375,23 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             source: 'qTopo',
         }],
     },
+    qTopoOld: {
+        version: 8,
+        sources: {
+            qTopoOld: {
+                type: 'raster',
+                tiles: ['https://tiles.wanderstories.space/qldglobe/qtopo_old/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qTopoOld',
+            type: 'raster',
+            source: 'qTopoOld',
+        }],
+    },
     qImagery: {
         version: 8,
         sources: {
@@ -2483,6 +2500,7 @@ export const basemapTree: LayerTreeType = {
         countries: {
             australia: {
                 qTopo: true,
+                qTopoOld: true,
                 qImagery: true,
                 qAerial: true,
                 nswTopo: true,
@@ -2830,6 +2848,7 @@ export const defaultBasemapTree: LayerTreeType = {
         countries: {
             australia: {
                 qTopo: true,
+                qTopoOld: true,
                 qImagery: true,
                 qAerial: true,
                 nswTopo: false,
