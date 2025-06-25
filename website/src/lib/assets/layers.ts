@@ -115,6 +115,23 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             source: 'cyclOSM',
         }],
     },
+    openCycleMap: {
+        version: 8,
+        sources: {
+            openCycleMap: {
+                type: 'raster',
+                tiles: ['https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=01a11fd78058448393f44810a68e989c'],
+                tileSize: 256,
+                maxzoom: 17,
+                attribution: 'Maps: &copy; <a href="https://www.thunderforest.com" target="_blank">Thunderforest</a> | Data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }
+        },
+        layers: [{
+            id: 'openCycleMap',
+            type: 'raster',
+            source: 'openCycleMap',
+        }],
+    },
     swisstopoRaster: {
         version: 8,
         sources: {
@@ -2484,6 +2501,7 @@ export const basemapTree: LayerTreeType = {
             openTopoMap: true,
             openHikingMap: true,
             cyclOSM: true,
+            openCycleMap: true,
             arcTopo: true,
             appleMaps: true,
             googleMaps: true,
@@ -2832,6 +2850,7 @@ export const defaultBasemapTree: LayerTreeType = {
             openTopoMap: true,
             openHikingMap: true,
             cyclOSM: true,
+            openCycleMap: true,
             arcTopo: false,
             appleMaps: false,
             googleMaps: false,

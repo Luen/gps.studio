@@ -386,6 +386,7 @@
             "openTopoMap": "OpenTopoMap",
             "openHikingMap": "OpenHikingMap",
             "cyclOSM": "CyclOSM",
+            "openCycleMap": "OpenCycleMap",
             "linz": "LINZ Topo",
             "linzTopo": "LINZ Topo50",
             "linzImagery": "LINZ Imagery",
