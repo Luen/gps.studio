@@ -67,8 +67,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             openTopoMap: {
                 type: 'raster',
                 //tiles: ['https://tile.opentopomap.org/{z}/{x}/{y}.png'],
-                //tiles: ['https://opentopomap.wanderstories.space/{z}/{x}/{y}.png'],
-                tiles: ['https://tiles.wanderstories.space/opentopomap/{z}/{x}/{y}.png'],
+                tiles: ['https://opentopomap.wanderstories.space/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.wanderstories.space/opentopomap/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 //maxzoom: 17,
                 maxzoom: 16,
@@ -379,7 +379,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qTopo: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/qtopo/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/qtopo/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/qtopo/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 3,
@@ -397,7 +398,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qTopoOld: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/qtopo_old/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/qtopo_old/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/qtopo_old/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
@@ -414,7 +416,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qImagery: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/qimagery/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/qimagery/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/qimagery/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 19,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
@@ -431,7 +434,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qAerial: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/qaerial/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/qaerial/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/qaerial/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 19,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
@@ -637,7 +641,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             natmapsTopo: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/natmap/natmap/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/natmap/natmap/{z}/{x}/{y}'],
+                tiles: ['https://natmap.wanderstories.space/natmap/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 14,
                 attribution: '&copy; <a href="https://natmap.wanderstories.space" target="_blank">NatMaps</a>'
@@ -673,7 +678,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             appleSatellite: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/applemaps/satellite/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/applemaps/satellite/{z}/{x}/{y}'],
+                tiles: ['https://applemaps.wanderstories.space/satellite/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://www.apple.com/maps" target="_blank">Apple</a>'
@@ -690,7 +696,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             appleMaps: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/applemaps/standard/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/applemaps/standard/{z}/{x}/{y}'],
+                tiles: ['https://applemaps.wanderstories.space/standard/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://www.apple.com/maps" target="_blank">Apple</a>'
@@ -1249,7 +1256,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             qContours: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/contours/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/contours/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/contours/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 11,
@@ -1257,7 +1265,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             },
             qWater: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/water/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/water/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/water/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16, // Can do 17
                 min: 9, // Can do more
@@ -1298,7 +1307,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             qFireScars: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/FireScarMapping/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/FireScarMapping/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/FireScarMapping/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 11,
@@ -1316,13 +1326,15 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             qMiningResources: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/MiningResources/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/MiningResources/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/MiningResources/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 17,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qMinesPermitsHistoric: {
                 type: 'raster',
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/MinesPermitsHistoric/{z}/{x}/{y}'],
                 tiles: ['https://qldglobe.wanderstories.space/MinesPermitsHistoric/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 17,
@@ -1346,7 +1358,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             qRoads: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/RoadsAndTracks/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/RoadsAndTracks/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/RoadsAndTracks/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 17, // Can do 18
                 minzoom: 11, // Can do 8
@@ -1354,7 +1367,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             },
             qParks: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/ParksTerrestrialProtectedAreas/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/ParksTerrestrialProtectedAreas/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/ParksTerrestrialProtectedAreas/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 17,
                 minzoom: 11,
@@ -1440,7 +1454,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             qLandParcel: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/CadastralFramework/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/CadastralFramework/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/CadastralFramework/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 11,
@@ -1458,7 +1473,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             qLandUse: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/qldglobe/landuse/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/landuse/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/landuse/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 11,
@@ -1583,8 +1599,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             wanderstoriesHeatmap: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/heatmap/{z}/{x}/{y}'],
-                //tiles: ['https://heatmap.wanderstories.space/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/heatmap/{z}/{x}/{y}'],
+                tiles: ['https://heatmap.wanderstories.space/{z}/{x}/{y}'],
                 tileSize: 256,
                 minzoom: 3,
                 maxzoom: 15,
@@ -1602,7 +1618,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             stravaAll: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/all/hot'],
+                //tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/all/hot'],
+                tiles: ['https://strava.wanderstories.space/{z}/{x}/{y}/512/all/hot'],
                 tileSize: 256,
                 maxzoom: 14,
                 attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
@@ -1619,7 +1636,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             stravaRide: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/ride/hot'],
+                //tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/ride/hot'],
+                tiles: ['https://strava.wanderstories.space/{z}/{x}/{y}/512/ride/hot'],
                 tileSize: 256,
                 maxzoom: 14,
                 attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
@@ -1636,7 +1654,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             stravaRun: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/run/hot'],
+                //tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/run/hot'],
+                tiles: ['https://strava.wanderstories.space/{z}/{x}/{y}/512/run/hot'],
                 tileSize: 256,
                 maxzoom: 14,
                 attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
@@ -1653,7 +1672,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             stravaWater: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/water/hot'],
+                //tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/water/hot'],
+                tiles: ['https://strava.wanderstories.space/{z}/{x}/{y}/512/water/hot'],
                 tileSize: 256,
                 maxzoom: 14,
                 attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
@@ -1670,7 +1690,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             stravaWinter: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/winter/hot'],
+                //tiles: ['https://tiles.wanderstories.space/strava/{z}/{x}/{y}/512/winter/hot'],
+                tiles: ['https://strava.wanderstories.space/{z}/{x}/{y}/512/winter/hot'],
                 tileSize: 256,
                 maxzoom: 14,
                 attribution: '&copy; <a href="https://strava.com" target="_blank">Strava</a>'
@@ -1687,7 +1708,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             trailforksHeatmap: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/trailforks/heatmap/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/trailforks/heatmap/{z}/{x}/{y}'],
+                tiles: ['https://trailforks.wanderstories.space/heatmap/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://trailforks.com" target="_blank">Trailforks</a>'
@@ -1704,7 +1726,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             ridewithgpsHeatmap: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/ridewithgps/heatmap/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/ridewithgps/heatmap/{z}/{x}/{y}'],
+                tiles: ['https://ridewithgps.wanderstories.space/heatmap/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://ridewithgps.com" target="_blank">Ride with GPS</a>'
@@ -1721,8 +1744,9 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             garminHeatmapRoad: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/ROAD_CYCLING/{z}/{x}/{y}.png'],
                 //tiles: ['https://connecttile.garmin.com/ROAD_CYCLING/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.wanderstories.space/garmin/heatmap/ROAD_CYCLING/{z}/{x}/{y}.png'],
+                tiles: ['https://garmin.wanderstories.space/heatmap/ROAD_CYCLING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1741,7 +1765,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             garminHeatmapMtb: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/MOUNTAIN_BIKING/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.wanderstories.space/garmin/heatmap/MOUNTAIN_BIKING/{z}/{x}/{y}.png'],
+                tiles: ['https://garmin.wanderstories.space/heatmap/MOUNTAIN_BIKING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1758,7 +1783,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             garminHeatmapGravel: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/GRAVEL_BIKING/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.wanderstories.space/garmin/heatmap/GRAVEL_BIKING/{z}/{x}/{y}.png'],
+                tiles: ['https://garmin.wanderstories.space/heatmap/GRAVEL_BIKING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1775,7 +1801,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             garminHeatmapRunning: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/RUNNING/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.wanderstories.space/garmin/heatmap/RUNNING/{z}/{x}/{y}.png'],
+                tiles: ['https://garmin.wanderstories.space/heatmap/RUNNING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1792,7 +1819,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             garminHeatmapTrail: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/TRAIL_RUNNING/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.wanderstories.space/garmin/heatmap/TRAIL_RUNNING/{z}/{x}/{y}.png'],
+                tiles: ['https://garmin.wanderstories.space/heatmap/TRAIL_RUNNING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -1809,7 +1837,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             garminHeatmapHiking: {
                 type: 'raster',
-                tiles: ['https://tiles.wanderstories.space/garmin/heatmap/HIKING/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.wanderstories.space/garmin/heatmap/HIKING/{z}/{x}/{y}.png'],
+                tiles: ['https://garmin.wanderstories.space/heatmap/HIKING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
@@ -2629,6 +2658,7 @@ export const overlayTree: LayerTreeType = {
             osmTracks: true,
             openSeaMap: true,
             waterfalls: true,
+            calSlopes: true,
             wsArticleMarkers: true,
         },
         countries: {
@@ -2641,7 +2671,6 @@ export const overlayTree: LayerTreeType = {
                 qFireScars: true,
                 nafiFireScars: true,
                 shipwrecks: true,
-                calSlopes: true,
                 indigenousGroups: false,
                 qAlerts: true,
             },
@@ -2760,6 +2789,7 @@ export const defaultOverlays: LayerTreeType = {
             osmTracks: false,
             openSeaMap: false,
             waterfalls: false,
+            calSlopes: false,
             wsArticleMarkers: false,
         },
         countries: {
@@ -2772,7 +2802,6 @@ export const defaultOverlays: LayerTreeType = {
                 qFireScars: false,
                 nafiFireScars: false,
                 shipwrecks: false,
-                calSlopes: false,
                 indigenousGroups: false,
                 qAlerts: false,
             },
@@ -2978,6 +3007,7 @@ export const defaultOverlayTree: LayerTreeType = {
             osmTracks: true,
             openSeaMap: true,
             waterfalls: true,
+            calSlopes: true,
             wsArticleMarkers: true,
         },
         countries: {
@@ -2990,7 +3020,6 @@ export const defaultOverlayTree: LayerTreeType = {
                 qFireScars: true,
                 nafiFireScars: true,
                 shipwrecks: false,
-                calSlopes: true,
                 indigenousGroups: false,
                 qAlerts: true,
             },
