@@ -1284,10 +1284,10 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'qWater',
         }],
     },
-    nafiFireScars: {
+    nafiFireScarsCurrentYear: {
         version: 8,
         sources: {
-            nafiFireScars: {
+            nafiFireScarsCurrentYear: {
                 type: 'raster',
                 tiles: ['https://nafi.wanderstories.space/fire_scar_by_month_current/{z}/{x}/{y}'],
                 tileSize: 256,
@@ -1297,9 +1297,9 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             }
         },
         layers: [{
-            id: 'nafiFireScars',
+            id: 'nafiFireScarsCurrentYear',
             type: 'raster',
-            source: 'nafiFireScars',
+            source: 'nafiFireScarsCurrentYear',
         }],
     },
     nafiFireScarsPreviousYear: {
@@ -2739,7 +2739,7 @@ export const overlayTree: LayerTreeType = {
                 qContours: true,
                 qFireScarMappingCurrentYear: true,
                 qFireScarMappingLastYear: true,
-                nafiFireScars: true,
+                nafiFireScarsCurrentYear: true,
                 nafiFireScarsPreviousYear: true,
                 shipwrecks: true,
                 indigenousGroups: false,
@@ -2873,7 +2873,7 @@ export const defaultOverlays: LayerTreeType = {
                 qContours: false,
                 qFireScarMappingCurrentYear: false,
                 qFireScarMappingLastYear: false,
-                nafiFireScars: false,
+                nafiFireScarsCurrentYear: false,
                 nafiFireScarsPreviousYear: false,
                 shipwrecks: false,
                 indigenousGroups: false,
@@ -3094,7 +3094,7 @@ export const defaultOverlayTree: LayerTreeType = {
                 qContours: true,
                 qFireScarMappingCurrentYear: true,
                 qFireScarMappingLastYear: true,
-                nafiFireScars: true,
+                nafiFireScarsCurrentYear: true,
                 nafiFireScarsPreviousYear: true,
                 shipwrecks: false,
                 indigenousGroups: false,
