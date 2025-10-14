@@ -1302,6 +1302,24 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'nafiFireScars',
         }],
     },
+    nafiFireScarsPreviousYear: {
+        version: 8,
+        sources: {
+            nafiFireScarsPreviousYear: {
+                type: 'raster',
+                tiles: ['https://nafi.wanderstories.space/fire_scar_by_month_previous_year/{z}/{x}/{y}'],
+                tileSize: 256,
+                minzoom: 12,
+                maxzoom: 15,
+                attribution: '&copy; NAFI'
+            }
+        },
+        layers: [{
+            id: 'nafiFireScarsPreviousYear',
+            type: 'raster',
+            source: 'nafiFireScarsPreviousYear',
+        }],
+    },
     qFireScars: {
         version: 8,
         sources: {
@@ -1319,6 +1337,23 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             id: 'qFireScars',
             type: 'raster',
             source: 'qFireScars',
+        }],
+    },
+    qFireScarsPreviousYear: {
+        version: 8,
+        sources: {
+            qFireScarsPreviousYear: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/FireScarMappingPreviousYear/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qFireScarsPreviousYear',
+            type: 'raster',
+            source: 'qFireScarsPreviousYear',
         }],
     },
     qMines: {
@@ -1737,6 +1772,23 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             id: 'ridewithgpsHeatmap',
             type: 'raster',
             source: 'ridewithgpsHeatmap',
+        }],
+    },
+    alltrailsHeatmap: {
+        version: 8,
+        sources: {
+            alltrailsHeatmap: {
+                type: 'raster',
+                tiles: ['https://alltrails.wanderstories.space/tiles/years_1/all/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://alltrails.com" target="_blank">AllTrails</a>'
+            }
+        },
+        layers: [{
+            id: 'alltrailsHeatmap',
+            type: 'raster',
+            source: 'alltrailsHeatmap',
         }],
     },
     garminHeatmapRoad: {
@@ -2514,6 +2566,7 @@ export const defaultOpacities: { [key: string]: number; } = {
     qLandUse: 0.4,
     qLandParcel: 0.6,
     qContours: 0.7,
+    wanderstoriesHeatmap: 0.6,
     qWater: 0.7,
     osmTracks: 0.5,
 };
@@ -2632,6 +2685,7 @@ export const overlayTree: LayerTreeType = {
             stravaHeatmapWinter: true,
             trailforksHeatmap: true,
             ridewithgpsHeatmap: true,
+            alltrailsHeatmap: true,
             garminHeatmapRoad: true,
             garminHeatmapMtb: true,
             garminHeatmapGravel: true,
@@ -2763,6 +2817,7 @@ export const defaultOverlays: LayerTreeType = {
             stravaHeatmapWinter: false,
             trailforksHeatmap: false,
             ridewithgpsHeatmap: false,
+            alltrailsHeatmap: false,
             garminHeatmapRoad: false,
             garminHeatmapMtb: false,
             garminHeatmapGravel: false,
@@ -2981,6 +3036,7 @@ export const defaultOverlayTree: LayerTreeType = {
             stravaHeatmapWinter: false,
             trailforksHeatmap: false,
             ridewithgpsHeatmap: false,
+            alltrailsHeatmap: false,
             garminHeatmapRoad: false,
             garminHeatmapMtb: false,
             garminHeatmapGravel: false,
