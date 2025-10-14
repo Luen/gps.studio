@@ -1320,13 +1320,13 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'nafiFireScarsPreviousYear',
         }],
     },
-    qFireScars: {
+    qFireScarMappingCurrentYear: {
         version: 8,
         sources: {
-            qFireScars: {
+            qFireScarMappingCurrentYear: {
                 type: 'raster',
-                //tiles: ['https://tiles.wanderstories.space/qldglobe/FireScarMapping/{z}/{x}/{y}'],
-                tiles: ['https://qldglobe.wanderstories.space/FireScarMapping/{z}/{x}/{y}'],
+                //tiles: ['https://tiles.wanderstories.space/qldglobe/FireScarMappingCurrentYear/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/FireScarMappingCurrentYear/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 11,
@@ -1334,26 +1334,27 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             }
         },
         layers: [{
-            id: 'qFireScars',
+            id: 'qFireScarMappingCurrentYear',
             type: 'raster',
-            source: 'qFireScars',
+            source: 'qFireScarMappingCurrentYear',
         }],
     },
-    qFireScarsPreviousYear: {
+    qFireScarMappingLastYear: {
         version: 8,
         sources: {
-            qFireScarsPreviousYear: {
+            qFireScarMappingLastYear: {
                 type: 'raster',
-                tiles: ['https://qldglobe.wanderstories.space/FireScarMappingPreviousYear/{z}/{x}/{y}'],
+                tiles: ['https://qldglobe.wanderstories.space/FireScarMappingLastYear/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 16,
+                minzoom: 11,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
         layers: [{
-            id: 'qFireScarsPreviousYear',
+            id: 'qFireScarMappingLastYear',
             type: 'raster',
-            source: 'qFireScarsPreviousYear',
+            source: 'qFireScarMappingLastYear',
         }],
     },
     qMines: {
@@ -1789,6 +1790,20 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             id: 'alltrailsHeatmap',
             type: 'raster',
             source: 'alltrailsHeatmap',
+            paint: {
+                'raster-opacity': 1,
+                'raster-color': [
+                    'interpolate',
+                    ['linear'],
+                    ['raster-value'],
+                    0, 'rgba(150, 0, 150, 0)',
+                    1, 'rgba(150, 0, 150, 1.0)',
+                    //255, 'rgba(150, 0, 150, 1.0)'
+                ],
+                'raster-brightness-min': 0.3,
+                'raster-brightness-max': 1.0,
+                'raster-contrast': 1.0
+            }
         }],
     },
     garminHeatmapRoad: {
@@ -2722,7 +2737,8 @@ export const overlayTree: LayerTreeType = {
                 qLandUse: true,
                 qLandParcel: true,
                 qContours: true,
-                qFireScars: true,
+                qFireScarMappingCurrentYear: true,
+                qFireScarMappingLastYear: true,
                 nafiFireScars: true,
                 shipwrecks: true,
                 indigenousGroups: false,
@@ -2854,7 +2870,8 @@ export const defaultOverlays: LayerTreeType = {
                 qLandUse: false,
                 qLandParcel: false,
                 qContours: false,
-                qFireScars: false,
+                qFireScarMappingCurrentYear: false,
+                qFireScarMappingLastYear: false,
                 nafiFireScars: false,
                 shipwrecks: false,
                 indigenousGroups: false,
@@ -3073,7 +3090,8 @@ export const defaultOverlayTree: LayerTreeType = {
                 qLandUse: true,
                 qLandParcel: true,
                 qContours: true,
-                qFireScars: true,
+                qFireScarMappingCurrentYear: true,
+                qFireScarMappingLastYear: true,
                 nafiFireScars: true,
                 shipwrecks: false,
                 indigenousGroups: false,
