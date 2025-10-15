@@ -1782,7 +1782,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://alltrails.wanderstories.space/tiles/years_1/all/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                maxzoom: 15,
                 attribution: '&copy; <a href="https://alltrails.com" target="_blank">AllTrails</a>'
             }
         },
