@@ -1797,8 +1797,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                     ['linear'],
                     ['raster-value'],
                     0, 'rgba(150, 0, 150, 0)',
-                    1, 'rgba(150, 0, 150, 1.0)',
-                    //255, 'rgba(150, 0, 150, 1.0)'
+                    1, 'rgba(150, 0, 150, 0.6)',
+                    255, 'rgba(150, 0, 150, 1)'
                 ],
                 'raster-brightness-min': 0.3,
                 'raster-brightness-max': 1.0,
