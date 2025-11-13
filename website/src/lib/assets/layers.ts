@@ -636,6 +636,57 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             source: 'getlostTopo',
         }],
     },
+    natmap50k: {
+        version: 8,
+        sources: {
+            natmap50k: {
+                type: 'raster',
+                tiles: ['https://natmap.wanderstories.space/natmap50k/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://natmap.wanderstories.space" target="_blank">NatMaps</a>'
+            }
+        },
+        layers: [{
+            id: 'natmap50k',
+            type: 'raster',
+            source: 'natmap50k',
+        }],
+    },
+    natmap100k: {
+        version: 8,
+        sources: {
+            natmap100k: {
+                type: 'raster',
+                tiles: ['https://natmap.wanderstories.space/natmap100k/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 14,
+                attribution: '&copy; <a href="https://natmap.wanderstories.space" target="_blank">NatMaps</a>'
+            }
+        },
+        layers: [{
+            id: 'natmap100k',
+            type: 'raster',
+            source: 'natmap100k',
+        }],
+    },
+    natmap250k: {
+        version: 8,
+        sources: {
+            natmap250k: {
+                type: 'raster',
+                tiles: ['https://natmap.wanderstories.space/natmap250k/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 12,
+                attribution: '&copy; <a href="https://natmap.wanderstories.space" target="_blank">NatMaps</a>'
+            }
+        },
+        layers: [{
+            id: 'natmap250k',
+            type: 'raster',
+            source: 'natmap250k',
+        }],
+    },
     natmapsTopo: {
         version: 8,
         sources: {
@@ -2629,6 +2680,9 @@ export const basemapTree: LayerTreeType = {
                 tasHillshade: true,
                 tasImagery: true,
                 nafiTopo: true,
+                natmap50k: true,
+                natmap100k: true,
+                natmap250k: true,
                 natmapsTopo: true,
                 getlostTopo: true,
             },
@@ -2984,6 +3038,9 @@ export const defaultBasemapTree: LayerTreeType = {
                 tasHillshade: false,
                 tasImagery: false,
                 nafiTopo: true,
+                natmap50k: false,
+                natmap100k: false,
+                natmap250k: false,
                 natmapsTopo: true,
                 getlostTopo: true,
             },
