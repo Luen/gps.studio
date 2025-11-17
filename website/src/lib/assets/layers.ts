@@ -1562,8 +1562,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/StockRoutesQld/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 16,
-                minzoom: 11,
+                maxzoom: 15,
+                minzoom: 9,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
