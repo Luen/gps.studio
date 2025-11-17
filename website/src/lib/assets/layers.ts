@@ -1555,6 +1555,24 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'qLandParcel'
         }],
     },
+    qStockRoutes: {
+        version: 8,
+        sources: {
+            qStockRoutes: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/StockRoutesQld/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 16,
+                minzoom: 11,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qStockRoutes',
+            type: 'raster',
+            source: 'qStockRoutes'
+        }],
+    },
     qLandUse: {
         version: 8,
         sources: {
@@ -2630,6 +2648,7 @@ export const defaultOpacities: { [key: string]: number; } = {
     swisstopoSlope: 0.4,
     calSlopes: 0.5,
     qLandUse: 0.4,
+    qStockRoutes: 0.6,
     qLandParcel: 0.6,
     qContours: 0.7,
     wanderstoriesHeatmap: 0.6,
@@ -2789,6 +2808,7 @@ export const overlayTree: LayerTreeType = {
                 qMines: true,
                 qRoads: true,
                 qLandUse: true,
+                qStockRoutes: true,
                 qLandParcel: true,
                 qContours: true,
                 qFireScarMappingCurrentYear: true,
@@ -2923,6 +2943,7 @@ export const defaultOverlays: LayerTreeType = {
                 qMines: false,
                 qRoads: false,
                 qLandUse: false,
+                qStockRoutes: false,
                 qLandParcel: false,
                 qContours: false,
                 qFireScarMappingCurrentYear: false,
@@ -3147,6 +3168,7 @@ export const defaultOverlayTree: LayerTreeType = {
                 qMines: true,
                 qRoads: true,
                 qLandUse: true,
+                qStockRoutes: true,
                 qLandParcel: true,
                 qContours: true,
                 qFireScarMappingCurrentYear: true,

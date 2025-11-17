@@ -372,6 +372,7 @@
             "qRoads": "Qld Roads & Tracks",
             "osmTracks": "OSM Roads & Tracks",
             "qLandUse": "Qld Land Use",
+            "qStockRoutes": "Qld Stock Routes",
             "qLandParcel": "Qld Land Parcel",
             "qContours": "Qld Contours",
             "qFireScarMappingCurrentYear": "Qld Fire Scars Current Year",
