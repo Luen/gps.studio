@@ -3045,7 +3045,7 @@ export const defaultBasemapTree: LayerTreeType = {
         countries: {
             australia: {
                 qTopo: true,
-                qTopoOld: true,
+                qTopoOld: false,
                 qImagery: true,
                 qAerial: true,
                 nswTopo: false,
