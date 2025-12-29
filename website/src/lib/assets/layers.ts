@@ -374,25 +374,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             source: 'usgs',
         }],
     },
-    qTopo: {
-        version: 8,
-        sources: {
-            qTopo: {
-                type: 'raster',
-                //tiles: ['https://tiles.wanderstories.space/qldglobe/qtopo/{z}/{x}/{y}'],
-                tiles: ['https://qldglobe.wanderstories.space/qtopo/{z}/{x}/{y}'],
-                tileSize: 256,
-                maxzoom: 16,
-                minzoom: 3,
-                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
-            }
-        },
-        layers: [{
-            id: 'qTopo',
-            type: 'raster',
-            source: 'qTopo',
-        }],
-    },
+    qTopo: 'https://spatial.information.qld.gov.au/arcgis/rest/services/Hosted/QTopo/VectorTileServer/resources/styles/root.json',
     qTopoOld: {
         version: 8,
         sources: {
