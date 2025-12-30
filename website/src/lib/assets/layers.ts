@@ -374,7 +374,24 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             source: 'usgs',
         }],
     },
-    qTopo: 'https://spatial.information.qld.gov.au/arcgis/rest/services/Hosted/QTopo/VectorTileServer/resources/styles/root.json',
+    qTopo: {
+        version: 8,
+        sources: {
+            qTopo: {
+                type: 'raster',
+                tiles: ['https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Basemaps/QldMap_Topo/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 16,
+                minzoom: 3,
+                attribution: '&copy; State of Queensland (Department of Natural Resources and Mines, Manufacturing and Regional and Rural Development) 2025'
+            }
+        },
+        layers: [{
+            id: 'qTopo',
+            type: 'raster',
+            source: 'qTopo',
+        }],
+    },
     qTopoOld: {
         version: 8,
         sources: {
