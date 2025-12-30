@@ -711,7 +711,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://nafi.wanderstories.space/topo/{z}/{x}/{y}'],
                 tileSize: 256,
-                minzoom: 10,
+                minzoom: 4,
                 maxzoom: 12,
                 attribution: '&copy; NAFI'
             }
@@ -720,7 +720,11 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
             id: 'nafiTopo',
             type: 'raster',
             source: 'nafiTopo',
-            maxzoom: 12
+            minzoom: 4,
+            maxzoom: 22,
+            paint: {
+                'raster-resampling': 'linear'
+            }              
         }],
     },
     appleSatellite: {
