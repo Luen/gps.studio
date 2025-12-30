@@ -16,6 +16,15 @@
 	let popup: mapboxgl.Popup | null = null;
 	let isClosing = false; // Flag to prevent recursion
 	let popupCloseHandler: (() => void) | null = null;
+	let rightMouseDownTime: number | null = null;
+	let rightMouseDownPoint: { x: number; y: number } | null = null;
+	let hasMovedAfterRightClick = false;
+	let isRightMouseButtonDown = false;
+	let mouseDownHandler: ((e: any) => void) | null = null;
+	let mouseMoveHandler: ((e: any) => void) | null = null;
+	let mouseUpHandler: ((e: any) => void) | null = null;
+	let dragStartHandler: (() => void) | null = null;
+	let dragEndHandler: (() => void) | null = null;
 
 	function showCoordinatesMaps() {
 		if ($map && contextMenuPosition) {
@@ -97,6 +106,40 @@
 
 	function handleContextMenu(e: any) {
 		try {
+			// Don't show context menu if user was dragging after right-click
+			if (hasMovedAfterRightClick) {
+				// Reset flags
+				hasMovedAfterRightClick = false;
+				rightMouseDownPoint = null;
+				rightMouseDownTime = null;
+				isRightMouseButtonDown = false;
+				e.preventDefault();
+				return;
+			}
+			
+			// Also check if there was significant movement between mousedown and contextmenu
+			if (rightMouseDownPoint && rightMouseDownTime && e.originalEvent) {
+				const timeDiff = Date.now() - rightMouseDownTime;
+				const dx = e.originalEvent.clientX - rightMouseDownPoint.x;
+				const dy = e.originalEvent.clientY - rightMouseDownPoint.y;
+				const distance = Math.sqrt(dx * dx + dy * dy);
+				
+				// If moved more than 5 pixels or more than 100ms has passed (likely a drag), don't show menu
+				if (distance > 5 || timeDiff > 100) {
+					hasMovedAfterRightClick = false;
+					rightMouseDownPoint = null;
+					rightMouseDownTime = null;
+					isRightMouseButtonDown = false;
+					e.preventDefault();
+					return;
+				}
+			}
+			
+			// Reset flags for non-drag right-clicks
+			rightMouseDownPoint = null;
+			rightMouseDownTime = null;
+			isRightMouseButtonDown = false;
+			
 			e.preventDefault();
 			
 			// Remove any existing popup
@@ -214,6 +257,63 @@
 	$: if ($map) {
 		// Add event listeners
 		$map.on('contextmenu', handleContextMenu);
+		
+		// Track right-click and drag to prevent context menu during drag
+		mouseDownHandler = (e: any) => {
+			// Check if right mouse button (button 2)
+			if (e.originalEvent && e.originalEvent.button === 2) {
+				isRightMouseButtonDown = true;
+				rightMouseDownPoint = {
+					x: e.originalEvent.clientX,
+					y: e.originalEvent.clientY
+				};
+				rightMouseDownTime = Date.now();
+				hasMovedAfterRightClick = false;
+			} else {
+				// Reset if other button is pressed
+				isRightMouseButtonDown = false;
+				rightMouseDownPoint = null;
+				rightMouseDownTime = null;
+			}
+		};
+		
+		mouseMoveHandler = (e: any) => {
+			// Only track movement if right mouse button is currently down
+			if (isRightMouseButtonDown && rightMouseDownPoint && e.originalEvent) {
+				const dx = e.originalEvent.clientX - rightMouseDownPoint.x;
+				const dy = e.originalEvent.clientY - rightMouseDownPoint.y;
+				// If mouse moved more than 5 pixels, consider it a drag
+				const distance = Math.sqrt(dx * dx + dy * dy);
+				if (distance > 5) {
+					hasMovedAfterRightClick = true;
+				}
+			}
+		};
+		
+		mouseUpHandler = (e: any) => {
+			// Check if right mouse button was released
+			if (e.originalEvent && e.originalEvent.button === 2) {
+				isRightMouseButtonDown = false;
+			}
+		};
+		
+		// Also track map drag events which fire when the map is being dragged
+		dragStartHandler = () => {
+			// If drag starts while right mouse button is down, it's a right-click drag
+			if (isRightMouseButtonDown) {
+				hasMovedAfterRightClick = true;
+			}
+		};
+		
+		dragEndHandler = () => {
+			// No need to reset here, handleContextMenu will handle cleanup
+		};
+		
+		$map.on('mousedown', mouseDownHandler);
+		$map.on('mousemove', mouseMoveHandler);
+		$map.on('mouseup', mouseUpHandler);
+		$map.on('dragstart', dragStartHandler);
+		$map.on('dragend', dragEndHandler);
 	}
 
 	onDestroy(() => {
@@ -221,6 +321,26 @@
 			// Remove event listeners when component is destroyed
 			if ($map) {
 				$map.off('contextmenu', handleContextMenu);
+				if (mouseDownHandler) {
+					$map.off('mousedown', mouseDownHandler);
+					mouseDownHandler = null;
+				}
+				if (mouseMoveHandler) {
+					$map.off('mousemove', mouseMoveHandler);
+					mouseMoveHandler = null;
+				}
+				if (mouseUpHandler) {
+					$map.off('mouseup', mouseUpHandler);
+					mouseUpHandler = null;
+				}
+				if (dragStartHandler) {
+					$map.off('dragstart', dragStartHandler);
+					dragStartHandler = null;
+				}
+				if (dragEndHandler) {
+					$map.off('dragend', dragEndHandler);
+					dragEndHandler = null;
+				}
 				if (popup && popupCloseHandler) {
 					// Remove event listener first
 					popup.off('close', popupCloseHandler);
