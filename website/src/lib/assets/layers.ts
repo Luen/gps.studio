@@ -625,7 +625,7 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 tiles: ['https://getlost.wanderstories.space/{z}/{x}/{y}.jpg'],
                 tileSize: 256,
                 maxzoom: 13,
-                minzoom: 10,
+                minzoom: 2,
                 attribution: '&copy; <a href="https://getlost.com.au/" target="_blank">Getlost Maps</a>'
             }
         },
