@@ -384,9 +384,21 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
                 maxzoom: 16,
                 minzoom: 3,
                 attribution: '&copy; State of Queensland (Department of Natural Resources and Mines, Manufacturing and Regional and Rural Development) 2025'
+            },
+            qTopoHillshade: {
+                type: 'raster',
+                tiles: ['https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer/tile/{z}/{y}/{x}'],
+                tileSize: 256,
+                maxzoom: 16,
+                minzoom: 3,
+                attribution: '&copy; <a href="https://www.arcgis.com" target="_blank">Esri</a>'
             }
         },
         layers: [{
+            id: 'qTopoHillshade',
+            type: 'raster',
+            source: 'qTopoHillshade',
+        }, {
             id: 'qTopo',
             type: 'raster',
             source: 'qTopo',
