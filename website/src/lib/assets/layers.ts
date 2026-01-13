@@ -1884,8 +1884,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             garminHeatmapRoad: {
                 type: 'raster',
                 //tiles: ['https://connecttile.garmin.com/ROAD_CYCLING/{z}/{x}/{y}.png'],
-                //tiles: ['https://tiles.wanderstories.space/garmin/heatmap/ROAD_CYCLING/{z}/{x}/{y}.png'],
-                tiles: ['https://garmin.wanderstories.space/heatmap/ROAD_CYCLING/{z}/{x}/{y}.png'],
+                //tiles: ['https://tiles.wanderstories.space/garmin/ROAD_CYCLING/{z}/{x}/{y}.png'],
+                tiles: ['https://garmin.wanderstories.space/ROAD_CYCLING/{z}/{x}/{y}.png'],
                 tileSize: 256,
                 maxzoom: 18,
                 attribution: '&copy; <a href="https://connect.garmin.com" target="_blank">Garmin</a>'
