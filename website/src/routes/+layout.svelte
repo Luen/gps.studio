@@ -12,6 +12,7 @@
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { getURLForLanguage } from '$lib/utils';
+	import { afterNavigate } from '$app/navigation';
 
 	export let data: {
 		guideTitles: Record<string, string>;
@@ -52,6 +53,15 @@
 		}
 	}
 	$: showNavAndFooter = $page.route.id === null || !appRoutes.includes($page.route.id);
+
+	// Track page views for Google Analytics on client-side navigation
+	afterNavigate(() => {
+		if (browser && typeof window.gtag !== 'undefined') {
+			window.gtag('config', 'G-8YRS2SPLX3', {
+				page_path: $page.url.pathname + $page.url.search
+			});
+		}
+	});
 </script>
 
 <ModeWatcher />
