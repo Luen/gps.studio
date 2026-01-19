@@ -1,5 +1,5 @@
 # BUILD THE PROJECT
-FROM node:22-slim AS builder
+FROM node:24-slim AS builder
 
 # Set the working directory for the GPX project
 WORKDIR /app/gpx
@@ -23,7 +23,7 @@ RUN npx ci
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build
 
 # BUILD THE PRODUCTION IMAGE
-FROM node:22-slim AS production
+FROM node:24-slim AS production
 
 # Set working directory in the production image
 WORKDIR /app
