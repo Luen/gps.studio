@@ -1595,6 +1595,42 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'qLandUse'
         }],
     },
+    qDemAzimuth: {
+        version: 8,
+        sources: {
+            qDemAzimuth: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/qlddem_azimuth/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                minzoom: 11,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qDemAzimuth',
+            type: 'raster',
+            source: 'qDemAzimuth'
+        }],
+    },
+    qDemHillshade: {
+        version: 8,
+        sources: {
+            qDemHillshade: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/qlddem_hillshade/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 18,
+                minzoom: 11,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qDemHillshade',
+            type: 'raster',
+            source: 'qDemHillshade'
+        }],
+    },
     calSlopes: {
         version: 8,
         sources: {
@@ -2814,6 +2850,8 @@ export const overlayTree: LayerTreeType = {
                 qStockRoutes: true,
                 qLandParcel: true,
                 qContours: true,
+                qDemAzimuth: true,
+                qDemHillshade: true,
                 qFireScarMappingCurrentYear: true,
                 qFireScarMappingLastYear: true,
                 nafiFireScarsCurrentYear: true,
@@ -2949,6 +2987,8 @@ export const defaultOverlays: LayerTreeType = {
                 qStockRoutes: false,
                 qLandParcel: false,
                 qContours: false,
+                qDemAzimuth: false,
+                qDemHillshade: false,
                 qFireScarMappingCurrentYear: false,
                 qFireScarMappingLastYear: false,
                 nafiFireScarsCurrentYear: false,
@@ -3174,6 +3214,8 @@ export const defaultOverlayTree: LayerTreeType = {
                 qStockRoutes: true,
                 qLandParcel: true,
                 qContours: true,
+                qDemAzimuth: true,
+                qDemHillshade: true,
                 qFireScarMappingCurrentYear: true,
                 qFireScarMappingLastYear: true,
                 nafiFireScarsCurrentYear: true,

@@ -378,6 +378,8 @@
             "qStockRoutes": "Qld Stock Routes",
             "qLandParcel": "Qld Land Parcel",
             "qContours": "Qld Contours",
+            "qDemAzimuth": "Qld DEM Azimuth",
+            "qDemHillshade": "Qld DEM Hillshade",
             "qFireScarMappingCurrentYear": "Qld Fire Scars Current Year",
             "qFireScarMappingLastYear": "Qld Fire Scars Last Year",
             "nafiFireScarsCurrentYear": "NAFI Fire Scars Current Year",
