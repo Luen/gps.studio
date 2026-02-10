@@ -379,7 +379,8 @@ export const basemaps: { [key: string]: string | StyleSpecification; } = {
         sources: {
             qTopo: {
                 type: 'raster',
-                tiles: ['https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Basemaps/QldMap_Topo/MapServer/tile/{z}/{y}/{x}'],
+                tiles: ['https://qldglobe.wanderstories.space/qtopo/{z}/{x}/{y}'],
+                //tiles: ['https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Basemaps/QldMap_Topo/MapServer/tile/{z}/{y}/{x}'],
                 tileSize: 256,
                 maxzoom: 16,
                 minzoom: 3,
