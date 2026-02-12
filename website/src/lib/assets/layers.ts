@@ -2033,7 +2033,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://kamoot.wanderstories.space/tiles/all-sports/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                minzoom: 1,
+                maxzoom: 12,
                 attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
             }
         },
@@ -2050,7 +2051,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://kamoot.wanderstories.space/tiles/all-foot-sports/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                minzoom: 1,
+                maxzoom: 12,
                 attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
             }
         },
@@ -2067,7 +2069,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://kamoot.wanderstories.space/tiles/hike/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                minzoom: 1,
+                maxzoom: 12,
                 attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
             }
         },
@@ -2084,7 +2087,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://kamoot.wanderstories.space/tiles/jogging/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                minzoom: 1,
+                maxzoom: 12,
                 attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
             }
         },
@@ -2101,7 +2105,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://kamoot.wanderstories.space/tiles/all-cycle-sports/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                minzoom: 1,
+                maxzoom: 12,
                 attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
             }
         },
@@ -2118,7 +2123,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://kamoot.wanderstories.space/tiles/touringbicycle/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                minzoom: 1,
+                maxzoom: 12,
                 attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
             }
         },
@@ -2135,7 +2141,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://kamoot.wanderstories.space/tiles/mtb/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                minzoom: 1,
+                maxzoom: 12,
                 attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
             }
         },
@@ -2152,7 +2159,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://kamoot.wanderstories.space/tiles/racebike/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                minzoom: 1,
+                maxzoom: 12,
                 attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
             }
         },
@@ -2169,7 +2177,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://kamoot.wanderstories.space/tiles/mtb-easy/{z}/{x}/{y}.png'],
                 tileSize: 256,
-                maxzoom: 18,
+                minzoom: 1,
+                maxzoom: 12,
                 attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
             }
         },
