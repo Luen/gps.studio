@@ -2026,6 +2026,159 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'garminHeatmapHiking',
         }],
     },
+    kamootHeatmapAllSports: {
+        version: 8,
+        sources: {
+            kamootHeatmapAllSports: {
+                type: 'raster',
+                tiles: ['https://kamoot.wanderstories.space/tiles/all_sports/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
+            }
+        },
+        layers: [{
+            id: 'kamootHeatmapAllSports',
+            type: 'raster',
+            source: 'kamootHeatmapAllSports',
+        }],
+    },
+    kamootHeatmapAllFootSports: {
+        version: 8,
+        sources: {
+            kamootHeatmapAllFootSports: {
+                type: 'raster',
+                tiles: ['https://kamoot.wanderstories.space/tiles/all_foot_sports/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
+            }
+        },
+        layers: [{
+            id: 'kamootHeatmapAllFootSports',
+            type: 'raster',
+            source: 'kamootHeatmapAllFootSports',
+        }],
+    },
+    kamootHeatmapHike: {
+        version: 8,
+        sources: {
+            kamootHeatmapHike: {
+                type: 'raster',
+                tiles: ['https://kamoot.wanderstories.space/tiles/hike/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
+            }
+        },
+        layers: [{
+            id: 'kamootHeatmapHike',
+            type: 'raster',
+            source: 'kamootHeatmapHike',
+        }],
+    },
+    kamootHeatmapJogging: {
+        version: 8,
+        sources: {
+            kamootHeatmapJogging: {
+                type: 'raster',
+                tiles: ['https://kamoot.wanderstories.space/tiles/jogging/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
+            }
+        },
+        layers: [{
+            id: 'kamootHeatmapJogging',
+            type: 'raster',
+            source: 'kamootHeatmapJogging',
+        }],
+    },
+    kamootHeatmapAllCycleSports: {
+        version: 8,
+        sources: {
+            kamootHeatmapAllCycleSports: {
+                type: 'raster',
+                tiles: ['https://kamoot.wanderstories.space/tiles/all_cycle_sports/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
+            }
+        },
+        layers: [{
+            id: 'kamootHeatmapAllCycleSports',
+            type: 'raster',
+            source: 'kamootHeatmapAllCycleSports',
+        }],
+    },
+    kamootHeatmapTouringbicycle: {
+        version: 8,
+        sources: {
+            kamootHeatmapTouringbicycle: {
+                type: 'raster',
+                tiles: ['https://kamoot.wanderstories.space/tiles/touringbicycle/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
+            }
+        },
+        layers: [{
+            id: 'kamootHeatmapTouringbicycle',
+            type: 'raster',
+            source: 'kamootHeatmapTouringbicycle',
+        }],
+    },
+    kamootHeatmapMtb: {
+        version: 8,
+        sources: {
+            kamootHeatmapMtb: {
+                type: 'raster',
+                tiles: ['https://kamoot.wanderstories.space/tiles/mtb/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
+            }
+        },
+        layers: [{
+            id: 'kamootHeatmapMtb',
+            type: 'raster',
+            source: 'kamootHeatmapMtb',
+        }],
+    },
+    kamootHeatmapRacebike: {
+        version: 8,
+        sources: {
+            kamootHeatmapRacebike: {
+                type: 'raster',
+                tiles: ['https://kamoot.wanderstories.space/tiles/racebike/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
+            }
+        },
+        layers: [{
+            id: 'kamootHeatmapRacebike',
+            type: 'raster',
+            source: 'kamootHeatmapRacebike',
+        }],
+    },
+    kamootHeatmapMtbEasy: {
+        version: 8,
+        sources: {
+            kamootHeatmapMtbEasy: {
+                type: 'raster',
+                tiles: ['https://kamoot.wanderstories.space/tiles/mtb_easy/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                maxzoom: 18,
+                attribution: '&copy; <a href="https://www.komoot.com" target="_blank">Komoot</a>'
+            }
+        },
+        layers: [{
+            id: 'kamootHeatmapMtbEasy',
+            type: 'raster',
+            source: 'kamootHeatmapMtbEasy',
+        }],
+    },
     suuntoHeatmapRunning: {
         version: 8,
         sources: {
@@ -2820,6 +2973,15 @@ export const overlayTree: LayerTreeType = {
             garminHeatmapRunning: true,
             garminHeatmapTrail: true,
             garminHeatmapHiking: true,
+            kamootHeatmapAllSports: true,
+            kamootHeatmapAllFootSports: true,
+            kamootHeatmapHike: true,
+            kamootHeatmapJogging: true,
+            kamootHeatmapAllCycleSports: true,
+            kamootHeatmapTouringbicycle: true,
+            kamootHeatmapMtb: true,
+            kamootHeatmapRacebike: true,
+            kamootHeatmapMtbEasy: true,
             suuntoHeatmapRunning: true,
             suuntoHeatmapTrailRunning: true,
             suuntoHeatmapAllTrails: true,
@@ -2957,6 +3119,15 @@ export const defaultOverlays: LayerTreeType = {
             garminHeatmapRunning: false,
             garminHeatmapTrail: false,
             garminHeatmapHiking: false,
+            kamootHeatmapAllSports: false,
+            kamootHeatmapAllFootSports: false,
+            kamootHeatmapHike: false,
+            kamootHeatmapJogging: false,
+            kamootHeatmapAllCycleSports: false,
+            kamootHeatmapTouringbicycle: false,
+            kamootHeatmapMtb: false,
+            kamootHeatmapRacebike: false,
+            kamootHeatmapMtbEasy: false,
             suuntoHeatmapRunning: false,
             suuntoHeatmapTrailRunning: false,
             suuntoHeatmapAllTrails: false,
@@ -3184,6 +3355,15 @@ export const defaultOverlayTree: LayerTreeType = {
             garminHeatmapRunning: false,
             garminHeatmapTrail: false,
             garminHeatmapHiking: false,
+            kamootHeatmapAllSports: false,
+            kamootHeatmapAllFootSports: false,
+            kamootHeatmapHike: false,
+            kamootHeatmapJogging: false,
+            kamootHeatmapAllCycleSports: false,
+            kamootHeatmapTouringbicycle: false,
+            kamootHeatmapMtb: false,
+            kamootHeatmapRacebike: false,
+            kamootHeatmapMtbEasy: false,
             suuntoHeatmapRunning: false,
             suuntoHeatmapTrailRunning: false,
             suuntoHeatmapAllTrails: false,
