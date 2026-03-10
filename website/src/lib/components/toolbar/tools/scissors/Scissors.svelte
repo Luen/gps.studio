@@ -3,6 +3,7 @@
 </script>
 
 <script lang="ts">
+	import { SplitType } from './SplitType';
 	import Help from '$lib/components/Help.svelte';
 	import { ListRootItem } from '$lib/components/file-list/FileList';
 	import { selection } from '$lib/components/file-list/Selection';
