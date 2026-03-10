@@ -2,14 +2,37 @@ import Dexie, { liveQuery } from 'dexie';
 import { GPXFile, GPXStatistics, Track, TrackSegment, Waypoint, TrackPoint, type Coordinates, distance, type LineStyleExtension, type WaypointType } from 'gpx';
 import { enableMapSet, enablePatches, applyPatches, type Patch, type WritableDraft, freeze, produceWithPatches } from 'immer';
 import { writable, get, derived, type Readable, type Writable } from 'svelte/store';
-import { gpxStatistics, initTargetMapBounds, map, splitAs, updateAllHidden, updateTargetMapBounds } from './stores';
 import { defaultBasemap, defaultBasemapTree, defaultOverlayTree, defaultOverlays, type CustomLayer, defaultOpacities, defaultOverpassQueries, defaultOverpassTree } from './assets/layers';
-import { applyToOrderedItemsFromFile, applyToOrderedSelectedItemsFromFile, selection } from '$lib/components/file-list/Selection';
-import { ListFileItem, ListItem, ListTrackItem, ListLevel, ListTrackSegmentItem, ListWaypointItem, ListRootItem } from '$lib/components/file-list/FileList';
+import { ListFileItem, ListItem, ListTrackItem, ListLevel, ListTrackSegmentItem, ListWaypointItem, ListRootItem } from '$lib/components/file-list/file-list-types';
 import { updateAnchorPoints } from '$lib/components/toolbar/tools/routing/Simplify';
-import { SplitType } from '$lib/components/toolbar/tools/scissors/Scissors.svelte';
-import { getClosestLinePoint, getElevation } from '$lib/utils';
+import { SplitType } from '$lib/components/toolbar/tools/scissors/SplitType';
 import { browser } from '$app/environment';
+
+/** Injected deps to break circular dependency (db ↔ stores, Selection, utils). Set from app page. */
+export type DbDeps = {
+    selection: Writable<unknown>;
+    applyToOrderedItemsFromFile: (items: ListItem[], callback: (fileId: string, level: ListLevel, items: ListItem[]) => void) => void;
+    applyToOrderedSelectedItemsFromFile: (callback: (fileId: string, level: ListLevel, items: ListItem[]) => void, trackOrder?: boolean) => void;
+    gpxStatistics: Writable<GPXStatistics>;
+    updateTargetMapBounds: (id: string, bounds: [Coordinates, Coordinates] | undefined) => void;
+    updateAllHidden: () => void;
+    initTargetMapBounds: (ids: string[]) => void;
+    map: Writable<unknown>;
+    splitAs: Writable<string>;
+    getClosestLinePoint: (points: TrackPoint[], point: TrackPoint | Coordinates, details?: any) => TrackPoint;
+    getElevation: (points: (TrackPoint | Waypoint | Coordinates)[], ELEVATION_ZOOM?: number, tileSize?: number) => Promise<number[]>;
+};
+
+let dbDeps: DbDeps | null = null;
+
+export function setDbDependencies(deps: DbDeps) {
+    dbDeps = deps;
+}
+
+function getDeps(): DbDeps {
+    if (!dbDeps) throw new Error('db deps not initialized; call setDbDependencies() from app page');
+    return dbDeps;
+}
 
 enableMapSet();
 enablePatches();
@@ -179,7 +202,7 @@ function dexieGPXFileStore(id: string): Readable<GPXFileWithStatistics> & { dest
 
             let statistics = new GPXStatisticsTree(gpx);
             if (!fileState.has(id)) { // Update the map bounds for new files
-                updateTargetMapBounds(id, statistics.getStatisticsFor(new ListFileItem(id)).global.bounds);
+                getDeps().updateTargetMapBounds(id, statistics.getStatisticsFor(new ListFileItem(id)).global.bounds);
             }
 
             fileState.set(id, gpx);
@@ -188,8 +211,8 @@ function dexieGPXFileStore(id: string): Readable<GPXFileWithStatistics> & { dest
                 statistics
             });
 
-            if (get(selection).hasAnyChildren(new ListFileItem(id))) {
-                updateAllHidden();
+            if (get(getDeps().selection).hasAnyChildren(new ListFileItem(id))) {
+                getDeps().updateAllHidden();
             }
         }
     });
@@ -205,7 +228,7 @@ function dexieGPXFileStore(id: string): Readable<GPXFileWithStatistics> & { dest
 function updateSelection(updatedFiles: GPXFile[], deletedFileIds: string[]) {
     let removedItems: ListItem[] = [];
 
-    applyToOrderedItemsFromFile(get(selection).getSelected(), (fileId, level, items) => {
+    getDeps().applyToOrderedItemsFromFile(get(getDeps().selection).getSelected(), (fileId, level, items) => {
         let file = updatedFiles.find((file) => file._data.id === fileId);
         if (file) {
             items.forEach((item) => {
@@ -239,7 +262,7 @@ function updateSelection(updatedFiles: GPXFile[], deletedFileIds: string[]) {
     });
 
     if (removedItems.length > 0) {
-        selection.update(($selection) => {
+        getDeps().selection.update(($selection) => {
             removedItems.forEach((item) => {
                 if (item instanceof ListFileItem) {
                     $selection.deleteChild(item.getFileId());
@@ -291,7 +314,7 @@ export function observeFilesFromDatabase(fitBounds: boolean) {
     liveQuery(() => db.fileids.toArray()).subscribe(dbFileIds => {
         if (initialize) {
             if (fitBounds && dbFileIds.length > 0) {
-                initTargetMapBounds(dbFileIds);
+                getDeps().initTargetMapBounds(dbFileIds);
             }
             initialize = false;
         }
@@ -471,13 +494,13 @@ export const dbUtils = {
         applyEachToFilesAndGlobal(ids, callbacks, globalCallback, context);
     },
     duplicateSelection: () => {
-        if (get(selection).size === 0) {
+        if (get(getDeps().selection).size === 0) {
             return;
         }
         applyGlobal((draft) => {
             let ids = getFileIds(get(settings.fileOrder).length);
             let index = 0;
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 if (level === ListLevel.FILE) {
                     let file = getFile(fileId);
                     if (file) {
@@ -522,11 +545,11 @@ export const dbUtils = {
         });
     },
     reverseSelection: () => {
-        if (!get(selection).hasAnyChildren(new ListRootItem(), true, ['waypoints']) || get(gpxStatistics).local.points?.length <= 1) {
+        if (!get(getDeps().selection).hasAnyChildren(new ListRootItem(), true, ['waypoints']) || get(getDeps().gpxStatistics).local.points?.length <= 1) {
             return;
         }
         applyGlobal((draft) => {
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 let file = draft.get(fileId);
                 if (file) {
                     if (level === ListLevel.FILE) {
@@ -548,11 +571,11 @@ export const dbUtils = {
         });
     },
     createRoundTripForSelection() {
-        if (!get(selection).hasAnyChildren(new ListRootItem(), true, ['waypoints'])) {
+        if (!get(getDeps().selection).hasAnyChildren(new ListRootItem(), true, ['waypoints'])) {
             return;
         }
         applyGlobal((draft) => {
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 let file = draft.get(fileId);
                 if (file) {
                     if (level === ListLevel.FILE) {
@@ -587,7 +610,7 @@ export const dbUtils = {
                 trkseg: [],
                 wpt: []
             };
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 let file = draft.get(fileId);
                 let originalFile = getFile(fileId);
                 if (file && originalFile) {
@@ -634,7 +657,7 @@ export const dbUtils = {
             });
 
             if (mergeTraces) {
-                let statistics = get(gpxStatistics);
+                let statistics = get(getDeps().gpxStatistics);
                 let speed = statistics.global.speed.moving > 0 ? statistics.global.speed.moving : undefined;
                 let startTime: Date | undefined = undefined;
                 if (speed !== undefined) {
@@ -683,11 +706,11 @@ export const dbUtils = {
         });
     },
     cropSelection: (start: number, end: number) => {
-        if (get(selection).size === 0) {
+        if (get(getDeps().selection).size === 0) {
             return;
         }
         applyGlobal((draft) => {
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 let file = draft.get(fileId);
                 if (file) {
                     if (level === ListLevel.FILE) {
@@ -713,7 +736,7 @@ export const dbUtils = {
     },
     extractSelection: () => {
         return applyGlobal((draft) => {
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 if (level === ListLevel.FILE) {
                     let file = getFile(fileId);
                     if (file) {
@@ -816,7 +839,7 @@ export const dbUtils = {
         });
     },
     split(fileId: string, trackIndex: number, segmentIndex: number, coordinates: Coordinates, trkptIndex?: number) {
-        let splitType = get(splitAs);
+        let splitType = get(getDeps().splitAs);
         return applyGlobal((draft) => {
             let file = getFile(fileId);
             if (file) {
@@ -825,7 +848,7 @@ export const dbUtils = {
                 let minIndex = 0;
                 if (trkptIndex === undefined) {
                     // Find the point closest to split
-                    let closest = getClosestLinePoint(segment.trkpt, coordinates);
+                    let closest = getDeps().getClosestLinePoint(segment.trkpt, coordinates);
                     minIndex = closest._data.index;
                 } else {
                     minIndex = trkptIndex;
@@ -870,11 +893,11 @@ export const dbUtils = {
         });
     },
     cleanSelection: (bounds: [Coordinates, Coordinates], inside: boolean, deleteTrackPoints: boolean, deleteWaypoints: boolean) => {
-        if (get(selection).size === 0) {
+        if (get(getDeps().selection).size === 0) {
             return;
         }
         applyGlobal((draft) => {
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 let file = draft.get(fileId);
                 if (file) {
                     if (level === ListLevel.FILE) {
@@ -902,7 +925,7 @@ export const dbUtils = {
         }
         applyGlobal((draft) => {
             let allItems = Array.from(itemsAndPoints.keys());
-            applyToOrderedItemsFromFile(allItems, (fileId, level, items) => {
+            getDeps().applyToOrderedItemsFromFile(allItems, (fileId, level, items) => {
                 let file = draft.get(fileId);
                 if (file) {
                     for (let item of items) {
@@ -920,11 +943,11 @@ export const dbUtils = {
         });
     },
     addOrUpdateWaypoint: (waypoint: WaypointType, item?: ListWaypointItem) => {
-        let m = get(map);
+        let m = get(getDeps().map);
         if (m === null) {
             return;
         }
-        getElevation([waypoint.attributes]).then((elevation) => {
+        getDeps().getElevation([waypoint.attributes]).then((elevation) => {
             if (item) {
                 dbUtils.applyToFile(item.getFileId(), (file) => {
                     let wpt = file.wpt[item.getWaypointIndex()];
@@ -938,7 +961,7 @@ export const dbUtils = {
                 });
             } else {
                 let fileIds = new Set<string>();
-                get(selection).getSelected().forEach((item) => {
+                get(getDeps().selection).getSelected().forEach((item) => {
                     fileIds.add(item.getFileId());
                 });
                 let wpt = new Waypoint(waypoint);
@@ -950,11 +973,11 @@ export const dbUtils = {
         });
     },
     setStyleToSelection: (style: LineStyleExtension) => {
-        if (get(selection).size === 0) {
+        if (get(getDeps().selection).size === 0) {
             return;
         }
         applyGlobal((draft) => {
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 let file = draft.get(fileId);
                 if (file && (level === ListLevel.FILE || level === ListLevel.TRACK)) {
                     if (level === ListLevel.FILE) {
@@ -974,11 +997,11 @@ export const dbUtils = {
         });
     },
     setHiddenToSelection: (hidden: boolean) => {
-        if (get(selection).size === 0) {
+        if (get(getDeps().selection).size === 0) {
             return;
         }
         applyGlobal((draft) => {
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 let file = draft.get(fileId);
                 if (file) {
                     if (level === ListLevel.FILE) {
@@ -1001,11 +1024,11 @@ export const dbUtils = {
         });
     },
     deleteSelection: () => {
-        if (get(selection).size === 0) {
+        if (get(getDeps().selection).size === 0) {
             return;
         }
         applyGlobal((draft) => {
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 if (level === ListLevel.FILE) {
                     draft.delete(fileId);
                 } else {
@@ -1036,11 +1059,11 @@ export const dbUtils = {
         });
     },
     addElevationToSelection: async (map: mapboxgl.Map) => {
-        if (get(selection).size === 0) {
+        if (get(getDeps().selection).size === 0) {
             return;
         }
         let points: (TrackPoint | Waypoint)[] = [];
-        applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+        getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
             let file = fileState.get(fileId);
             if (file) {
                 if (level === ListLevel.FILE) {
@@ -1070,9 +1093,9 @@ export const dbUtils = {
             return;
         }
 
-        getElevation(points).then((elevations) => {
+        getDeps().getElevation(points).then((elevations) => {
             applyGlobal((draft) => {
-                applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+                getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                     let file = draft.get(fileId);
                     if (file) {
                         if (level === ListLevel.FILE) {
@@ -1096,11 +1119,11 @@ export const dbUtils = {
         });
     },
     deleteSelectedFiles: () => {
-        if (get(selection).size === 0) {
+        if (get(getDeps().selection).size === 0) {
             return;
         }
         applyGlobal((draft) => {
-            applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
+            getDeps().applyToOrderedSelectedItemsFromFile((fileId, level, items) => {
                 draft.delete(fileId);
             });
         });

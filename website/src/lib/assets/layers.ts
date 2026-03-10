@@ -1319,12 +1319,10 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qWater: {
-                type: 'raster',
-                //tiles: ['https://tiles.wanderstories.space/qldglobe/water/{z}/{x}/{y}'],
+                type: 'vector',
                 tiles: ['https://qldglobe.wanderstories.space/water/{z}/{x}/{y}'],
-                tileSize: 256,
-                maxzoom: 16, // Can do 17
-                min: 9, // Can do more
+                minzoom: 6,
+                maxzoom: 23,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
@@ -1333,10 +1331,44 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             type: 'raster',
             source: 'qContours',
         },
+        // Water: vector tiles only have line layers (no polygon 'Water area' in this service)
         {
-            id: 'qWater',
-            type: 'raster',
+            id: 'qWater-line',
+            type: 'line',
             source: 'qWater',
+            'source-layer': 'Water area edge',
+            paint: {
+                'line-color': '#7eb5d0',
+                'line-width': 1,
+                'line-opacity': 0.8,
+                'line-dasharray': [2, 1]
+            },
+            minzoom: 6
+        },
+        {
+            id: 'qWater-watercourse',
+            type: 'line',
+            source: 'qWater',
+            'source-layer': 'Watercourse line',
+            paint: {
+                'line-color': '#7eb5d0',
+                'line-width': 1.5,
+                'line-opacity': 0.8,
+                'line-dasharray': [6, 4]
+            },
+            minzoom: 6
+        },
+        {
+            id: 'qWater-coastline',
+            type: 'line',
+            source: 'qWater',
+            'source-layer': 'Coastline',
+            paint: {
+                'line-color': '#7eb5d0',
+                'line-width': 1.2,
+                'line-opacity': 0.9
+            },
+            minzoom: 6
         }],
     },
     nafiFireScarsCurrentYear: {

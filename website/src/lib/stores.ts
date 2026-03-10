@@ -20,9 +20,9 @@ import {
     ListTrackSegmentItem,
     ListWaypointItem,
     ListWaypointsItem
-} from '$lib/components/file-list/FileList';
+} from '$lib/components/file-list/file-list-types';
 import type { RoutingControls } from '$lib/components/toolbar/tools/routing/RoutingControls';
-import { SplitType } from '$lib/components/toolbar/tools/scissors/Scissors.svelte';
+import { SplitType } from '$lib/components/toolbar/tools/scissors/SplitType';
 import FileSaver from 'file-saver';
 import JSZip from 'jszip';
 

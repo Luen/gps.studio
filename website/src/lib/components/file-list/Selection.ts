@@ -1,5 +1,5 @@
 import { get, writable } from "svelte/store";
-import { ListFileItem, ListItem, ListRootItem, ListTrackItem, ListTrackSegmentItem, ListWaypointItem, ListLevel, sortItems, ListWaypointsItem, moveItems } from "./FileList";
+import { ListFileItem, ListItem, ListRootItem, ListTrackItem, ListTrackSegmentItem, ListWaypointItem, ListLevel, sortItems, ListWaypointsItem } from "./file-list-types";
 import { fileObservers, getFile, getFileIds, settings } from "$lib/db";
 
 export class SelectionTreeType {
@@ -253,7 +253,7 @@ function resetCopied() {
     cut.set(false);
 }
 
-export function pasteSelection() {
+export async function pasteSelection() {
     let fromItems = get(copied);
     if (fromItems === undefined || fromItems.length === 0) {
         return;
@@ -309,6 +309,7 @@ export function pasteSelection() {
     }
 
     if (fromItems.length === toItems.length) {
+        const { moveItems } = await import('./FileList');
         moveItems(fromParent, toParent, fromItems, toItems, get(cut));
         resetCopied();
     }

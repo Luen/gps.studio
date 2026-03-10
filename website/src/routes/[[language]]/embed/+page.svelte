@@ -6,6 +6,24 @@
 		getMergedEmbeddingOptions,
 		type EmbeddingOptions
 	} from '$lib/components/embedding/Embedding';
+	import { setDbDependencies } from '$lib/db';
+	import { selection, applyToOrderedItemsFromFile, applyToOrderedSelectedItemsFromFile } from '$lib/components/file-list/Selection';
+	import { gpxStatistics, updateTargetMapBounds, updateAllHidden, initTargetMapBounds, map, splitAs } from '$lib/stores';
+	import { getClosestLinePoint, getElevation } from '$lib/utils';
+
+	setDbDependencies({
+		selection,
+		applyToOrderedItemsFromFile,
+		applyToOrderedSelectedItemsFromFile,
+		gpxStatistics,
+		updateTargetMapBounds,
+		updateAllHidden,
+		initTargetMapBounds,
+		map,
+		splitAs,
+		getClosestLinePoint,
+		getElevation
+	});
 
 	let embeddingOptions: EmbeddingOptions | undefined = undefined;
 

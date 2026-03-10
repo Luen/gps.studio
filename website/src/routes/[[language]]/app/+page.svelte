@@ -11,8 +11,24 @@
 	import CoordinatesPopup from '$lib/components/CoordinatesPopup.svelte';
 	import Resizer from '$lib/components/Resizer.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
-	import { observeFilesFromDatabase, settings } from '$lib/db';
-	import { gpxStatistics, loadFiles, slicedGPXStatistics } from '$lib/stores';
+	import { setDbDependencies, observeFilesFromDatabase, settings } from '$lib/db';
+	import { selection, applyToOrderedItemsFromFile, applyToOrderedSelectedItemsFromFile } from '$lib/components/file-list/Selection';
+	import { gpxStatistics, loadFiles, slicedGPXStatistics, updateTargetMapBounds, updateAllHidden, initTargetMapBounds, map, splitAs } from '$lib/stores';
+	import { getClosestLinePoint, getElevation } from '$lib/utils';
+
+	setDbDependencies({
+		selection,
+		applyToOrderedItemsFromFile,
+		applyToOrderedSelectedItemsFromFile,
+		gpxStatistics,
+		updateTargetMapBounds,
+		updateAllHidden,
+		initTargetMapBounds,
+		map,
+		splitAs,
+		getClosestLinePoint,
+		getElevation
+	});
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { languages } from '$lib/languages';

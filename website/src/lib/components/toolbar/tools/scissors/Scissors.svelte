@@ -1,9 +1,5 @@
 <script lang="ts" context="module">
-	export enum SplitType {
-		FILES = 'files',
-		TRACKS = 'tracks',
-		SEGMENTS = 'segments'
-	}
+	export { SplitType } from './SplitType';
 </script>
 
 <script lang="ts">
