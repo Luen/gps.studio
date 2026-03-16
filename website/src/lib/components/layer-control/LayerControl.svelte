@@ -138,10 +138,33 @@
 	});
 
 	let open = false;
+	let leaveTimeout: ReturnType<typeof setTimeout> | null = null;
+	let pointerDownInside = false;
 	function openLayerControl() {
+		if (leaveTimeout) {
+			clearTimeout(leaveTimeout);
+			leaveTimeout = null;
+		}
 		open = true;
 	}
-	function closeLayerControl() {
+	function closeLayerControl(ev?: MouseEvent) {
+		// Don't close if a click is in progress (user clicked checkbox/label)
+		if (pointerDownInside) return;
+		// Don't close if the pointer moved to an element inside the panel (e.g. checkbox)
+		if (ev?.relatedTarget && container?.contains(ev.relatedTarget as Node)) {
+			return;
+		}
+		// Short delay so clicking the checkbox doesn't close (avoids spurious mouseleave)
+		leaveTimeout = setTimeout(() => {
+			leaveTimeout = null;
+			open = false;
+		}, 120);
+	}
+	function closeLayerControlImmediate() {
+		if (leaveTimeout) {
+			clearTimeout(leaveTimeout);
+			leaveTimeout = null;
+		}
 		open = false;
 	}
 	let cancelEvents = false;
@@ -214,9 +237,20 @@
 </CustomControl>
 
 <svelte:window
+	on:mousedown={(e) => {
+		const target = e.target instanceof Node ? e.target : null;
+		pointerDownInside = !!(target && document.contains(target) && container?.contains(target));
+	}}
+	on:mouseup={() => {
+		pointerDownInside = false;
+	}}
 	on:click={(e) => {
-		if (open && !cancelEvents && !container.contains(e.target)) {
-			closeLayerControl();
+		const target = e.target instanceof Node ? e.target : null;
+		if (!open || cancelEvents || !target) return;
+		// Don't close if target is detached (e.g. checkbox that just toggled and was re-rendered)
+		if (!document.contains(target)) return;
+		if (!container.contains(target)) {
+			closeLayerControlImmediate();
 		}
 	}}
 />
