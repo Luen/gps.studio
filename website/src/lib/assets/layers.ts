@@ -1308,15 +1308,17 @@ export const overlays: { [key: string]: StyleSpecification; } = {
     },
     qContours: {
         version: 8,
+        glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf',
         sources: {
             qContours: {
-                type: 'raster',
-                //tiles: ['https://tiles.wanderstories.space/qldglobe/contours/{z}/{x}/{y}'],
-                tiles: ['https://qldglobe.wanderstories.space/contours/{z}/{x}/{y}'],
-                tileSize: 256,
-                maxzoom: 16,
-                minzoom: 11,
-                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+                type: 'vector',
+                tiles: [
+                    'https://spatial.information.qld.gov.au/arcgis/rest/services/Hosted/Elevation_Contours/VectorTileServer/tile/{z}/{y}/{x}.pbf'
+                ],
+                minzoom: 10,
+                maxzoom: 23,
+                attribution:
+                    '&copy; <a href="https://spatial.information.qld.gov.au/" target="_blank">State of Queensland (Department of Resources)</a>'
             },
             qWater: {
                 type: 'vector',
@@ -1326,50 +1328,361 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
-        layers: [{
-            id: 'qContours',
-            type: 'raster',
-            source: 'qContours',
-        },
-        // Water: vector tiles only have line layers (no polygon 'Water area' in this service)
-        {
-            id: 'qWater-line',
-            type: 'line',
-            source: 'qWater',
-            'source-layer': 'Water area edge',
-            paint: {
-                'line-color': '#7eb5d0',
-                'line-width': 1,
-                'line-opacity': 0.8,
-                'line-dasharray': [2, 1]
+        layers: [
+            // Elevation contours — lines + labels match QLD Hosted Elevation Contours style (root.json)
+            {
+                id: 'qContours-srtm-10m-index',
+                type: 'line',
+                source: 'qContours',
+                'source-layer': 'Contour SRTM 10m',
+                filter: ['==', ['get', '_symbol'], 0],
+                minzoom: 10,
+                maxzoom: 24,
+                layout: { 'line-cap': 'round', 'line-join': 'round' },
+                paint: {
+                    'line-color': '#FFA900',
+                    'line-width': 1.33
+                }
             },
-            minzoom: 6
-        },
-        {
-            id: 'qWater-watercourse',
-            type: 'line',
-            source: 'qWater',
-            'source-layer': 'Watercourse line',
-            paint: {
-                'line-color': '#7eb5d0',
-                'line-width': 1.5,
-                'line-opacity': 0.8,
-                'line-dasharray': [6, 4]
+            {
+                id: 'qContours-srtm-10m-intermediate',
+                type: 'line',
+                source: 'qContours',
+                'source-layer': 'Contour SRTM 10m',
+                filter: ['==', ['get', '_symbol'], 1],
+                minzoom: 12,
+                maxzoom: 24,
+                layout: { 'line-cap': 'round', 'line-join': 'round' },
+                paint: {
+                    'line-color': '#FFD37F',
+                    'line-width': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        12,
+                        0.53,
+                        15,
+                        0.8,
+                        17,
+                        0.93,
+                        19,
+                        1.07
+                    ]
+                }
             },
-            minzoom: 6
-        },
-        {
-            id: 'qWater-coastline',
-            type: 'line',
-            source: 'qWater',
-            'source-layer': 'Coastline',
-            paint: {
-                'line-color': '#7eb5d0',
-                'line-width': 1.2,
-                'line-opacity': 0.9
+            {
+                id: 'qContours-lidar-5m-index',
+                type: 'line',
+                source: 'qContours',
+                'source-layer': 'Contour LiDAR 5m',
+                filter: ['==', ['get', '_symbol'], 0],
+                minzoom: 15,
+                maxzoom: 16,
+                layout: { 'line-cap': 'round', 'line-join': 'round' },
+                paint: {
+                    'line-color': '#FFA900',
+                    'line-width': 1.33
+                }
             },
-            minzoom: 6
-        }],
+            {
+                id: 'qContours-lidar-5m-intermediate',
+                type: 'line',
+                source: 'qContours',
+                'source-layer': 'Contour LiDAR 5m',
+                filter: ['==', ['get', '_symbol'], 1],
+                minzoom: 15,
+                maxzoom: 16,
+                layout: { 'line-cap': 'round', 'line-join': 'round' },
+                paint: {
+                    'line-color': '#FFD37F',
+                    'line-width': 0.8
+                }
+            },
+            {
+                id: 'qContours-lidar-1m-index',
+                type: 'line',
+                source: 'qContours',
+                'source-layer': 'Contour LiDAR 1m',
+                filter: ['==', ['get', '_symbol'], 0],
+                minzoom: 16,
+                maxzoom: 24,
+                layout: { 'line-cap': 'round', 'line-join': 'round' },
+                paint: {
+                    'line-color': '#FFA900',
+                    'line-width': 1.33
+                }
+            },
+            {
+                id: 'qContours-lidar-1m-intermediate',
+                type: 'line',
+                source: 'qContours',
+                'source-layer': 'Contour LiDAR 1m',
+                filter: ['==', ['get', '_symbol'], 1],
+                minzoom: 16,
+                maxzoom: 24,
+                layout: { 'line-cap': 'round', 'line-join': 'round' },
+                paint: {
+                    'line-color': '#FFD37F',
+                    'line-width': 0.8
+                }
+            },
+            // Elevation labels (source-layer …/label, field _name — same as Queensland Globe)
+            {
+                id: 'qContours-label-srtm-index-small',
+                type: 'symbol',
+                source: 'qContours',
+                'source-layer': 'Contour SRTM 10m/label',
+                filter: ['==', ['get', '_label_class'], 0],
+                minzoom: 11,
+                maxzoom: 12,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 1000,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 8,
+                    'text-letter-spacing': 0.1,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
+                    'text-halo-color': '#734C00',
+                    'text-halo-width': 1.33
+                }
+            },
+            {
+                id: 'qContours-label-srtm-index-medium',
+                type: 'symbol',
+                source: 'qContours',
+                'source-layer': 'Contour SRTM 10m/label',
+                filter: ['==', ['get', '_label_class'], 1],
+                minzoom: 12,
+                maxzoom: 15,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 283,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 9.33,
+                    'text-letter-spacing': 0.1,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
+                    'text-halo-color': '#734C00',
+                    'text-halo-width': 1.33
+                }
+            },
+            {
+                id: 'qContours-label-srtm-index-large',
+                type: 'symbol',
+                source: 'qContours',
+                'source-layer': 'Contour SRTM 10m/label',
+                filter: ['==', ['get', '_label_class'], 2],
+                minzoom: 15,
+                maxzoom: 24,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 283,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 10.67,
+                    'text-letter-spacing': 0.1,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
+                    'text-halo-color': '#734C00',
+                    'text-halo-width': 1.33
+                }
+            },
+            {
+                id: 'qContours-label-srtm-intermediate-medium',
+                type: 'symbol',
+                source: 'qContours',
+                'source-layer': 'Contour SRTM 10m/label',
+                filter: ['==', ['get', '_label_class'], 4],
+                minzoom: 12,
+                maxzoom: 15,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 283,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                    'text-size': 9.33,
+                    'text-letter-spacing': 0.1,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
+                    'text-halo-color': '#897044',
+                    'text-halo-width': 1.33
+                }
+            },
+            {
+                id: 'qContours-label-srtm-intermediate-large',
+                type: 'symbol',
+                source: 'qContours',
+                'source-layer': 'Contour SRTM 10m/label',
+                filter: ['==', ['get', '_label_class'], 5],
+                minzoom: 15,
+                maxzoom: 24,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 283,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                    'text-size': 10.67,
+                    'text-letter-spacing': 0.1,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
+                    'text-halo-color': '#897044',
+                    'text-halo-width': 1.33
+                }
+            },
+            {
+                id: 'qContours-label-lidar-5m-index',
+                type: 'symbol',
+                source: 'qContours',
+                'source-layer': 'Contour LiDAR 5m/label',
+                filter: ['==', ['get', '_label_class'], 0],
+                minzoom: 15,
+                maxzoom: 16,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 1000,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 10.67,
+                    'text-letter-spacing': 0.1,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
+                    'text-halo-color': '#734C00',
+                    'text-halo-width': 1.33
+                }
+            },
+            {
+                id: 'qContours-label-lidar-5m-intermediate',
+                type: 'symbol',
+                source: 'qContours',
+                'source-layer': 'Contour LiDAR 5m/label',
+                filter: ['==', ['get', '_label_class'], 1],
+                minzoom: 15,
+                maxzoom: 16,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 283,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                    'text-size': 10.67,
+                    'text-letter-spacing': 0.1,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
+                    'text-halo-color': '#897044',
+                    'text-halo-width': 1.33
+                }
+            },
+            {
+                id: 'qContours-label-lidar-1m-index',
+                type: 'symbol',
+                source: 'qContours',
+                'source-layer': 'Contour LiDAR 1m/label',
+                filter: ['==', ['get', '_label_class'], 0],
+                minzoom: 16,
+                maxzoom: 24,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 1000,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': 10.67,
+                    'text-letter-spacing': 0.1,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
+                    'text-halo-color': '#734C00',
+                    'text-halo-width': 1.33
+                }
+            },
+            {
+                id: 'qContours-label-lidar-1m-intermediate',
+                type: 'symbol',
+                source: 'qContours',
+                'source-layer': 'Contour LiDAR 1m/label',
+                filter: ['==', ['get', '_label_class'], 1],
+                minzoom: 16,
+                maxzoom: 24,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 283,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                    'text-size': 10.67,
+                    'text-letter-spacing': 0.1,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#FFFFFF',
+                    'text-halo-color': '#897044',
+                    'text-halo-width': 1.33
+                }
+            },
+            // Water: vector tiles only have line layers (no polygon 'Water area' in this service)
+            {
+                id: 'qWater-line',
+                type: 'line',
+                source: 'qWater',
+                'source-layer': 'Water area edge',
+                paint: {
+                    'line-color': '#7eb5d0',
+                    'line-width': 1,
+                    'line-opacity': 0.8,
+                    'line-dasharray': [2, 1]
+                },
+                minzoom: 6
+            },
+            {
+                id: 'qWater-watercourse',
+                type: 'line',
+                source: 'qWater',
+                'source-layer': 'Watercourse line',
+                paint: {
+                    'line-color': '#7eb5d0',
+                    'line-width': 1.5,
+                    'line-opacity': 0.8,
+                    'line-dasharray': [6, 4]
+                },
+                minzoom: 6
+            },
+            {
+                id: 'qWater-coastline',
+                type: 'line',
+                source: 'qWater',
+                'source-layer': 'Coastline',
+                paint: {
+                    'line-color': '#7eb5d0',
+                    'line-width': 1.2,
+                    'line-opacity': 0.9
+                },
+                minzoom: 6
+            }
+        ],
     },
     nafiFireScarsCurrentYear: {
         version: 8,

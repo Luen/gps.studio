@@ -68,6 +68,24 @@
 									layer.paint = {};
 								}
 								layer.paint['raster-opacity'] = $opacities[id];
+							} else if (
+								layer.type === 'line' &&
+								typeof layer.id === 'string' &&
+								layer.id.startsWith('qContours-')
+							) {
+								if (!layer.paint) {
+									layer.paint = {};
+								}
+								layer.paint['line-opacity'] = $opacities[id];
+							} else if (
+								layer.type === 'symbol' &&
+								typeof layer.id === 'string' &&
+								layer.id.startsWith('qContours-')
+							) {
+								if (!layer.paint) {
+									layer.paint = {};
+								}
+								layer.paint['text-opacity'] = $opacities[id];
 							}
 							return layer;
 						})
