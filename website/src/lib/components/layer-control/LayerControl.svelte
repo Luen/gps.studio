@@ -71,7 +71,9 @@
 							} else if (
 								layer.type === 'line' &&
 								typeof layer.id === 'string' &&
-								layer.id.startsWith('qContours-')
+								(id === 'qContours'
+									? layer.id.startsWith('qContours-') || layer.id.startsWith('qWater-')
+									: layer.id.startsWith('qContours-'))
 							) {
 								if (!layer.paint) {
 									layer.paint = {};
@@ -80,7 +82,9 @@
 							} else if (
 								layer.type === 'symbol' &&
 								typeof layer.id === 'string' &&
-								layer.id.startsWith('qContours-')
+								(id === 'qContours'
+									? layer.id.startsWith('qContours-') || layer.id.startsWith('qWater-')
+									: layer.id.startsWith('qContours-'))
 							) {
 								if (!layer.paint) {
 									layer.paint = {};

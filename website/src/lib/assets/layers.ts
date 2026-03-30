@@ -1313,12 +1313,12 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             qContours: {
                 type: 'vector',
                 tiles: [
-                    'https://spatial.information.qld.gov.au/arcgis/rest/services/Hosted/Elevation_Contours/VectorTileServer/tile/{z}/{y}/{x}.pbf'
+                    'https://qldglobe.wanderstories.space/contours/{z}/{x}/{y}'
                 ],
                 minzoom: 10,
                 maxzoom: 23,
                 attribution:
-                    '&copy; <a href="https://spatial.information.qld.gov.au/" target="_blank">State of Queensland (Department of Resources)</a>'
+                    '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qWater: {
                 type: 'vector',
@@ -1681,6 +1681,53 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                     'line-opacity': 0.9
                 },
                 minzoom: 6
+            },
+            // Watercourse / waterbody names (vector tile label layers; _name where present)
+            {
+                id: 'qWater-watercourse-label',
+                type: 'symbol',
+                source: 'qWater',
+                'source-layer': 'Watercourse line/label',
+                minzoom: 12,
+                maxzoom: 24,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 400,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                    'text-size': ['interpolate', ['linear'], ['zoom'], 12, 9, 16, 11],
+                    'text-letter-spacing': 0.05,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#e8f6fc',
+                    'text-halo-color': '#1a4a5c',
+                    'text-halo-width': 1.25
+                }
+            },
+            {
+                id: 'qWater-area-label',
+                type: 'symbol',
+                source: 'qWater',
+                'source-layer': 'Watercourse area /label',
+                minzoom: 11,
+                maxzoom: 24,
+                layout: {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 500,
+                    'text-field': ['coalesce', ['get', '_name'], ''],
+                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+                    'text-size': ['interpolate', ['linear'], ['zoom'], 11, 10, 16, 13],
+                    'text-letter-spacing': 0.08,
+                    'text-rotation-alignment': 'map',
+                    'text-optional': true
+                },
+                paint: {
+                    'text-color': '#e8f6fc',
+                    'text-halo-color': '#1a4a5c',
+                    'text-halo-width': 1.35
+                }
             }
         ],
     },
