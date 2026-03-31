@@ -1337,14 +1337,6 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             }
         },
         layers: [
-            // Mountain / range names (transparent PNG; drawn under vector contours)
-            {
-                id: 'qContours-mountain-ranges',
-                type: 'raster',
-                source: 'qMountainRanges',
-                minzoom: 6,
-                maxzoom: 16
-            },
             // Elevation contours — lines + labels match QLD Hosted Elevation Contours style (root.json)
             {
                 id: 'qContours-srtm-10m-index',
@@ -1744,6 +1736,14 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                     'text-halo-color': '#1a4a5c',
                     'text-halo-width': 1.35
                 }
+            },
+            // Mountain / range names (transparent PNG; drawn over vector contours)
+            {
+                id: 'qContours-mountain-ranges',
+                type: 'raster',
+                source: 'qMountainRanges',
+                minzoom: 6,
+                maxzoom: 16
             }
         ],
     },
