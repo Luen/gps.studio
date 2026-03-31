@@ -1742,8 +1742,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 id: 'qContours-mountain-ranges',
                 type: 'raster',
                 source: 'qMountainRanges',
-                minzoom: 6,
-                maxzoom: 16
+                minzoom: 7,
+                maxzoom: 15
             }
         ],
     },
