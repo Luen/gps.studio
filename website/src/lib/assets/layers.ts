@@ -1326,9 +1326,25 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 minzoom: 6,
                 maxzoom: 23,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            },
+            qMountainRanges: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/MountainRanges/{z}/{x}/{y}'],
+                tileSize: 256,
+                minzoom: 6,
+                maxzoom: 16,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
         layers: [
+            // Mountain / range names (transparent PNG; drawn under vector contours)
+            {
+                id: 'qContours-mountain-ranges',
+                type: 'raster',
+                source: 'qMountainRanges',
+                minzoom: 6,
+                maxzoom: 16
+            },
             // Elevation contours — lines + labels match QLD Hosted Elevation Contours style (root.json)
             {
                 id: 'qContours-srtm-10m-index',
