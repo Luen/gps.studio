@@ -1340,7 +1340,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 tiles: ['https://qldglobe.wanderstories.space/ParksAdminBoundaries/{z}/{x}/{y}'],
                 tileSize: 256,
                 minzoom: 6,
-                maxzoom: 18,
+                maxzoom: 16,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
