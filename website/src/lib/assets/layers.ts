@@ -3276,9 +3276,8 @@ export const defaultOpacities: { [key: string]: number; } = {
     qLandUse: 0.4,
     qStockRoutes: 0.6,
     qLandParcel: 0.6,
-    qContours: 0.7,
+    qContours: 0.5,
     wanderstoriesHeatmap: 0.6,
-    qWater: 0.7,
     osmTracks: 0.5,
 };
 
