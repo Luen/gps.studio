@@ -1991,7 +1991,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 tiles: ['https://qldglobe.wanderstories.space/StockRoutesQld/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 15,
-                minzoom: 9,
+                minzoom: 10,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
