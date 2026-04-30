@@ -1983,6 +1983,24 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'qLandParcel'
         }],
     },
+    qCadastralPublicAccess: {
+        version: 8,
+        sources: {
+            qCadastralPublicAccess: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/CadastralPublicAccess/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 16,
+                minzoom: 11,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            }
+        },
+        layers: [{
+            id: 'qCadastralPublicAccess',
+            type: 'raster',
+            source: 'qCadastralPublicAccess'
+        }],
+    },
     qStockRoutes: {
         version: 8,
         sources: {
@@ -3275,6 +3293,7 @@ export const defaultOpacities: { [key: string]: number; } = {
     calSlopes: 0.5,
     qLandUse: 0.4,
     qStockRoutes: 0.6,
+    qCadastralPublicAccess: 0.6,
     qLandParcel: 0.6,
     qContours: 0.5,
     wanderstoriesHeatmap: 0.6,
@@ -3443,6 +3462,7 @@ export const overlayTree: LayerTreeType = {
                 qRoads: true,
                 qLandUse: true,
                 qStockRoutes: true,
+                qCadastralPublicAccess: true,
                 qLandParcel: true,
                 qContours: true,
                 qDemAzimuth: true,
@@ -3589,6 +3609,7 @@ export const defaultOverlays: LayerTreeType = {
                 qRoads: false,
                 qLandUse: false,
                 qStockRoutes: false,
+                qCadastralPublicAccess: false,
                 qLandParcel: false,
                 qContours: false,
                 qDemAzimuth: false,
@@ -3825,6 +3846,7 @@ export const defaultOverlayTree: LayerTreeType = {
                 qRoads: true,
                 qLandUse: true,
                 qStockRoutes: true,
+                qCadastralPublicAccess: true,
                 qLandParcel: true,
                 qContours: true,
                 qDemAzimuth: true,
