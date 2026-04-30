@@ -3305,7 +3305,7 @@ export const defaultOpacities: { [key: string]: number; } = {
     calSlopes: 0.5,
     qLandUse: 0.4,
     qStockRoutes: 0.6,
-    qCadastralPublicAccess: 0.6,
+    qCadastralPublicAccess: 0.5,
     qLandParcel: 0.6,
     qContours: 0.5,
     wanderstoriesHeatmap: 0.6,
