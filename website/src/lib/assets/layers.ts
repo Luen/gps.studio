@@ -1993,12 +1993,24 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 maxzoom: 16,
                 minzoom: 11,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
+            },
+            qStockRoutes: {
+                type: 'raster',
+                tiles: ['https://qldglobe.wanderstories.space/StockRoutesQld/{z}/{x}/{y}'],
+                tileSize: 256,
+                maxzoom: 15,
+                minzoom: 10,
+                attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
         layers: [{
             id: 'qCadastralPublicAccess',
             type: 'raster',
             source: 'qCadastralPublicAccess'
+        }, {
+            id: 'qStockRoutes',
+            type: 'raster',
+            source: 'qStockRoutes'
         }],
     },
     qStockRoutes: {
