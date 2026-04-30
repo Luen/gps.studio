@@ -1339,7 +1339,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/ParksAdminBoundaries/{z}/{x}/{y}'],
                 tileSize: 256,
-                minzoom: 11,
+                minzoom: 9,
                 maxzoom: 16,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
@@ -1990,8 +1990,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/CadastralPublicAccess/{z}/{x}/{y}'],
                 tileSize: 256,
-                maxzoom: 16,
-                minzoom: 11,
+                maxzoom: 15,
+                minzoom: 9,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             },
             qStockRoutes: {
@@ -1999,7 +1999,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 tiles: ['https://qldglobe.wanderstories.space/StockRoutesQld/{z}/{x}/{y}'],
                 tileSize: 256,
                 maxzoom: 15,
-                minzoom: 10,
+                minzoom: 9,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
         },
