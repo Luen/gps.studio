@@ -3296,6 +3296,34 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             source: 'waymarkedTrailsWinter',
         }],
     },
+    gaiaPublicTracks: {
+        version: 8,
+        sources: {
+            gaiaPublicTracks: {
+                type: 'vector',
+                tiles: ['https://gaia.wanderstories.space/tiles/{z}/{x}/{y}'],
+                minzoom: 0,
+                maxzoom: 14,
+                attribution:
+                    '&copy; <a href="https://www.gaiagps.com/" target="_blank">Gaia GPS</a> via <a href="https://gaia.wanderstories.space/" target="_blank">Wanderstories</a>'
+            }
+        },
+        layers: [{
+            id: 'gaiaTracksLine',
+            type: 'line',
+            source: 'gaiaPublicTracks',
+            'source-layer': 'tracks',
+            layout: {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            paint: {
+                'line-color': '#e63946',
+                'line-width': 2,
+                'line-opacity': 0.9
+            }
+        }]
+    },
 };
 
 export const defaultOpacities: { [key: string]: number; } = {
@@ -3308,6 +3336,7 @@ export const defaultOpacities: { [key: string]: number; } = {
     qCadastralPublicAccess: 0.5,
     qLandParcel: 0.6,
     qContours: 0.5,
+    gaiaPublicTracks: 0.9,
     wanderstoriesHeatmap: 0.6,
     osmTracks: 0.5,
 };
@@ -3467,6 +3496,7 @@ export const overlayTree: LayerTreeType = {
             waterfalls: true,
             calSlopes: true,
             wsArticleMarkers: true,
+            gaiaPublicTracks: true,
         },
         countries: {
             australia: {
@@ -3614,6 +3644,7 @@ export const defaultOverlays: LayerTreeType = {
             waterfalls: false,
             calSlopes: false,
             wsArticleMarkers: false,
+            gaiaPublicTracks: false,
         },
         countries: {
             australia: {
@@ -3851,6 +3882,7 @@ export const defaultOverlayTree: LayerTreeType = {
             waterfalls: true,
             calSlopes: true,
             wsArticleMarkers: true,
+            gaiaPublicTracks: false,
         },
         countries: {
             australia: {

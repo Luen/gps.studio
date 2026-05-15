@@ -71,9 +71,10 @@
 							} else if (
 								layer.type === 'line' &&
 								typeof layer.id === 'string' &&
-								(id === 'qContours'
-									? layer.id.startsWith('qContours-') || layer.id.startsWith('qWater-')
-									: layer.id.startsWith('qContours-'))
+								(id === 'gaiaPublicTracks' ||
+									(id === 'qContours'
+										? layer.id.startsWith('qContours-') || layer.id.startsWith('qWater-')
+										: layer.id.startsWith('qContours-')))
 							) {
 								if (!layer.paint) {
 									layer.paint = {};
