@@ -3324,6 +3324,34 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             }
         }]
     },
+    allTrailsCommunityTrails: {
+        version: 8,
+        sources: {
+            community_trails_geojson: {
+                type: 'geojson',
+                data: {
+                    type: 'FeatureCollection',
+                    features: []
+                },
+                attribution:
+                    '&copy; <a href="https://www.alltrails.com/" target="_blank">AllTrails</a> via <a href="https://alltrails.wanderstories.space/" target="_blank">Wanderstories</a>'
+            }
+        },
+        layers: [{
+            id: 'alltrails-community-trail-lines',
+            type: 'line',
+            source: 'community_trails_geojson',
+            layout: {
+                'line-cap': 'round',
+                'line-join': 'round'
+            },
+            paint: {
+                'line-color': '#0d7f3c',
+                'line-width': 4,
+                'line-opacity': 0.85
+            }
+        }]
+    },
 };
 
 export const defaultOpacities: { [key: string]: number; } = {
@@ -3337,6 +3365,7 @@ export const defaultOpacities: { [key: string]: number; } = {
     qLandParcel: 0.6,
     qContours: 0.5,
     gaiaPublicTracks: 0.9,
+    allTrailsCommunityTrails: 0.85,
     wanderstoriesHeatmap: 0.6,
     osmTracks: 0.5,
 };
@@ -3497,6 +3526,7 @@ export const overlayTree: LayerTreeType = {
             calSlopes: true,
             wsArticleMarkers: true,
             gaiaPublicTracks: true,
+            allTrailsCommunityTrails: true,
         },
         countries: {
             australia: {
@@ -3645,6 +3675,7 @@ export const defaultOverlays: LayerTreeType = {
             calSlopes: false,
             wsArticleMarkers: false,
             gaiaPublicTracks: false,
+            allTrailsCommunityTrails: false,
         },
         countries: {
             australia: {
@@ -3883,6 +3914,7 @@ export const defaultOverlayTree: LayerTreeType = {
             calSlopes: true,
             wsArticleMarkers: true,
             gaiaPublicTracks: false,
+            allTrailsCommunityTrails: false,
         },
         countries: {
             australia: {

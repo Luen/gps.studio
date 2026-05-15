@@ -13,9 +13,11 @@
 	import { get, writable } from 'svelte/store';
 	import { customBasemapUpdate, getLayers } from './utils';
 	import { OverpassLayer } from './OverpassLayer';
+	import { AllTrailsCommunityTrailsLayer } from './AllTrailsCommunityTrailsLayer';
 
 	let container: HTMLDivElement;
 	let overpassLayer: OverpassLayer;
+	let allTrailsCommunityTrailsLayer: AllTrailsCommunityTrailsLayer;
 
 	const {
 		currentBasemap,
@@ -72,6 +74,7 @@
 								layer.type === 'line' &&
 								typeof layer.id === 'string' &&
 								(id === 'gaiaPublicTracks' ||
+									id === 'allTrailsCommunityTrails' ||
 									(id === 'qContours'
 										? layer.id.startsWith('qContours-') || layer.id.startsWith('qWater-')
 										: layer.id.startsWith('qContours-')))
@@ -142,6 +145,11 @@
 		}
 		overpassLayer = new OverpassLayer($map);
 		overpassLayer.add();
+		if (allTrailsCommunityTrailsLayer) {
+			allTrailsCommunityTrailsLayer.remove();
+		}
+		allTrailsCommunityTrailsLayer = new AllTrailsCommunityTrailsLayer($map);
+		allTrailsCommunityTrailsLayer.add();
 		$map.on('style.import.load', updateOverlays);
 	}
 
