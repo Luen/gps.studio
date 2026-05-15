@@ -14,7 +14,7 @@ export const ALLTRAILS_COMMUNITY_GRID_MIN_Z = 10;
 export const ALLTRAILS_COMMUNITY_GRID_MAX_Z = 14;
 
 const MAX_TILE_JOBS = 56;
-const DEBOUNCE_MS = 350;
+const DEBOUNCE_MS = 100;
 
 type StyleWithScopedSource = {
 	getSource?: (id: string, scope: string) => mapboxgl.Source | null | undefined;
