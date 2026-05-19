@@ -13,11 +13,9 @@
 	import { get, writable } from 'svelte/store';
 	import { customBasemapUpdate, getLayers } from './utils';
 	import { OverpassLayer } from './OverpassLayer';
-	import { AllTrailsCommunityTrailsLayer } from './AllTrailsCommunityTrailsLayer';
 
 	let container: HTMLDivElement;
 	let overpassLayer: OverpassLayer;
-	let allTrailsCommunityTrailsLayer: AllTrailsCommunityTrailsLayer;
 
 	const {
 		currentBasemap,
@@ -145,11 +143,6 @@
 		}
 		overpassLayer = new OverpassLayer($map);
 		overpassLayer.add();
-		if (allTrailsCommunityTrailsLayer) {
-			allTrailsCommunityTrailsLayer.remove();
-		}
-		allTrailsCommunityTrailsLayer = new AllTrailsCommunityTrailsLayer($map);
-		allTrailsCommunityTrailsLayer.add();
 		$map.on('style.import.load', updateOverlays);
 	}
 

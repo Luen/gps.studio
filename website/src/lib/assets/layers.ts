@@ -3327,12 +3327,13 @@ export const overlays: { [key: string]: StyleSpecification; } = {
     allTrailsCommunityTrails: {
         version: 8,
         sources: {
-            community_trails_geojson: {
-                type: 'geojson',
-                data: {
-                    type: 'FeatureCollection',
-                    features: []
-                },
+            allTrailsCommunityTrails: {
+                type: 'vector',
+                tiles: [
+                    'https://alltrails.wanderstories.space/api/viewport-trails/mvt/{z}/{x}/{y}.pbf'
+                ],
+                minzoom: 8,
+                maxzoom: 14,
                 attribution:
                     '&copy; <a href="https://www.alltrails.com/" target="_blank">AllTrails</a> via <a href="https://alltrails.wanderstories.space/" target="_blank">Wanderstories</a>'
             }
@@ -3340,7 +3341,8 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         layers: [{
             id: 'alltrails-community-trail-lines',
             type: 'line',
-            source: 'community_trails_geojson',
+            source: 'allTrailsCommunityTrails',
+            'source-layer': 'trails',
             layout: {
                 'line-cap': 'round',
                 'line-join': 'round'
