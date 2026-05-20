@@ -3333,7 +3333,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                     'https://alltrails.wanderstories.space/api/viewport-trails/mvt-accumulated/{z}/{x}/{y}.pbf'
                 ],
                 minzoom: 8,
-                maxzoom: 14,
+                maxzoom: 13,
                 attribution:
                     '&copy; <a href="https://www.alltrails.com/" target="_blank">AllTrails</a> via <a href="https://alltrails.wanderstories.space/" target="_blank">Wanderstories</a>'
             }
