@@ -3330,7 +3330,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
             allTrailsCommunityTrails: {
                 type: 'vector',
                 tiles: [
-                    'https://alltrails.wanderstories.space/api/viewport-trails/mvt/{z}/{x}/{y}.pbf'
+                    'https://alltrails.wanderstories.space/api/viewport-trails/mvt-accumulated/{z}/{x}/{y}.pbf'
                 ],
                 minzoom: 8,
                 maxzoom: 14,
