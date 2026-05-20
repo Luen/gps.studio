@@ -3301,7 +3301,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
         sources: {
             gaiaPublicTracks: {
                 type: 'vector',
-                tiles: ['https://gaia.wanderstories.space/tiles/{z}/{x}/{y}'],
+                tiles: ['https://gaia.wanderstories.space/tiles-accumulated/{z}/{x}/{y}'],
                 minzoom: 0,
                 maxzoom: 14,
                 attribution:
