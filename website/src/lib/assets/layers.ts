@@ -1339,7 +1339,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 type: 'raster',
                 tiles: ['https://qldglobe.wanderstories.space/ParksAdminBoundaries/{z}/{x}/{y}'],
                 tileSize: 256,
-                minzoom: 9,
+                minzoom: 11,
                 maxzoom: 16,
                 attribution: '&copy; <a href="https://qldglobe.wanderstories.space/" target="_blank">Queensland Government</a>'
             }
@@ -1750,7 +1750,7 @@ export const overlays: { [key: string]: StyleSpecification; } = {
                 id: 'qContours-parks-admin-boundaries',
                 type: 'raster',
                 source: 'qParksAdminBoundaries',
-                minzoom: 7,
+                minzoom: 11,
                 maxzoom: 24
             },
             // Mountain / range names (transparent PNG; drawn over vector contours)
